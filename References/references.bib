@@ -1,0 +1,185 @@
+@inproceedings{2020_what_happens_to_bert_embeddings_during_finetuning,
+    title = "What Happens To {BERT} Embeddings During Fine-tuning?",
+    author = "Merchant, Amil  and
+      Rahimtoroghi, Elahe  and
+      Pavlick, Ellie  and
+      Tenney, Ian",
+    booktitle = "Proceedings of the Third BlackboxNLP Workshop on Analyzing and Interpreting Neural Networks for NLP",
+    month = nov,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2020.blackboxnlp-1.4",
+    doi = "10.18653/v1/2020.blackboxnlp-1.4",
+    pages = "33--44",
+    abstract = "While much recent work has examined how linguistic information is encoded in pre-trained sentence representations, comparatively little is understood about how these models change when adapted to solve downstream tasks. Using a suite of analysis techniques{---}supervised probing, unsupervised similarity analysis, and layer-based ablations{---}we investigate how fine-tuning affects the representations of the BERT model. We find that while fine-tuning necessarily makes some significant changes, there is no catastrophic forgetting of linguistic phenomena. We instead find that fine-tuning is a conservative process that primarily affects the top layers of BERT, albeit with noteworthy variation across tasks. In particular, dependency parsing reconfigures most of the model, whereas SQuAD and MNLI involve much shallower processing. Finally, we also find that fine-tuning has a weaker effect on representations of out-of-domain sentences, suggesting room for improvement in model generalization.",
+}
+
+
+@article{kim-etal-2019-categorical_metadata_text_classification,
+    title = "Categorical Metadata Representation for Customized Text Classification",
+    author = "Kim, Jihyeok  and
+      Amplayo, Reinald Kim  and
+      Lee, Kyungjae  and
+      Sung, Sua  and
+      Seo, Minji  and
+      Hwang, Seung-won",
+    journal = "Transactions of the Association for Computational Linguistics",
+    volume = "7",
+    year = "2019",
+    address = "Cambridge, MA",
+    publisher = "MIT Press",
+    url = "https://aclanthology.org/Q19-1013",
+    doi = "10.1162/tacl_a_00263",
+    pages = "201--215",
+    abstract = "The performance of text classification has improved tremendously using intelligently engineered neural-based models, especially those injecting categorical metadata as additional information, e.g., using user/product information for sentiment classification. This information has been used to modify parts of the model (e.g., word embeddings, attention mechanisms) such that results can be customized according to the metadata. We observe that current representation methods for categorical metadata, which are devised for human consumption, are not as effective as claimed in popular classification methods, outperformed even by simple concatenation of categorical features in the final layer of the sentence encoder. We conjecture that categorical features are harder to represent for machine use, as available context only indirectly describes the category, and even such context is often scarce (for tail category). To this end, we propose using basis vectors to effectively incorporate categorical metadata on various parts of a neural-based model. This additionally decreases the number of parameters dramatically, especially when the number of categorical features is large. Extensive experiments on various data sets with different properties are performed and show that through our method, we can represent categorical metadata more effectively to customize parts of the model, including unexplored ones, and increase the performance of the model greatly.",
+}
+
+
+
+
+@inproceedings{match_metadata_for_multilabel_classification,
+author = {Zhang, Yu and Shen, Zhihong and Dong, Yuxiao and Wang, Kuansan and Han, Jiawei},
+title = {MATCH: Metadata-Aware Text Classification in A Large Hierarchy},
+year = {2021},
+isbn = {9781450383127},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3442381.3449979},
+doi = {10.1145/3442381.3449979},
+abstract = {Multi-label text classification refers to the problem of assigning each given document its most relevant labels from a label set. Commonly, the metadata of the given documents and the hierarchy of the labels are available in real-world applications. However, most existing studies focus on only modeling the text information, with a few attempts to utilize either metadata or hierarchy signals, but not both of them. In this paper, we bridge the gap by formalizing the problem of metadata-aware text classification in a large label hierarchy (e.g., with tens of thousands of labels). To address this problem, we present the MATCH1 solution—an end-to-end framework that leverages both metadata and hierarchy information. To incorporate metadata, we pre-train the embeddings of text and metadata in the same space and also leverage the fully-connected attentions to capture the interrelations between them. To leverage the label hierarchy, we propose different ways to regularize the parameters and output probability of each child label by its parents. Extensive experiments on two massive text datasets with large-scale label hierarchies demonstrate the effectiveness of MATCH over the state-of-the-art deep learning baselines.},
+booktitle = {Proceedings of the Web Conference 2021},
+pages = {3246–3257},
+numpages = {12},
+keywords = {academic graph, hierarchical classification, text classification},
+location = {Ljubljana, Slovenia},
+series = {WWW '21}
+}
+
+@inproceedings{model_cards_for_model_reporting,
+author = {Mitchell, Margaret and Wu, Simone and Zaldivar, Andrew and Barnes, Parker and Vasserman, Lucy and Hutchinson, Ben and Spitzer, Elena and Raji, Inioluwa Deborah and Gebru, Timnit},
+title = {Model Cards for Model Reporting},
+year = {2019},
+isbn = {9781450361255},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3287560.3287596},
+doi = {10.1145/3287560.3287596},
+abstract = {Trained machine learning models are increasingly used to perform high-impact tasks in areas such as law enforcement, medicine, education, and employment. In order to clarify the intended use cases of machine learning models and minimize their usage in contexts for which they are not well suited, we recommend that released models be accompanied by documentation detailing their performance characteristics. In this paper, we propose a framework that we call model cards, to encourage such transparent model reporting. Model cards are short documents accompanying trained machine learning models that provide benchmarked evaluation in a variety of conditions, such as across different cultural, demographic, or phenotypic groups (e.g., race, geographic location, sex, Fitzpatrick skin type [15]) and intersectional groups (e.g., age and race, or sex and Fitzpatrick skin type) that are relevant to the intended application domains. Model cards also disclose the context in which models are intended to be used, details of the performance evaluation procedures, and other relevant information. While we focus primarily on human-centered machine learning models in the application fields of computer vision and natural language processing, this framework can be used to document any trained machine learning model. To solidify the concept, we provide cards for two supervised models: One trained to detect smiling faces in images, and one trained to detect toxic comments in text. We propose model cards as a step towards the responsible democratization of machine learning and related artificial intelligence technology, increasing transparency into how well artificial intelligence technology works. We hope this work encourages those releasing trained machine learning models to accompany model releases with similar detailed evaluation numbers and other relevant documentation.},
+booktitle = {Proceedings of the Conference on Fairness, Accountability, and Transparency},
+pages = {220–229},
+numpages = {10},
+keywords = {ML model evaluation, disaggregated evaluation, ethical considerations, fairness evaluation, datasheets, documentation, model cards},
+location = {Atlanta, GA, USA},
+series = {FAT* '19}
+}
+
+@article{text_classification_embeddings_survey,
+  title={Text classification using embeddings: a survey},
+  author={da Costa, Liliane Soares and Oliveira, Italo L and Fileto, Renato},
+  journal={Knowledge and Information Systems},
+  pages={1--43},
+  year={2023},
+  publisher={Springer}
+}
+
+@inproceedings{evaluation_metrics_document_filtering,
+  title={A Comparison of Evaluation Metrics for Document Filtering.},
+  author={Amig{\'o}, Enrique and Gonzalo, Julio and Verdejo, Felisa},
+  booktitle={CLEF},
+  pages={38--49},
+  year={2011},
+  organization={Springer}
+}
+
+@inproceedings{probabilistic_interpretation_precision_recall_fscore,
+  title={A probabilistic interpretation of precision, recall and F-score, with implication for evaluation},
+  author={Goutte, Cyril and Gaussier, Eric},
+  booktitle={Advances in Information Retrieval: 27th European Conference on IR Research, ECIR 2005, Santiago de Compostela, Spain, March 21-23, 2005. Proceedings 27},
+  pages={345--359},
+  year={2005},
+  organization={Springer}
+}
+
+@article{fbetascore,
+  title={Information retrieval 2nd edition butterworths},
+  author={Van Rijsbergen, CJ},
+  journal={London available on internet},
+  year={1979}
+}
+
+@inproceedings{BioMedicalBERT_ALBERT_ELECTRA_2021,
+    title = "{B}io{M}-Transformers: Building Large Biomedical Language Models with {BERT}, {ALBERT} and {ELECTRA}",
+    author = "Alrowili, Sultan  and
+      Shanker, Vijay",
+    booktitle = "Proceedings of the 20th Workshop on Biomedical Language Processing",
+    month = jun,
+    year = "2021",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2021.bionlp-1.24",
+    doi = "10.18653/v1/2021.bionlp-1.24",
+    pages = "221--227",
+    abstract = "The impact of design choices on the performance of biomedical language models recently has been a subject for investigation. In this paper, we empirically study biomedical domain adaptation with large transformer models using different design choices. We evaluate the performance of our pretrained models against other existing biomedical language models in the literature. Our results show that we achieve state-of-the-art results on several biomedical domain tasks despite using similar or less computational cost compared to other models in the literature. Our findings highlight the significant effect of design choices on improving the performance of biomedical language models.",
+}
+
+
+@inproceedings{BioNER_with_multilingualBERT_2019,
+    title = "Biomedical Named Entity Recognition with Multilingual {BERT}",
+    author = "Hakala, Kai  and
+      Pyysalo, Sampo",
+    booktitle = "Proceedings of the 5th Workshop on BioNLP Open Shared Tasks",
+    month = nov,
+    year = "2019",
+    address = "Hong Kong, China",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/D19-5709",
+    doi = "10.18653/v1/D19-5709",
+    pages = "56--61",
+    abstract = "We present the approach of the Turku NLP group to the PharmaCoNER task on Spanish biomedical named entity recognition. We apply a CRF-based baseline approach and multilingual BERT to the task, achieving an F-score of 88{\%} on the development data and 87{\%} on the test set with BERT. Our approach reflects a straightforward application of a state-of-the-art multilingual model that is not specifically tailored to either the language nor the application domain. The source code is available at: https://github.com/chaanim/pharmaconer",
+}
+
+
+
+
+
+@article{Reference1,
+	Abstract = {We have developed an enhanced Littrow configuration extended cavity diode laser (ECDL) that can be tuned without changing the direction of the output beam. The output of a conventional Littrow ECDL is reflected from a plane mirror fixed parallel to the tuning diffraction grating. Using a free-space Michelson wavemeter to measure the laser wavelength, we can tune the laser over a range greater than 10 nm without any alteration of alignment.},
+	Author = {C. J. Hawthorn and K. P. Weber and R. E. Scholten},
+	Journal = {Review of Scientific Instruments},
+	Month = {12},
+	Number = {12},
+	Numpages = {3},
+	Pages = {4477--4479},
+	Title = {Littrow Configuration Tunable External Cavity Diode Laser with Fixed Direction Output Beam},
+	Volume = {72},
+	Url = {http://link.aip.org/link/?RSI/72/4477/1},
+	Year = {2001}}
+
+@article{Reference3,
+	Abstract = {Operating a laser diode in an extended cavity which provides frequency-selective feedback is a very effective method of reducing the laser's linewidth and improving its tunability. We have developed an extremely simple laser of this type, built from inexpensive commercial components with only a few minor modifications. A 780~nm laser built to this design has an output power of 80~mW, a linewidth of 350~kHz, and it has been continuously locked to a Doppler-free rubidium transition for several days.},
+	Author = {A. S. Arnold and J. S. Wilson and M. G. Boshier and J. Smith},
+	Journal = {Review of Scientific Instruments},
+	Month = {3},
+	Number = {3},
+	Numpages = {4},
+	Pages = {1236--1239},
+	Title = {A Simple Extended-Cavity Diode Laser},
+	Volume = {69},
+	Url = {http://link.aip.org/link/?RSI/69/1236/1},
+	Year = {1998}}
+
+@article{Reference2,
+	Abstract = {We present a review of the use of diode lasers in atomic physics with an extensive list of references. We discuss the relevant characteristics of diode lasers and explain how to purchase and use them. We also review the various techniques that have been used to control and narrow the spectral outputs of diode lasers. Finally we present a number of examples illustrating the use of diode lasers in atomic physics experiments. Review of Scientific Instruments is copyrighted by The American Institute of Physics.},
+	Author = {Carl E. Wieman and Leo Hollberg},
+	Journal = {Review of Scientific Instruments},
+	Keywords = {Diode Laser},
+	Month = {1},
+	Number = {1},
+	Numpages = {20},
+	Pages = {1--20},
+	Title = {Using Diode Lasers for Atomic Physics},
+	Volume = {62},
+	Url = {http://link.aip.org/link/?RSI/62/1/1},
+	Year = {1991}}
+

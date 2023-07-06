@@ -1,0 +1,183 @@
+\documentclass[a4paper, 11pt]{memoir}
+
+\newcommand{\english}
+% \input config/macros
+
+
+\input{Control/UPV_control/UPV_usepackages}
+\input{Control/Global_control/Global_usepackages}
+\input{Control/UPV_control/UPV_utils/config/macros}
+
+\semiisopage
+\chapterstyle{veelo}
+\pdfobjcompresslevel 0
+
+
+\input{Control/UPV_control/UPV_newcommands}
+\input{Control/Global_control/Global_newcommands}
+
+
+
+%% INFORMAZIOA / INFORMACIÓN %%
+\newcommand{\egilea}{Luis Antonio VASQUEZ REINA}
+\newcommand{\zuzendariak}{
+\href{https://ragerri.github.io/}{Rodrigo AGERRI} (\href{https://www.ehu.eus/es/web/informatika-fakultatea}{Informatics Faculty  at UPV-EHU })\\
+\href{https://maiage.inrae.fr/fr/robert-bossy}{Robert BOSSY} (\href{https://maiage.inrae.fr/}{
+%Math\'ematiques et Informatique Appliqu\'ees du G\'enome \`{a} l'Environnement (MaIAGE)}
+MaIAGE} Research Group at \href{https://inrae.fr/}{INRAE}
+)\\
+\href{https://members.loria.fr/mcouceiro/}{Miguel COUCEIRO} (\href{https://idmc.univ-lorraine.fr/}{IDMC Institute} at \href{https://www.univ-lorraine.fr/}{Universit\'e de Lorraine})\\
+
+\iffalse
+%\university{\href{https://www.univ-lorraine.fr/}{Universit\'e de Lorraine}} % Your university's name and URL, this is used in the title page and abstract, print it elsewhere with \univname
+%\department{\href{https://www.inrae.fr/}{Institut national de recherche pour l'agriculture, l'alimentation et l'environnement (INRAE)}} % Your department's name and URL, this is used in the title page and abstract, print it elsewhere with \deptname
+%\group{\href{https://maiage.inrae.fr/}{
+%Math\'ematiques et Informatique Appliqu\'ees du G\'enome \`{a} l'Environnement (MaIAGE)}
+%Applied Mathematics and Informatics from Genome to the Environment Group (MaIAGE)}
+%} % Your research group's name and URL, this is used in the title page, print it elsewhere with \groupname
+%\faculty{\href{https://idmc.univ-lorraine.fr/}{Institut du Digital, Management et Cognition (IDMC)} \\  \href{https://www.ehu.eus/es/web/informatika-fakultatea}{Informatics Faculty of the University of the Basque Country (UPV-EHU)}}
+\fi
+
+}
+\newcommand{\izenburua}{Hau izenburua da/Título del trabajo}
+\newcommand{\data}{{\LARGE {August 2023}}}
+
+
+%% BAKARRIK BAT DESKOMENTATU, GRADU AMAIERAKO LANA BADA. BESTELA, DENAK KOMENTATU%%
+%% DESCOMENTAR SOLO UNO SI ES UN TRABAJO FIN DE GRADO. SINO, COMENTAR TODOS%%
+
+%\newcommand{\ikasketak}{Informatika Ingeniaritzako Gradua}
+%\newcommand{\ikasketak}{Grado en Ingeniería Informática}
+%\newcommand{\ikasketak}{Adimen Artifizialeko Gradua}
+%\newcommand{\ikasketak}{Grado en Inteligencia Artificial}
+
+
+%% BAKARRIK BAT DESKOMENTATU, INGENIARITZA INFORMATIKAKOA BADA. BESTELA, DENAK KOMENTATU %%
+%% DESCOMENTAR SOLO UNO SI ES EN INGENIERÍA INFORMÁTICA. SINO, COMENTAR TODOS %%
+
+%\newcommand{\espezialitatea}{Konputazioa}
+%\newcommand{\espezialitatea}{Computación}
+%\newcommand{\espezialitatea}{Software Ingeniaritza}
+%\newcommand{\espezialitatea}{Ingeniería de Software}
+%\newcommand{\espezialitatea}{Konputagailuen Ingeniaritza}
+%\newcommand{\espezialitatea}{Ingeniería de Computadores}
+
+
+%% BAKARRIK BAT DESKOMENTATU MASTER AMAIERAKO LANA BADA. BESTELA, DENAK KOMENTATU%%
+%% DESCOMENTAR SOLO UNO SI ES UN TRABAJO FIN DE MASTER. SINO, COMENTAR TODOS%%
+
+%\newcommand{\ikasketak}{Mster Universitario en Ingeniería Computacional y Sistemas Inteligentes}
+%\newcommand{\ikasketak}{Konputazio Ingeniaritza eta Sistema Adimentsuak Unibertsitate Masterra}
+\newcommand{\ikasketak}{Master in Language Analysis and Processing}
+
+
+%% DOKUMENTUAREN HIZKUNTZA / IDIOMA DEL DOCUMENTO %%
+%% BAKARRIK BAT DESKOMENTATU / DESCOMENTAR SOLO UNO %%
+%\newcommand{\euskaraz}
+%\newcommand{\castellano}
+% \newcommand{\english}{}
+
+\input{Control/Global_control/Global_newcommands}
+
+% \input config/macros
+% \input{Control/UPV_control/UPV_utils/config/macros}
+
+\title{\izenburua}
+\author{\egilea}
+
+
+\begin{document}
+\pagenumbering{roman}
+	
+%% AZALA BEREZIRIK BADUZU (PDF FORMATUAN), DESKOMENTATU%%
+%% SI HAY UNA PORTADA ESPECIAL (EN PDF), DESCOMENTAR%%
+	
+%\includepdf[pages={1-}]{cover.pdf}
+% \cleardoublepage
+
+
+%% AUKERATU DAGOKIONA. AZALA BEREZIA GEHITUZ GERO, KOMENTATU DAITEKE, BETIERE HEMENGOAN AGERTZEN DEN INFORMAZIOA AGERTZEN BADA %%
+%% SELECCIONA LA QUE CORRESPONDA. EN CASO DE TENER UNA PORTADA ESPECIAL SE PUEDE COMENTAR, SIEMPRE Y CUANDO DICHA PORTADA INCLUYA LA INFORMACIÓN QUE APARECE EN ESTA%%
+
+% \input{Control/UPV_control/UPV_utils/config/cover_informatika}
+\input{Control/UPV_control/UPV_utils/config/cover_masterra}
+%\input config/cover_informatika
+%\input config/cover_adimen_artifiziala
+%\input config/cover_masterra
+
+
+\cleardoublepage
+\frontmatter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ESKER ONAK / AGRADECIMIENTOS %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% KOMENTATU HIRU LERRO HAUEK ATALA NAHI EZ BADUZU
+%% COMENTA ESTAS TRES LÍNEAS SI NO QUIERES ESTE APARTADO
+\chapter*{Esker onak \\ Agradecimientos \\ Acknowledgements}
+% \input chapters/acknowledgements
+\input{Chapters/Preamble/Acknowledgements}
+
+\cleardoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% LABURPENA / RESUMEN %
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{Laburpena \\ Resumen \\ Abstract}
+% \input chapters/abstract
+\input{Chapters/Preamble/Abstract}
+\cleardoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% EDUKIEN ZERRENDA / ÍNIDCES %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+\clearpage
+\listoffigures
+\clearpage
+\listoftables
+\clearpage
+%\listofalgorithms
+%\addcontentsline{toc}{chapter}{Índice de algoritmos}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+% EDUKIA / CONTENIDO %
+%%%%%%%%%%%%%%%%%%%%%%
+
+\cleardoublepage
+\mainmatter
+\pagestyle{ruled}
+
+\pagenumbering{arabic}
+\input{content}
+
+%\chapter{Txatiloiaren erabilera} \label{ch:txantiloia}
+%\input chapters/chap1
+%\cleardoublepage
+%\chapter{Uso de la plantilla} \label{ch:plantilla}
+%\input chapters/chap2
+%\cleardoublepage
+
+%\input{chapters/ChapterTemplate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ERANSKINAK / APENDICES %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\backmatter
+\appendix
+
+%\chapter{Eranskina / apéndice} \label{ch:eranskina}
+%\input chapters/appendix
+\input{appendices}
+
+%%%%%%%%%%%%%%%%%%
+%% BIBLIOGRAFIA %%
+%%%%%%%%%%%%%%%%%%
+\input{Control/UPV_control/UPV_references}
+
+\end{document}
