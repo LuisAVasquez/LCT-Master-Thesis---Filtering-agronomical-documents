@@ -1,6 +1,5 @@
-\newcommand{\mytextcite}[1]{\citet{#1}}
-\newcommand{\myparencite}[1]{\citep{#1}}
-
+\newcommand{\mytextcite}[1]{\textcite{#1}}
+\newcommand{\myparencite}[1]{\parencite{#1}}
 
 % redefining chapters and sections
 
@@ -8,13 +7,13 @@
 \newcommand{\customHeader}[2]{    
     \ifcase#1
        %This is case 0.
-       \section{#2}
+       \chapter{#2}
     \or
        %This is case 1.
-       \subsection{#2}
+       \section{#2}
     \or
        %This is case 2.
-       \subsubsection{#2}
+       \subsection{#2}
     \else
         {\color{red} HEADER PROBLEM. LEVELS 0 to 2}
        %This is the default case.
@@ -22,6 +21,6 @@
 }
 
 
-\newcommand{\headerName}[0]{Section} 
+\newcommand{\headerName}[0]{Chapter} 
 % \headerName exists so that I can write phrases like:
 % "As seen in \headerName \ref{some label}"
