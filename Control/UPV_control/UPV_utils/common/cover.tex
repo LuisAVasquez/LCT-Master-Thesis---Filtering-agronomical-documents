@@ -10,6 +10,8 @@
   \renewcommand{\listtablename}{List of tables}%
 }
 
+\input{Chapters/00_Preamble/Abbreviations}
+
 \begin{document}
 \begin{titlepage}
 { \center
@@ -71,6 +73,8 @@
 \listoffigures
 \cleardoublepage
 \listoftables
+\cleardoublepage
+\printacronyms[title={Abbreviations}]
 \cleardoublepage
 \setcounter{page}{1}
 \renewcommand{\thepage}{\arabic{page}}
