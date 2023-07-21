@@ -1,0 +1,120 @@
+\customHeader{0}{Regular expressions used in this project}
+\label{appendix02:regular_expressions}
+
+This Appendix contains examples of the regular expressions used for different tasks in this project.
+
+
+\customHeader{1}{Error Message Removal - \VSI{} Dataset}
+\label{appendix02:pesv_error_regex}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|l|}
+\hline
+\textbf{Regular Expressions} \\ \hline
+\verb|^JavaScript is not available\.$| \\
+\verb|^Error$| \\
+%\verb|^Text$| \\
+\verb|^NA$| \\
+\verb|^Timeout error$| \\
+%\verb|^post_title$| \\
+\verb|^None$| \\
+%\verb|^Home$| \\
+\verb|^Loading(\.)*$| \\
+%\verb|^Facebook$| \\
+%\verb|^Idioma$| \\
+%\verb|^Publications$| \\
+%\verb|^Buscar$| \\
+%\verb|^Search$| \\
+\verb|^Not Found$| \\
+\verb|^Access Restricted$| \\
+%\verb|^DSpace JSPUI$| \\
+\verb|^Page Not Found$| \\
+%\verb|^Archives$| \\
+%\verb|^Author Details$| \\
+\verb|^\[\]$| \\
+\verb|^blacklisted| \\
+\verb|^'NoneType' object has no attribute 'get'?$| \\
+%\verb|^Copyright All Rights Reserved.+$| \\
+\verb|^PPlease Wait\.\.\.\s+ Cloudflare$| \\
+\verb|^HTTPSConnectionPool.*| \\
+%\verb|^HTTPConnectionPool.*| \\
+\verb|^Checking your browser.*| \\
+%\verb|^Facebook\s+Twitter\s+Instagram$| \\
+%\verb|^Sequence Features$| \\
+%\verb|^Discover open access scientific publications$| \\
+%\verb|^Abbonati subito$| \\
+\verb|^Please update your browser$| \\
+%\verb|^News$| \\
+\verb|^JavaScript n'est pas disponible\.$| \\
+\verb|^Vos données\.% Votre expérience\.*$| \\
+%\verb|^Related Articles$| \\
+\verb|^Before you continue to YouTube$| \\
+%\verb|^常用链接$| \\
+%\verb|^Google Search Console$| \\
+%\verb|^Cultures$| \\
+%\verb|^Browse Articles$| \\
+%\verb|^Article Versions Notes$| \\
+%\verb|^Datasets$| \\
+\verb|^Just a moment(\.)*| \\
+%\verb|^Search Results$| \\
+%\verb|^Browsing by Title$| \\
+%\verb|^Search\. Read\. Cite\.$| \\
+%\verb|^Agricultura$| \\
+%\verb|^datosrevista$| \\
+%\verb|^Journal$| \\
+\verb|^Your data\. Your experience\.$| \\
+%\verb|^Table of Contents$| \\
+\verb|^Access Denied$| \\
+\ldots \\
+\hline
+\end{tabular}
+\caption{Some Regular Expressions for Removing Errors Messages in the  \VSI{} dataset}
+\label{appendix02:tab:error_messages}
+\end{table}
+
+
+
+
+
+
+
+
+\customHeader{1}{Noise Removal - \VSI{} Dataset}
+\label{appendix02:pesv_noise_removal}
+
+\begin{landscape}
+\begin{table}%[ht]
+\resizebox{\paperwidth}{!}{
+    \begin{tabular}{|l|p{6.5cm}| p{6cm}|}
+\hline
+\textbf{Description} & \textbf{Regular Expression} & \textbf{Explanation}\\ \hline
+Emojis & \texttt{[\textbackslash U00010000-\textbackslash U0010ffff]} & Unicode emojis\\ \hline
+
+Hyphen-like Characters & \texttt{[\textbackslash u002D\textbackslash u058A\textbackslash u2010\textbackslash u2011\textbackslash u2012} \texttt{\textbackslash u2013\textbackslash u2014\textbackslash u2015\textbackslash u2E3A} \texttt{\textbackslash u2E3B\textbackslash uFE58\textbackslash uFE63\textbackslash uFF0D]} 
+&
+Common hyphen-like characters in Unicode  such as ֊ ‐ ‑ ‒ – — ⸺ ⸻ ﹘ ﹣ －, etc.
+\\ \hline
+Quotation-mark-like Characters & \texttt{[\textbackslash u00BB\textbackslash u00AB\textbackslash u25B7\textbackslash u2018\textbackslash u2019} \texttt{\textbackslash u201C\textbackslash u201D\textbackslash u2039\textbackslash u203A} \texttt{\textbackslash u300C\textbackslash u300D\textbackslash u300E\textbackslash u300F} \texttt{\textbackslash u301D\textbackslash u301E\textbackslash u301F\textbackslash uFE41} \texttt{\textbackslash uFE42\textbackslash uFE43\textbackslash uFE44\textbackslash uFF02} \texttt{\textbackslash uFF07\textbackslash uFF62\textbackslash uFF63]} & 
+Common quotation-mark-like characters in Unicode, such as » « ▷ ‘ ’ “ ” ‹ › 「 」『 』〝 〞 〟 ﹁ ﹂ ﹃ ﹄ ＂ ＇ ｢ ｣
+\\ \hline
+URL & \texttt{\textbackslash bhttps?://\textbackslash S+\textbackslash b} & \\ \hline
+Date & \texttt{\textbackslash b\d\{4\}[.-/]\d\{1,2\}[.-/]\d\{1,2\}\textbackslash b|\textbackslash b\d\{1,2\}[.-/]\d\{1,2\}[.-/]\d\{4\}\textbackslash b|\textbackslash b\d\{1,2\}[.-/]\d\{1,2\}[.-/]\d\{1,2\}\textbackslash b}   
+&
+Date pattern for dates in formats YYYY-MM-DD, DD-MM-YYYY, DD.MM.YYYY, DD/MM/YYY, etc....
+\\ \hline
+Hours & \texttt{\textbackslash b\d\{1,2\}:\d\{2\}(?::\d\{2\})?\textbackslash b} 
+& 
+Hours pattern e.g. 10:30 AM, 15:45, or 2023-05-15 10:30:00. Also, 15:45:30 and 2023-05-15T12:30:45+00:00, etc
+\\
+\hline
+
+    \end{tabular}
+}
+\caption{Regular Expressions for Noise Removal}
+\label{appendix02:tab:pesv_string_cleaning_regex}
+\end{table}
+\end{landscape}
+
+\newpage
+

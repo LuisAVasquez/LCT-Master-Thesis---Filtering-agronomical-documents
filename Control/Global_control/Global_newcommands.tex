@@ -2,16 +2,40 @@
 \colorbox{pink}{#1}
  }
 \newcommand{\TODO}[0]{\WARNING{TODO}}
+\newcommand{\todo}[1]{\WARNING{TODO: #1}}
+
+\colorlet{body}{black!80!white}
+\newcommand{\cvtag}[1]{%
+  \tikz[baseline]\node[anchor=base,draw=body!30,rounded corners,inner xsep=1ex,inner ysep =0.75ex,text height=1.5ex,text depth=.25ex]{#1};
+}
+
+
+\newcommand{\appendixName}[0]{Appendix{}}
 
 \newcommand{\INRAE}[0]{INRAE}
 \newcommand{\MAIAGE}[0]{MaiAGE}
 \newcommand{\PESV}[0]{PESV}
+\newcommand{\VSI}[0]{VSI}
 \newcommand{\bibliome}[0]{Bibliome}
 \newcommand{\textclassification}[0]{Text Classification}
 \newcommand{\tokenization}[0]{Tokenization}
 \newcommand{\wordpiece}[0]{Word Piece}
 \newcommand{\bpe}[0]{Byte-Pair Encoding}
+\newcommand{\trafilaturaTitle}[0]{Title}
+\newcommand{\trafilaturaAbstract}[0]{Abstract}
+\newcommand{\trafilaturaFulltext}[0]{Full text}
+\newcommand{\translationTitle}[0]{Translated Title}
+\newcommand{\trafilatura}[0]{Trafilatura}
 
+\newcommand{\keyphrasesAbstractOnly}[0]{Phrases with Keywords (Abstract)}
+\newcommand{\keyphrasesAbstractOC}[0]{Phrases with Keywords + O.C (Abstract)}
+
+\newcommand{\keyphrasesFulltextOnly}[0]{Phrases with Keywords (Full text)}
+\newcommand{\keyphrasesFulltextOC}[0]{Phrases with Keywords + O.C (Full text)}
+
+
+\newcommand{\sanbaTitle}[0]{Title}
+\newcommand{\sanbaAbstract}[0]{Abstract}
 
 \newcommand{\Sanba}[0]{Sanba}
 \newcommand{\BERT}[0]{BERT}
