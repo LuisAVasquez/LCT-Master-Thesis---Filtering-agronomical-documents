@@ -1,0 +1,61 @@
+\customHeader{0}{Regular expressions used in this project}
+\label{appendix03:regular_expressions}
+
+In this \appendixname{}, we present the full results of our preprocessing approaches, as explained in \headerName{} \ref{preprocessing}.
+
+
+\customHeader{1}{Preprocessing the \VSI{} dataset}
+\label{appendix03:vsi_preprocessing results}
+
+
+\begin{table}[ht]
+\centering
+\resizebox{\textwidth}{!}{
+
+\begin{tabular}{lcccccccc}
+%\toprule
+\textbf{\contentType{}} & \textbf{Size} & \textbf{Mean} & \textbf{STD} & \textbf{Min} & \textbf{25\%} & \textbf{50\%} & \textbf{75\%} & \textbf{max} \\
+%\midrule
+\trafilaturaTitle{} & 16222 & 12.464 & 29.867 & 1 & 8 & 11 & 15 & 1565 \\
+\trafilaturaAbstract{} & 16974 & 50.549 & 73.982 & 1 & 19 & 27 & 46 & 1537 \\
+\trafilaturaFulltext{} & 22535 & 1097.756 & 5763.482 & 1 & 187 & 411 & 800 & 240318 \\
+\translationTitle{} & 16359 & 12.821 & 30.943 & 1 & 8 & 11 & 15 & 1565 \\
+\keyphrasesAbstractOnly{} & 4050 & 34.919 & 33.765 & 1 & 18 & 25 & 39 & 537 \\
+\keyphrasesAbstractOC{}& 16833 & 35.768 & 44.700 & 1 & 17 & 25 & 38 & 1518 \\
+\keyphrasesFulltextOnly{} & 14359 & 115.655 & 429.369 & 1 & 26 & 52 & 114 & 40700 \\
+\keyphrasesFulltextOC{} & 20880 & 217.711 & 614.478 & 1 & 32 & 71 & 201 & 40700 \\
+%\bottomrule
+\end{tabular}
+
+}
+\caption{Token Length statistics after preprocessing the \VSI{} dataset}
+\label{appendix03:tab:vsi_token_length_statistics}
+\end{table}
+
+
+\begin{table}[ht]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{lcccccccc}
+\hline
+\contentType{} & Irrelevant & Relevant & Size & \% Irrelevant & \% Relevant \\
+\hline
+\trafilaturaTitle{}{} & 13917 & 2305 & 16222 & 85.8\% & 14.2\% \\
+\trafilaturaAbstract{} & 14625 & 2349 & 16974 & 86.2\% & 13.8\% \\
+\trafilaturaFulltext{} & 19794 & 2741 & 22535 & 87.8\% & 12.2\% \\
+\translationTitle{} & 14084 & 2275 & 16359 & 86.1\% & 13.9\% \\
+\keyphrasesAbstractOnly{} & 2962 & 1088 & 4050 & 73.1\% & 26.9\% \\
+\keyphrasesAbstractOC{} & 14553 & 2280 & 16833 & 86.5\% & 13.5\% \\
+\keyphrasesFulltextOnly{} & 12130 & 2229 & 14359 & 84.5\% & 15.5\% \\
+\keyphrasesFulltextOC{} & 18344 & 2536 & 20880 & 87.9\% & 12.1\% \\
+\hline
+\end{tabular}
+}
+\caption{Label Distribution after preprocessing the \VSI{} dataset}
+\label{appendix03:tab:vsi_positive_negative_balance}
+\end{table}
+
+
+
+
+\clearpage

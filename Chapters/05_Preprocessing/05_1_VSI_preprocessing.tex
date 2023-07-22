@@ -1,7 +1,7 @@
 \customHeader{1}{Preprocessing the \VSI{} dataset}
 \label{vsi_preprocessing}
 
-In response to the challenges outlined in \headerName{} \ref{vsi_data_issues}, we implemented multiple strategies.
+In response to the challenges outlined in \headerName{} \ref{vsi_data_issues}, we implemented multiple strategies that allowed us to obtain a preprocessed dataset suitable for \textclassification{}.
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \customHeader{2}{Leveraging Keywords}
@@ -10,14 +10,9 @@ In response to the challenges outlined in \headerName{} \ref{vsi_data_issues}, w
 Leveraging the available keywords and key phrases used for the Google Search queries to construct the dataset (Table \ref{tab:04_query_keywords}), we obtained four more sources of content. 
 
 
-We opted to extract sentences containing keywords or key phrases from the content. Using the Python package \texttt{NLTK} \myparencite{nltk}, we divided each document into phrases and selected those containing at least one of the keywords or key phrases. This process was carried out for both the \trafilaturaAbstract{} and \trafilaturaFulltext{} sources of content. However, considering the diverse range of languages in the documents, it was not always apparent whether we should discard the content entirely or retain it. For example, even if the keyword is not present in the text, maybe its translation is; or, the language could use a non-Latin script. Consequently, we pursued two different approaches: in one case, we discarded the original content (O.C.), and in the other, we retained it, resulting in four new sources of content:
+We opted to extract sentences containing keywords or key phrases from the content. Using the Python package \texttt{NLTK} \myparencite{nltk}, we divided each document into phrases and selected those containing at least one of the keywords or key phrases. This process was carried out for both the \trafilaturaAbstract{} and \trafilaturaFulltext{} sources of content. However, considering the diverse range of languages in the documents, it was not always apparent whether we should discard the content entirely or retain it. For example, even if the keyword is not present in the text, maybe its translation is; or, the language could use a non-Latin script. Consequently, we pursued two different approaches: in one case, we discarded the original content (O.C.), and in the other, we retained it, resulting in four new sources of content (Table \ref{tab:05_pesv_sources of content after preprocessing}).
 
-\begin{itemize}
-    \item \keyphrasesAbstractOnly{}
-    \item \keyphrasesAbstractOC{}
-    \item \keyphrasesFulltextOnly{}
-    \item \keyphrasesFulltextOC{}
-\end{itemize}
+\input{Tables/05/Sources_of_content_after_preprocessing}
 
 
 Figure \ref{fig:05_unique_entries_keyphrases_vsi} offers a comparison of the number of unique entries per content source. In both cases, keeping only the phrases containing keywords dramatically reduces the size of the data. Note that, in the case of keeping the original content, there are slightly less unique entries for both the \trafilaturaAbstract{} and the \trafilaturaFulltext{} ($19939-19798 = 141$ and $26346-24447=1899$, respectively). This may be explained by the fact that some data noise may be removed by the sentence extraction process, especially those cases where several entries differ by a small amount of tokens (see Table \ref{tab:04_website_names_as_suffixes}).
@@ -35,6 +30,7 @@ Figure \ref{fig:05_unique_entries_keyphrases_vsi} offers a comparison of the num
 \label{vsi_data_cleaning}
 
 
+
 \customHeader{3}{Noise Removal}
 \label{vsi_string_cleaning}
 
@@ -47,7 +43,7 @@ To address the text noise mentioned in \headerName{} \ref{vsi_issues_data_noise}
     \item Remove digits at beginning and end of the string.
     \item Standardize quotation characters into the ASCII simple quotation character (').
     \item Standardize hyphen-like characters into the ASCII hyphen (-).
-    \item Remove sentence suffixes that may be the name of the website, by deleting short text ($<=3$ tokens) that follow an ASCII hyphen near the end of the string.
+    \item Remove sentence suffixes that may be the name of the website, by deleting short text ($\leq 3$ tokens) that follow an ASCII hyphen or bar (|) near the end of the string.
 \end{enumerate}
 
 See Table \ref{appendix02:tab:pesv_string_cleaning_regex} in the \appendixname{} for some examples of the regular expressions used to clean the multilingual strings. Figure \ref{fig:05_multilingual_string_cleaning} shows the effect of string cleaning on an example text.
@@ -65,7 +61,9 @@ See Table \ref{appendix02:tab:pesv_string_cleaning_regex} in the \appendixname{}
 
 Fortunately, error messages in the dataset are very consistent. Given that they do not provide information on the relevance of a document, we may delete them using regular expressions. See Table \ref{appendix02:tab:error_messages} in the \appendixname{} for some examples of the regular expressions used to remove the error messages. 
 
+\input{Tables/05/Error_count}
 
+In Figure \ref{tab:05_vsi_error_message_count}, we present the number of error messages identified using our regular expressions. Notably, the proportion of error messages generally hovers around one-fifth of all entries. In $18.50\%\ (\approx 20\%)$ of cases \trafilatura{} completely fails to obtain any content from the website. This proportion almost doubles ($36.50\approx 40\%$) for the \trafilaturaAbstract{}. This discrepancy in the \trafilaturaAbstract{} could be attributed to the common occurrence of missing metadata, as discussed in \headerName{} \ref{vsi_data_statistics}.
 
 
 \customHeader{3}{Handling scrapping errors}
@@ -93,7 +91,191 @@ Our algorithm to filter by length consists in:
 \customHeader{2}{Resolving Inconsistencies and Duplicate Documents}
 \label{vsi_resolving_inconsistencies}
 
+The initial preprocessing steps focused solely on cleaning the textual content of the dataset. Now, our attention turns to addressing the labeling challenges, specifically, instances where entries have identical content but differ in subject assignment or lack a subject (as in Tables \ref{tab:04_xmol_inconsistencies} and \ref{tab:04_annotation_inconsistencies}).
+
+Considering our main goal is to automate the identification of articles relevant to epidemiologists, where subject assignment signifies their interest, we propose the following strategy:
+
+\begin{tcolorbox}[colback=mylightblue,colframe=gray!50!black]
+For each of the eight content sources, we group the dataset based on the text content. If a particular text has been assigned a subject at least once, we categorize it as \textbf{relevant}. Conversely, if no subject has been assigned to a text, we consider it \textbf{irrelevant}.
+\end{tcolorbox}
+
+We believe this strategy reflects the intention of the annotators as they labeled the documents (see \headerName{} \ref{vsi_data_annotation}). Additionally, by design, this strategy eliminates duplicate content. Table \ref{tab:determining_relevance} illustrates this process for the content from the \trafilaturaTitle{}.
+
+\input{Tables/05/Strategy_for_labelling}
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\customHeader{2}{Preprocessing Results}
+\label{vsi_results_of_preprocessing}
+
+In this \headerName{}, we present the outcomes of our preprocessing techniques, yielding refined datasets suitable for text classification. Additional numerical results can be found in \appendixname{} \ref{appendix03:vsi_preprocessing results}.
+
+We now proceed to present the results of our preprocessing methods, which produce clean datasets fit to be used for text classification.
+Supplementary numerical results are available in the appendix.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\textwidth]{Figures/05/Preprocessing_Unique entries per content source.png}
+    \caption{Unique Entries per content source before and after preprocessing}
+    \label{fig:05_unique_entries_after_preprocessing}
+\end{figure}
+
+\input{Tables/05/Unique_entries_after_preprocessing}
 
 
 
 
+\begin{figure}[ht]
+    \centering
+    \subfigure[\trafilaturaTitle{}]{
+        \begin{adjustbox}{max height=0.18\textheight}
+            \includegraphics[width=0.45\textwidth]{Figures/05/Histograms/preprocessing length histogram parsed_trafilatura_title.png}
+        \end{adjustbox}
+        %\label{fig:image1}
+    }
+    \hfill
+    \subfigure[\trafilaturaAbstract{}]{
+            \begin{adjustbox}{max height=0.18\textheight}
+            \includegraphics[width=0.45\textwidth]{Figures/05/Histograms/preprocessing length histogram parsed_trafilatura_abstract.png}
+        \end{adjustbox}
+
+        %\label{fig:image2}
+    }
+    
+    \subfigure[\trafilaturaFulltext{}]{
+        \begin{adjustbox}{max height=0.18\textheight}
+          \includegraphics[width=0.45\textwidth]{Figures/05/Histograms/preprocessing length histogram parsed_trafilatura_fulltext.png}
+        \end{adjustbox}
+        %\label{fig:image3}
+    }
+    \hfill
+    \subfigure[\translationTitle{}]{
+            \begin{adjustbox}{max height=0.18\textheight}
+                    \includegraphics[width=0.45\textwidth]{Figures/05/Histograms/preprocessing length histogram translation_title.png}
+        \end{adjustbox}
+        %\label{fig:image4}
+    }
+    
+    
+    %%
+    \subfigure[\keyphrasesAbstractOnly{}]{
+        \begin{adjustbox}{max height=0.18\textheight}
+            \includegraphics[width=0.45\textwidth]{Figures/05/Histograms/preprocessing length histogram sentence_with_keywords_parsed_trafilatura_abstract_only_relevant_sentences.png}
+        \end{adjustbox}
+        
+        %\label{fig:image2}
+    }
+    \hfill
+    \subfigure[\keyphrasesAbstractOC{}]{
+         \begin{adjustbox}{max height=0.18\textheight}
+         \includegraphics[width=0.45\textwidth]{Figures/05/Histograms/preprocessing length histogram sentence_with_keywords_parsed_trafilatura_abstract_keep_original_content.png}
+        \end{adjustbox}
+    
+        %\label{fig:image1}
+    }
+
+    
+    \subfigure[\keyphrasesFulltextOnly{}]{
+
+    \begin{adjustbox}{max height=0.18\textheight}
+           \includegraphics[width=0.45\textwidth]{Figures/05/Histograms/preprocessing length histogram sentence_with_keywords_parsed_trafilatura_fulltext_only_relevant_sentences.png}
+        \end{adjustbox}
+    
+        %\label{fig:image4}
+    }
+    \hfill
+        \subfigure[\keyphrasesFulltextOC{}]{
+        \begin{adjustbox}{max height=0.18\textheight}
+            \includegraphics[width=0.45\textwidth]{Figures/05/Histograms/preprocessing length histogram sentence_with_keywords_parsed_trafilatura_fulltext_keep_original_content.png}
+        \end{adjustbox}
+        
+        %\label{fig:image3}
+    }
+
+    
+    \caption{Token distribution after preprocessing the \VSI{} dataset}
+    \label{fig:05_vsi_token_distribution_after_preprocessing}
+\end{figure}
+
+
+
+\input{Tables/05/Mean_length_comparison}
+
+
+
+
+\begin{figure}[ht]
+    \centering
+    \subfigure[\trafilaturaTitle{}]{
+        \begin{adjustbox}{max height=0.18\textheight}
+            \includegraphics[width=0.45\textwidth]{Figures/05/Charts/balance Title.png}
+        \end{adjustbox}
+        
+        %\label{fig:image1}
+    }
+    \hfill
+    \subfigure[\trafilaturaAbstract{}]{
+        \begin{adjustbox}{max height=0.18\textheight}
+            \includegraphics[width=0.45\textwidth]{Figures/05/Charts/balance Abstract.png}
+        \end{adjustbox}
+        
+        %\label{fig:image2}
+    }
+    
+    \subfigure[\trafilaturaFulltext{}]{
+        \begin{adjustbox}{max height=0.18\textheight}
+            \includegraphics[width=0.45\textwidth]{Figures/05/Charts/balance Fulltext.png}
+        \end{adjustbox}
+        
+        %\label{fig:image3}
+    }
+    \hfill
+    \subfigure[\translationTitle{}]{
+        \begin{adjustbox}{max height=0.18\textheight}
+            \includegraphics[width=0.45\textwidth]{Figures/05/Charts/balance Translated Title.png}
+        \end{adjustbox}
+        %\label{fig:image4}
+    }
+    
+    
+    %%
+    \subfigure[\keyphrasesAbstractOnly{}]{
+        \begin{adjustbox}{max height=0.18\textheight}
+            \includegraphics[width=0.45\textwidth]{Figures/05/Charts/balance Sentence with Keywords Abstract.png}
+        \end{adjustbox}
+        %\label{fig:image2}
+    }
+    \hfill
+    \subfigure[\keyphrasesAbstractOC{}]{
+        \begin{adjustbox}{max height=0.18\textheight}
+            \includegraphics[width=0.45\textwidth]{Figures/05/Charts/balance Sentece with Keywords and OC Abstract.png}
+        \end{adjustbox}
+        %\label{fig:image1}
+    }
+
+    
+    \subfigure[\keyphrasesFulltextOnly{}]{
+        \begin{adjustbox}{max height=0.18\textheight}
+            \includegraphics[width=0.45\textwidth]{Figures/05/Charts/balance Sentence with keywords Fulltext.png}
+        \end{adjustbox}
+        %\label{fig:image4}
+    }
+    \hfill
+    \subfigure[\keyphrasesFulltextOC{}]{
+        \begin{adjustbox}{max height=0.18\textheight}
+            \includegraphics[width=0.45\textwidth]{Figures/05/Charts/balance Sentence with keywords and OC Fulltext.png}
+        \end{adjustbox}
+        %\label{fig:image3}
+    }
+
+    
+    \caption{Positive/Negative balance after preprocessing the \VSI{} dataset}
+    \label{fig:05_vsi_pos_neg_balance}
+\end{figure}
+
+
+
+
+% making sure to print all tables and figures 
+\clearpage
