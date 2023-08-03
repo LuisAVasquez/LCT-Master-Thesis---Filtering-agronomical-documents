@@ -1,0 +1,47 @@
+
+
+
+\begin{figure}[ht]
+    \centering
+    \subfigure[Neuron overview]{
+    \begin{tikzpicture}[scale=0.7, every node/.style={transform shape}]
+        % Add the "Hello" text to the left
+        \node[anchor=east] at (-3, 0) {Input};
+        
+        % Draw the neuron circle with a node name
+        \node[draw, thick, circle, minimum size=1.5cm, fill=mylightblue] (neuron) at (0, 0) {};
+        
+        % Draw the input nodes with labels x_i
+        \foreach \x/\xval in {1/{$x_1$}, 2/{$x_2$}, 3/{$x_3$}} {
+            \node[draw, circle, minimum size=0.7cm] (input\x) at (-2, 2.8-\x*1.4) {};
+            \draw[->] (input\x) -- node[above] {} (neuron);
+        }
+        
+        % Draw the output arrow
+        \draw[->] (neuron) -- (2, 0) node[right] {Output};
+    \end{tikzpicture}
+    }
+    \hfill
+    \subfigure[Neuron with weights]{
+    \begin{tikzpicture}[scale=0.7, every node/.style={transform shape}]
+        % Add the "Hello" text to the left
+        \node[anchor=east] at (-3, 0) {Input};
+        
+        % Draw the neuron circle with a node name
+        \node[draw, thick, circle, minimum size=1.5cm, fill=mylightblue] (neuron) at (0, 0) {$f$};
+        
+        % Draw the input nodes with labels x_i
+        \foreach \x/\xval in {1/{$x_1$}, 2/{$x_2$}, 3/{$x_3$}} {
+            \node[draw, circle, minimum size=0.7cm] (input\x) at (-2, 2.8-\x*1.4) {\xval};
+            \draw[->] (input\x) -- node[above] {$w_\x$} (neuron);
+        }
+        
+        % Draw the output arrow
+        \draw[->] (neuron) -- (2, 0) node[right] {$z$ Output};
+    \end{tikzpicture}
+    }
+    \caption{
+    Basic Neuron
+    }
+    \label{fig:02_neuron}
+\end{figure}

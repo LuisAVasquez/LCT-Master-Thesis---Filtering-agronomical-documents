@@ -1,0 +1,100 @@
+\customHeader{0}{Results and Discussion}
+\label{07_results_and_discussion}
+
+\iffalse
+\begin{landscape}
+\begin{table}
+\centering
+\resizebox{\paperwidth}{!}{
+\csvreader[
+    tabular=|p{5cm}|*{6}{c|}p{5cm}|,
+    table head=\hline %\rowcolor{gray!20} 
+    \contentType{} & Second Column & Third Column & Fourth Column & Fifth Column & Sixth Column & 7 & \contentType{}  \\ \hline,
+    %late after line=\\ \hline
+    late after line=\\, late after last line=\\\hline
+    ]%
+    {Tables/07/TestHoja1.csv}{}%
+    {
+    \csvcoli
+    & \cellcolor[rgb]{\fpeval{1-\csvcolii}, \fpeval{0.1+\csvcolii}, 0} \fpeval{round(100*\csvcolii, 2)}\% 
+    & \cellcolor[rgb]{\fpeval{round(1-\csvcoliii,2)}, \fpeval{0.1+\csvcoliii}, 0} \fpeval{round(100*\csvcoliii, 2)}\% 
+    & \cellcolor[rgb]{\fpeval{1-\csvcoliv}, \fpeval{0.1+\csvcoliv}, 0} \fpeval{round(100*\csvcoliv, 2)}\% 
+    & \cellcolor[rgb]{\fpeval{1-\csvcolv}, \fpeval{0.1+\csvcolv}, 0} \fpeval{round(100*\csvcolv, 2)}\%
+    & \cellcolor[rgb]{\fpeval{1-\csvcolvi}, \fpeval{0.1+\csvcolvi}, 0} \fpeval{round(100*\csvcolvi, 2)}\%
+    & \cellcolor[rgb]{\fpeval{1-\csvcolvi}, \fpeval{0.1+\csvcolvi}, 0} \fpeval{round(100*\csvcolvi, 2)}\% 
+    %& {\cellcolor[rgb]{\fpeval{1-\csvcolvi}, \fpeval{0.1+\csvcolvi}, 0} \fpeval{round(100*\csvcolvi, 2)}\% } 
+    & \cellcolor{white} \csvcoli %, \fpeval{0.1+\csvcolvi}, 0} \fpeval{round(100*\csvcolvi, 2)}\%
+    %& \cellcolor[rgb]{0.36, 0.64, 0} Test 1 \csvcolvi \%
+    %&  \csvcolvi \% \cellcolor[rgb]{0.40, 1, 0} Test 2
+    %& \cellcolor[rgb]{\fpeval{round(1-\csvcolvi,2)}, \fpeval{0.1+ round(\csvcolvi,2)}, 0} (\fpeval{round(1-\csvcolvi,2)}, 
+    %\fpeval{round(\csvcolvi,2)} ) \%
+    %& \cellcolor[rgb]{0, \fpeval{\csvcolvi}, 0} \fpeval{0.1+round(100*\csvcolvi, 2)}\% 
+    }
+}
+\caption{test coloring table}
+\label{07_test_colored table}
+\end{table}
+
+\end{landscape}
+\fi
+
+
+
+
+\begin{landscape}
+\begin{table}[]
+    \coloredTable{
+    Tables/07/F2/eval_f_beta_2.0__BERT-base.csv
+    }
+    \caption{\bertbase{} \fTwo{} on development split}
+    \label{tab:07_f2_bert_base}
+\end{table}
+
+\begin{table}[]
+    \coloredTable{
+    Tables/07/F2/eval_f_beta_2.0__mBERT.csv
+    }
+    \caption{\bertmultilingual{} \fTwo{} on development split}
+    \label{tab:07_f2_bert_multilingual}
+\end{table}
+\end{landscape}
+
+\begin{landscape}
+\begin{table}[]
+    \coloredTable{
+    Tables/07/F2/eval_f_beta_2.0__Bio-Link-BERT.csv
+    }
+    \caption{\bertbiolinkbert{} \fTwo{} on development split}
+    \label{tab:07_f2_bert_biolinkbert}
+\end{table}
+
+\begin{table}[]
+    \coloredTable{
+    Tables/07/F2/eval_f_beta_2.0__SciBERT.csv
+    }
+    \caption{\bertscibert{} \fTwo{} on development split}
+    \label{tab:07_f2_scibert}
+\end{table}
+\end{landscape}
+
+
+\begin{landscape}
+\begin{table}[]
+    \coloredTable{
+    Tables/07/F2/eval_f_beta_2.0__roBERTa-base.csv
+    }
+    \caption{\bertroberta{} \fTwo{} on development split}
+    \label{tab:07_f2_roberta}
+\end{table}
+
+\begin{table}[]
+    \coloredTable{
+    Tables/07/F2/eval_f_beta_2.0__XLM-roBERTa.csv
+    }
+    \caption{\bertxlmroberta{} \fTwo{} on development split}
+    \label{tab:07_f2_bert_xlmroberta}
+\end{table}
+\end{landscape}
+
+
+\clearpage

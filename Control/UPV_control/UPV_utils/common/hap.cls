@@ -9,6 +9,8 @@
 \LoadClass[12pt,twoside,openwight,a4paper]{article}
 
 % Some includes and definitions
+\usepackage[usenames,dvipsnames,table]{xcolor}
+%\usepackage[table]{xcolor}
 %\usepackage{epsfig}
 \usepackage{a4wide}
 \usepackage{graphicx}
@@ -16,6 +18,7 @@
 \usepackage{fancyhdr}
 \usepackage{natbib}
 \usepackage{color}
+
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 

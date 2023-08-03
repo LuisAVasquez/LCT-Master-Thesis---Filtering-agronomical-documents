@@ -93,11 +93,16 @@ series = {WWW '21}
   organization={Springer}
 }
 
-@article{fbetascore,
-  title={Information retrieval 2nd edition butterworths},
-  author={Van Rijsbergen, CJ},
-  journal={London available on internet},
-  year={1979}
+
+
+@BOOK{fbetascore,
+  title     = "Information Retrieval",
+  author    = "Van Rijsbergen, C J",
+  publisher = "Butterworth-Heinemann",
+  edition   =  2,
+  month     =  jan,
+  year      =  1979,
+  address   = "Oxford, England"
 }
 
 @inproceedings{BioMedicalBERT_ALBERT_ELECTRA_2021,
@@ -134,20 +139,22 @@ series = {WWW '21}
 
 
 
-
-@article{BERT_paper,
-  title={Bert: Pre-training of deep bidirectional transformers for language understanding},
-  author={Devlin, Jacob and Chang, Ming-Wei and Lee, Kenton and Toutanova, Kristina},
-  journal={arXiv preprint arXiv:1810.04805},
-  year={2018}
+@misc{BERT_paper,
+      title={BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding}, 
+      author={Jacob Devlin and Ming-Wei Chang and Kenton Lee and Kristina Toutanova},
+      year={2019},
+      eprint={1810.04805},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
 }
 
-
-@article{linkbert_biolinkbert,
-  title={Linkbert: Pretraining language models with document links},
-  author={Yasunaga, Michihiro and Leskovec, Jure and Liang, Percy},
-  journal={arXiv preprint arXiv:2203.15827},
-  year={2022}
+@misc{linkbert_biolinkbert,
+      title={LinkBERT: Pretraining Language Models with Document Links}, 
+      author={Michihiro Yasunaga and Jure Leskovec and Percy Liang},
+      year={2022},
+      eprint={2203.15827},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
 }
 
 @inproceedings{scibert,
@@ -192,28 +199,54 @@ models and code.},
   url = {http://arxiv.org/abs/1907.11692},
   year = 2019
 }
-
-@article{xlm_roberta,
-  title={Unsupervised Cross-lingual Representation Learning at Scale},
-  author={Conneau, Alexis and Khandelwal, Kartikay and Goyal, Naman and Chaudhary, Vishrav and Wenzek, Guillaume and Guzm{\'a}n, Francisco and Grave, Edouard and Ott, Myle and Zettlemoyer, Luke and Stoyanov, Veselin},
-  journal={arXiv preprint arXiv:1911.02116},
-  year={2019}
+@inproceedings{xlm_roberta,
+    title = "Unsupervised Cross-lingual Representation Learning at Scale",
+    author = "Conneau, Alexis  and
+      Khandelwal, Kartikay  and
+      Goyal, Naman  and
+      Chaudhary, Vishrav  and
+      Wenzek, Guillaume  and
+      Guzm{\'a}n, Francisco  and
+      Grave, Edouard  and
+      Ott, Myle  and
+      Zettlemoyer, Luke  and
+      Stoyanov, Veselin",
+    booktitle = "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics",
+    month = jul,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2020.acl-main.747",
+    doi = "10.18653/v1/2020.acl-main.747",
+    pages = "8440--8451",
+    abstract = "This paper shows that pretraining multilingual language models at scale leads to significant performance gains for a wide range of cross-lingual transfer tasks. We train a Transformer-based masked language model on one hundred languages, using more than two terabytes of filtered CommonCrawl data. Our model, dubbed XLM-R, significantly outperforms multilingual BERT (mBERT) on a variety of cross-lingual benchmarks, including +14.6{\%} average accuracy on XNLI, +13{\%} average F1 score on MLQA, and +2.4{\%} F1 score on NER. XLM-R performs particularly well on low-resource languages, improving 15.7{\%} in XNLI accuracy for Swahili and 11.4{\%} for Urdu over previous XLM models. We also present a detailed empirical analysis of the key factors that are required to achieve these gains, including the trade-offs between (1) positive transfer and capacity dilution and (2) the performance of high and low resource languages at scale. Finally, we show, for the first time, the possibility of multilingual modeling without sacrificing per-language performance; XLM-R is very competitive with strong monolingual models on the GLUE and XNLI benchmarks. We will make our code and models publicly available.",
 }
+
 
 
 @inproceedings{distilbert,
   title={DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter},
   author={Sanh, Victor and Debut, Lysandre and Chaumond, Julien and Wolf, Thomas},
-  booktitle={NeurIPS EMC^2 Workshop},
+  booktitle={NeurIPS EMC2 Workshop},
   year={2019}
 }
 
 
-@article{huang2023chatgpt,
-  title={Is chatgpt better than human annotators? potential and limitations of chatgpt in explaining implicit hate speech},
-  author={Huang, Fan and Kwak, Haewoon and An, Jisun},
-  journal={arXiv preprint arXiv:2302.07736},
-  year={2023}
+@inproceedings{huang2023chatgpt,
+author = {Huang, Fan and Kwak, Haewoon and An, Jisun},
+title = {Is ChatGPT Better than Human Annotators? Potential and Limitations of ChatGPT in Explaining Implicit Hate Speech},
+year = {2023},
+isbn = {9781450394192},
+publisher = {Association for Computing Machinery},
+url = {https://doi.org/10.1145/3543873.3587368},
+doi = {10.1145/3543873.3587368},
+abstract = {Recent studies have alarmed that many online hate speeches are implicit. With its subtle nature, the explainability of the detection of such hateful speech has been a challenging problem. In this work, we examine whether ChatGPT can be used for providing natural language explanations (NLEs) for implicit hateful speech detection. We design our prompt to elicit concise ChatGPT-generated NLEs and conduct user studies to evaluate their qualities by comparison with human-written NLEs. We discuss the potential and limitations of ChatGPT in the context of implicit hateful speech research.},
+booktitle = {Companion Proceedings of the ACM Web Conference 2023},
+pages = {294–297},
+numpages = {4},
+keywords = {Large Language Models, Hate Speech, Human Annotation, Natural Language Explanation, Toxicity Detection, ChatGPT},
+location = {Austin, TX, USA},
+series = {WWW '23 Companion}
 }
 
 @inproceedings{mikolov2013linguistic,
@@ -278,25 +311,32 @@ models and code.},
     abstract = "Data annotation is a time-consuming and labor-intensive process for many NLP tasks. Although there exist various methods to produce pseudo data labels, they are often task-specific and require a decent amount of labeled data to start with. Recently, the immense language model GPT-3 with 170 billion parameters has achieved tremendous improvement across many few-shot learning tasks. In this paper, we explore ways to leverage GPT-3 as a low-cost data labeler to train other models. We find that to make the downstream model achieve the same performance on a variety of NLU and NLG tasks, it costs 50{\%} to 96{\%} less to use labels from GPT-3 than using labels from humans. Furthermore, we propose a novel framework of combining pseudo labels from GPT-3 with human labels, which leads to even better performance. These results present a cost-effective data labeling methodology that is generalizable to many practical applications.",
 }
 
-@article{wu2016google,
-  title={Google's neural machine translation system: Bridging the gap between human and machine translation},
-  author={Wu, Yonghui and Schuster, Mike and Chen, Zhifeng and Le, Quoc V and Norouzi, Mohammad and Macherey, Wolfgang and Krikun, Maxim and Cao, Yuan and Gao, Qin and Macherey, Klaus and others},
-  journal={arXiv preprint arXiv:1609.08144},
-  year={2016}
+@misc{wu2016google,
+      title={Google's Neural Machine Translation System: Bridging the Gap between Human and Machine Translation}, 
+      author={Yonghui Wu and Mike Schuster and Zhifeng Chen and Quoc V. Le and Mohammad Norouzi and Wolfgang Macherey and Maxim Krikun and Yuan Cao and Qin Gao and Klaus Macherey and Jeff Klingner and Apurva Shah and Melvin Johnson and Xiaobing Liu and others},
+      year={2016},
+      eprint={1609.08144},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
 }
 
-@article{sennrich2015neural,
-  title={Neural machine translation of rare words with subword units},
-  author={Sennrich, Rico and Haddow, Barry and Birch, Alexandra},
-  journal={arXiv preprint arXiv:1508.07909},
-  year={2015}
+
+@misc{sennrich2015neural,
+      title={Neural Machine Translation of Rare Words with Subword Units}, 
+      author={Rico Sennrich and Barry Haddow and Alexandra Birch},
+      year={2016},
+      eprint={1508.07909},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
 }
+
+
 
 @article{gpt,
   title={Improving language understanding by generative pre-training},
   author={Radford, Alec and Narasimhan, Karthik and Salimans, Tim and Sutskever, Ilya and others},
   year={2018},
-  journal = {Preprint},
+  journal = {OpenAI Blog},
   publisher={OpenAI}
 }
 
@@ -404,3 +444,208 @@ url="https://doi.org/10.1007/978-0-387-39940-9_414"
     url = "https://aclanthology.org/P04-3031",
     pages = "214--217",
 }
+
+
+@article{survey_general_text_classificaiton,
+author = {Li, Qian and Peng, Hao and Li, Jianxin and Xia, Congying and Yang, Renyu and Sun, Lichao and Yu, Philip S. and He, Lifang},
+title = {A Survey on Text Classification: From Traditional to Deep Learning},
+year = {2022},
+issue_date = {April 2022},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {13},
+number = {2},
+issn = {2157-6904},
+url = {https://doi.org/10.1145/3495162},
+doi = {10.1145/3495162},
+abstract = {Text classification is the most fundamental and essential task in natural language processing. The last decade has seen a surge of research in this area due to the unprecedented success of deep learning. Numerous methods, datasets, and evaluation metrics have been proposed in the literature, raising the need for a comprehensive and updated survey. This paper fills the gap by reviewing the state-of-the-art approaches from 1961 to 2021, focusing on models from traditional models to deep learning. We create a taxonomy for text classification according to the text involved and the models used for feature extraction and classification. We then discuss each of these categories in detail, dealing with both the technical developments and benchmark datasets that support tests of predictions. A comprehensive comparison between different techniques, as well as identifying the pros and cons of various evaluation metrics are also provided in this survey. Finally, we conclude by summarizing key implications, future research directions, and the challenges facing the research area.},
+journal = {ACM Trans. Intell. Syst. Technol.},
+month = {apr},
+articleno = {31},
+numpages = {41},
+keywords = {text classification, traditional models, evaluation metrics, Deep learning, challenges}
+}
+
+
+@article{scikit-learn,
+ title={Scikit-learn: Machine Learning in {P}ython},
+ author={Pedregosa, F. and Varoquaux, G. and Gramfort, A. and Michel, V.
+         and Thirion, B. and Grisel, O. and Blondel, M. and Prettenhofer, P.
+         and Weiss, R. and Dubourg, V. and Vanderplas, J. and Passos, A. and
+         Cournapeau, D. and Brucher, M. and Perrot, M. and Duchesnay, E.},
+ journal={Journal of Machine Learning Research},
+ volume={12},
+ pages={2825--2830},
+ year={2011}
+}
+
+@article{auc_definition,
+  title={The meaning and use of the area under a receiver operating characteristic (ROC) curve.},
+  author={Hanley, James A and McNeil, Barbara J},
+  journal={Radiology},
+  volume={143},
+  number={1},
+  pages={29--36},
+  year={1982}
+}
+
+
+@misc{deep_learning_introduction,
+      title={Dive into Deep Learning}, 
+      author={Aston Zhang and Zachary C. Lipton and Mu Li and Alexander J. Smola},
+      year={2023},
+      eprint={2106.11342},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      howpublished = "\url{https://d2l.ai/}",
+}
+
+
+@article{padiweb3,
+title = {PADI-web 3.0: A new framework for extracting and disseminating fine-grained information from the news for animal disease surveillance},
+journal = {One Health},
+volume = {13},
+pages = {100357},
+year = {2021},
+issn = {2352-7714},
+doi = {https://doi.org/10.1016/j.onehlt.2021.100357},
+url = {https://www.sciencedirect.com/science/article/pii/S2352771421001476},
+author = {Sarah Valentin and Elena Arsevska and Julien Rabatel and Sylvain Falala and Alizé Mercier and Renaud Lancelot and Mathieu Roche},
+keywords = {Animal disease surveillance, Software, Text mining},
+abstract = {PADI-web (Platform for Automated extraction of animal Disease Information from the web) is a biosurveillance system dedicated to monitoring online news sources for the detection of emerging animal infectious diseases. PADI-web has collected more than 380,000 news articles since 2016. Compared to other existing biosurveillance tools, PADI-web focuses specifically on animal health and has a fully automated pipeline based on machine-learning methods. This paper presents the new functionalities of PADI-web based on the integration of: (i) a new fine-grained classification system, (ii) automatic methods to extract terms and named entities with text-mining approaches, (iii) semantic resources for indexing keywords and (iv) a notification system for end-users. Compared to other biosurveillance tools, PADI-web, which is integrated in the French Platform for Animal Health Surveillance (ESA Platform), offers strong coverage of the animal sector, a multilingual approach, an automated information extraction module and a notification tool configurable according to end-user needs.}
+}
+
+
+
+
+@misc{wolfram_llm, 
+title = {What Is ChatGPT Doing … and Why Does It Work?},
+author = {Wolfram, Stephen},
+url={https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/}, 
+journal={Stephen Wolfram Writings}, 
+year={2023}, 
+month=Feb
+} 
+
+
+@inproceedings{choubert,
+  title={ChouBERT: Pre-training French Language Model for Crowdsensing with Tweets in Phytosanitary Context},
+  author={Jiang, Shufan and Angarita, Rafael and Cormier, St{\'e}phane and Orensanz, Julien and Rousseaux, Francis},
+  booktitle={International Conference on Research Challenges in Information Science},
+  pages={653--661},
+  year={2022},
+  organization={Springer}
+}
+
+
+
+@article{biobert,
+  title={BioBERT: a pre-trained biomedical language representation model for biomedical text mining},
+  author={Lee, Jinhyuk and Yoon, Wonjin and Kim, Sungdong and Kim, Donghyeon and Kim, Sunkyu and So, Chan Ho and Kang, Jaewoo},
+  journal={Bioinformatics},
+  volume={36},
+  number={4},
+  pages={1234--1240},
+  year={2020},
+  publisher={Oxford University Press}
+}
+
+
+@inproceedings{transformers_hf_library,
+    title = "Transformers: State-of-the-Art Natural Language Processing",
+    author = "Wolf, Thomas  and
+      Debut, Lysandre  and
+      Sanh, Victor  and
+      Chaumond, Julien  and
+      Delangue, Clement  and
+      Moi, Anthony  and
+      Cistac, Pierric  and
+      Rault, Tim  and
+      Louf, Remi  and
+      Funtowicz, Morgan  and
+      Davison, Joe  and
+      Shleifer, Sam  and
+      von Platen, Patrick  and
+      Ma, Clara  and
+      Jernite, Yacine  and
+      Plu, Julien  and
+      Xu, Canwen  and
+      Le Scao, Teven  and
+      Gugger, Sylvain  and
+      Drame, Mariama  and
+      Lhoest, Quentin  and
+      Rush, Alexander",
+    booktitle = "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing: System Demonstrations",
+    month = oct,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2020.emnlp-demos.6",
+    doi = "10.18653/v1/2020.emnlp-demos.6",
+    pages = "38--45",
+    abstract = "Recent progress in natural language processing has been driven by advances in both model architecture and model pretraining. Transformer architectures have facilitated building higher-capacity models and pretraining has made it possible to effectively utilize this capacity for a wide variety of tasks. Transformers is an open-source library with the goal of opening up these advances to the wider machine learning community. The library consists of carefully engineered state-of-the art Transformer architectures under a unified API. Backing this library is a curated collection of pretrained models made by and available for the community. Transformers is designed to be extensible by researchers, simple for practitioners, and fast and robust in industrial deployments. The library is available at https://github.com/huggingface/transformers.",
+}
+
+
+
+@misc{blurb_biomedical_ranking, title={Domain-Specific Language Model Pretraining for Biomedical Natural Language Processing}, volume={3}, url={http://dx.doi.org/10.1145/3458754}, DOI={10.1145/3458754}, abstractNote={<jats:p> Pretraining large neural language models, such as BERT, has led to impressive gains on many natural language processing (NLP) tasks. However, most pretraining efforts focus on general domain corpora, such as newswire and Web. A prevailing assumption is that even domain-specific pretraining can benefit by starting from general-domain language models. In this article, we challenge this assumption by showing that for domains with abundant unlabeled text, such as biomedicine, pretraining language models from scratch results in substantial gains over continual pretraining of general-domain language models. To facilitate this investigation, we compile a comprehensive biomedical NLP benchmark from publicly available datasets. Our experiments show that domain-specific pretraining serves as a solid foundation for a wide range of biomedical NLP tasks, leading to new state-of-the-art results across the board. Further, in conducting a thorough evaluation of modeling choices, both for pretraining and task-specific fine-tuning, we discover that some common practices are unnecessary with BERT models, such as using complex tagging schemes in named entity recognition. To help accelerate research in biomedical NLP, we have released our state-of-the-art pretrained and task-specific models for the community, and created a leaderboard featuring our BLURB benchmark (short for Biomedical Language Understanding &amp; Reasoning Benchmark) at <jats:ext-link xmlns:xlink="http://www.w3.org/1999/xlink" ext-link-type="url" xlink:href="https://aka.ms/BLURB">https://aka.ms/BLURB</jats:ext-link> . </jats:p>}, number={1}, journal={ACM Transactions on Computing for Healthcare}, publisher={Association for Computing Machinery (ACM)}, author={Gu, Yu and Tinn, Robert and Cheng, Hao and Lucas, Michael and Usuyama, Naoto and Liu, Xiaodong and Naumann, Tristan and Gao, Jianfeng and Poon, Hoifung}, year={2021}, month=Oct, pages={1–23}, language={en}} 
+
+@InProceedings{ccnews_dataset,
+  author     = {Hamborg, Felix and Meuschke, Norman and Breitinger, Corinna and Gipp, Bela},
+  title      = {news-please: A Generic News Crawler and Extractor},
+  year       = {2017},
+  booktitle  = {Proceedings of the 15th International Symposium of Information Science},
+  location   = {Berlin},
+  doi        = {10.5281/zenodo.4120316},
+  pages      = {218--223},
+  month      = mar
+}
+
+@misc{openwebtext,
+    title={OpenWebText Corpus},
+    author={Gokaslan,Aaron and Cohen, Vanya and Pavlick, Ellie and Tellex, Stefanie},
+    howpublished={\url{http://Skylion007.github.io/OpenWebTextCorpus}},
+    year={2019}
+}
+
+@article{stories_dataset,
+  title={A Simple Method for Commonsense Reasoning},
+  author={Trieu H. Trinh and Quoc V. Le},
+  journal={ArXiv},
+  year={2018},
+  volume={abs/1806.02847},
+  url={https://api.semanticscholar.org/CorpusID:47015717}
+}
+
+@inproceedings{sentencepiece,
+    title = "{S}entence{P}iece: A simple and language independent subword tokenizer and detokenizer for Neural Text Processing",
+    author = "Kudo, Taku  and
+      Richardson, John",
+    booktitle = "Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing: System Demonstrations",
+    month = nov,
+    year = "2018",
+    address = "Brussels, Belgium",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/D18-2012",
+    doi = "10.18653/v1/D18-2012",
+    pages = "66--71",
+    abstract = "This paper describes SentencePiece, a language-independent subword tokenizer and detokenizer designed for Neural-based text processing, including Neural Machine Translation. It provides open-source C++ and Python implementations for subword units. While existing subword segmentation tools assume that the input is pre-tokenized into word sequences, SentencePiece can train subword models directly from raw sentences, which allows us to make a purely end-to-end and language independent system. We perform a validation experiment of NMT on English-Japanese machine translation, and find that it is possible to achieve comparable accuracy to direct subword training from raw sentences. We also compare the performance of subword training and segmentation with various configurations. SentencePiece is available under the Apache 2 license at \url{https://github.com/google/sentencepiece}.",
+}
+
+
+@article{heat_index,
+ ISSN = {00218952, 2163534X},
+ URL = {http://www.jstor.org/stable/26179216},
+ abstract = {Using as bases the amount of clothing needed to achieve thermal comfort and the reduction in the skin's resistance needed to obtain thermal equilibrium, the relative sultriness of warm-humid and hot-arid summer climates is assessed. Conditions of equal sultriness are referred to a vapor pressure of 1.6 kPa in order to prepare a table of apparent temperature corresponding to summer temperatures and humidities.},
+ author = {R. G. Steadman},
+ journal = {Journal of Applied Meteorology (1962-1982)},
+ number = {7},
+ pages = {861--873},
+ publisher = {American Meteorological Society},
+ title = {The Assessment of Sultriness. Part I: A Temperature-Humidity Index Based on Human Physiology and Clothing Science},
+ urldate = {2023-08-02},
+ volume = {18},
+ year = {1979}
+}
+
+@article{drawing_nns, doi = {10.21105/joss.00747}, url = {https://doi.org/10.21105/joss.00747}, year = {2019}, publisher = {The Open Journal}, volume = {4}, number = {33}, pages = {747}, author = {Alexander LeNail}, title = {NN-SVG: Publication-Ready Neural Network Architecture Schematics}, journal = {Journal of Open Source Software} } 

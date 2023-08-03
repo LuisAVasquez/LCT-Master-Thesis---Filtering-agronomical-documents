@@ -19,22 +19,31 @@ However, naive word tokenization\footnote{Another simple tokenization technique 
     \item \emph{\gls{wp}} \myparencite{wu2016google} begins by creating a vocabulary that consists of all the characters found in the training data. It then proceeds to learn a specific number of merge rules. Unlike \gls{bpe}, \wordpiece{} Tokenization selects symbol pairs that maximize their frequency relative to its constituent symbols, rather than choosing the most frequent symbol pair.
 \end{itemize}
 
-Usually, these algorithms produce different tokenizations of the same text, and thus, different vocabularies. Figure \ref{fig:02_tokenizer_comparison} show a sample output from the \gls{wp} implementation in \mytextcite{BERT_paper} and the \gls{bpe} implementation in \mytextcite{roberta} for English text.
+Usually, these algorithms produce different tokenizations of the same text, and thus, different vocabularies. Figure \ref{fig:02_tokenizer_comparison} shows a sample output from the \gls{wp} implementation in \mytextcite{BERT_paper} and the \gls{bpe} implementation in \mytextcite{roberta} for English text.
 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{Figures/02/02_Tokenizer_comparison.png}
-    \caption{Different tokenization approaches: naive, \wordpiece{} and \bpe}
+    \caption{Different tokenization approaches: naive, \bpe{}, and \wordpiece{}}
     \label{fig:02_tokenizer_comparison}
 \end{figure}
 
-Even though there are \textclassification{} approaches which only consider the distribution of tokens in a corpus, like \emph{Naive Bayes Classification} \myparencite{statistical_nlp_naive_bayes}, recent breakthroughs in \gls{nlp} have been enabled by \emph{text embeddings}, which are vector representations of text in high-dimensional space. They are intended to capture the semantic and syntactic relationships between texts, allowing computational models to understand and manipulate textual data. Word embeddings are a type of text embeddings that assign a vector representation to each token in a text. While word embeddings are widely used, \textclassification{} specifically benefits from the use of \emph{document embeddings}. Document embeddings assign a vector to each entire document, allowing for more comprehensive analysis and classification of texts based on their overall content and context. Intuitively, text embeddings represent text with similar meaning close to each other and far away from texts with different meanings (Figure \ref{fig:word_and_document_embeddings}).
+Even though there are \textclassification{} approaches which only consider the distribution of tokens in a corpus, like \emph{Naive Bayes Classification} \myparencite{statistical_nlp_naive_bayes}, recent breakthroughs in \gls{nlp} have been enabled by \emph{text embeddings}, which are vector representations of text in high-dimensional space. They are intended to capture the semantic and syntactic relationships between texts, allowing computational models to understand and manipulate textual data. Word embeddings are a type of text embeddings that assign a vector representation to each token in a text. 
+Typically, embeddings serve as \emph{input features} for textual data, which are then fed into \gls{ml} algorithms (Figure \ref{fig:02_embeddings_for_training_classification}).
+While word embeddings are widely used, \textclassification{} specifically benefits from the use of \emph{document embeddings}. Document embeddings assign a vector to each entire document, allowing for more comprehensive analysis and classification of texts based on their overall content and context. Intuitively, text embeddings represent text with similar meaning close to each other and far away from texts with different meanings (Figure \ref{fig:word_and_document_embeddings}).
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{Figures/02/02_embeddings.png}
+    \includegraphics[width=0.75\textwidth]{Figures/02/02_embeddings.png}
     \caption{Word and Document embeddings}
     \label{fig:word_and_document_embeddings}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{Figures/02/02_nns_for_nlp.png}
+    \caption{Using Embeddings to train Neural Networks for Classification}
+    \label{fig:02_embeddings_for_training_classification}
 \end{figure}
 
 Text embeddings have undergone significant evolution over the years, with several techniques and models contributing to their development. We present a brief overview of the key milestones in the evolution of word embeddings:

@@ -1,5 +1,5 @@
-\customHeader{0}{Regular expressions used in this project}
-\label{appendix03:regular_expressions}
+\customHeader{0}{Preprocesing Statistics}
+\label{appendix03:preprocessing_statistics}
 
 In this \appendixname{}, we present the full results of our preprocessing approaches, as explained in \headerName{} \ref{preprocessing}.
 
@@ -7,15 +7,37 @@ In this \appendixname{}, we present the full results of our preprocessing approa
 \customHeader{1}{Preprocessing the \VSI{} dataset}
 \label{appendix03:vsi_preprocessing results}
 
+\begin{table}[ht]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Unique entries per \contentType{}} & \textbf{Raw} & \textbf{After preprocessing} & \textbf{Percentage} \\
+\hline
+\trafilaturaTitle{}                      & 24037        & 16222                         & 67.49\%          \\
+\trafilaturaAbstract{}                   & 19939        & 16974                         & 85.13\%          \\
+\trafilaturaFulltext{}                   & 26346        & 22535                         & 85.53\%          \\
+\translationTitle{}                      & 23829        & 16359                         & 68.65\%          \\
+\keyphrasesAbstractOnly{}                & 4712         & 4050                          & 85.95\%          \\
+\keyphrasesAbstractOC{}                  & 19798        & 16833                         & 85.02\%          \\
+\keyphrasesFulltextOnly{}                & 16473        & 14359                         & 87.17\%          \\
+\keyphrasesFulltextOC{}                  & 24447        & 20880                         & 85.41\%          \\
+\hline
+\end{tabular}
+}
+\caption{Unique Entries per content source before and after preprocessing}
+\label{appendix03:tab:unique_entries_after_preprocessing}
+\end{table}
+
+
 
 \begin{table}[ht]
 \centering
 \resizebox{\textwidth}{!}{
 
 \begin{tabular}{lcccccccc}
-%\toprule
-\textbf{\contentType{}} & \textbf{Size} & \textbf{Mean} & \textbf{STD} & \textbf{Min} & \textbf{25\%} & \textbf{50\%} & \textbf{75\%} & \textbf{max} \\
-%\midrule
+
+\textbf{\contentType{}} & \textbf{Size} & \textbf{Mean} & \textbf{STD} & \textbf{Min} & \textbf{25\%} & \textbf{50\%} & \textbf{75\%} & \textbf{max} \\ \hline
 \trafilaturaTitle{} & 16222 & 12.464 & 29.867 & 1 & 8 & 11 & 15 & 1565 \\
 \trafilaturaAbstract{} & 16974 & 50.549 & 73.982 & 1 & 19 & 27 & 46 & 1537 \\
 \trafilaturaFulltext{} & 22535 & 1097.756 & 5763.482 & 1 & 187 & 411 & 800 & 240318 \\
@@ -24,6 +46,7 @@ In this \appendixname{}, we present the full results of our preprocessing approa
 \keyphrasesAbstractOC{}& 16833 & 35.768 & 44.700 & 1 & 17 & 25 & 38 & 1518 \\
 \keyphrasesFulltextOnly{} & 14359 & 115.655 & 429.369 & 1 & 26 & 52 & 114 & 40700 \\
 \keyphrasesFulltextOC{} & 20880 & 217.711 & 614.478 & 1 & 32 & 71 & 201 & 40700 \\
+\hline
 %\bottomrule
 \end{tabular}
 

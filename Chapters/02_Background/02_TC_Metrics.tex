@@ -1,0 +1,145 @@
+\customHeader{1}{Evaluation Metrics for Classification}
+\label{02_evaluation_metrics}
+
+After obtaining a classifier for Classification tasks, including \textclassification{}, the next step is to evaluate its performance \myparencite{fbetascore}. To achieve this, we use a dataset with known class labels and compare the classifier's \emph{predictions} against these \emph{true} labels. In Binary Classification, there are two classes, and for simplicity we call them the  positive class and negative class; and our primary concern is to measure how the positive class is predicted.
+
+When we apply the classifier to an item, four possible scenarios arise (Table \ref{tab:confusion_matrix}) based on the classifier's predictions and the true class labels.
+
+
+\begin{minipage}{\textwidth}
+\begin{itemize}
+    \item True Positives (TP) : The item \emph{is} in the positive class, and the classifier \emph{predicts} the positive class.
+    \item True Negatives (TN) : The item \emph{is} in the negative class, and the classifier \emph{predicts} the negative class.
+    \item False Negative (FN) : The item \emph{is} in the positive class, and the classifier \emph{predicts} the negative class.
+    \item False Positive (FP) : The item \emph{is} in the negative class, and the classifier \emph{predicts} the negative class
+\end{itemize}
+\end{minipage}
+
+\input{Tables/02/Confusion_matrix}
+
+There are four classic metrics for evaluating classifiers:
+
+\begin{itemize}
+    \item Accuracy: Accuracy measures the overall correctness of a classification model. It is the ratio of \emph{correctly} predicted instances to the total number of instances in the dataset.\\
+    \begin{align}
+    A &= \dfrac{TP + TN}{Positives + Negatives}  \label{eq:def_accuarcy}
+\end{align}
+    Example: If a model classifies 90 out of 100 samples correctly, the accuracy would be 90\%.
+    
+    \item Precision: Precision quantifies the ability of a model to correctly identify positive instances among the ones it predicted as positive. It is the ratio of true positive predictions to the total number of positive predictions (both true positives and false positives).
+    \begin{align}
+    P &= \dfrac{TP}{TP + FP}  \label{eq:def_precision}\\
+    \end{align}
+    
+    Example: If a model predicts 100 instances as positive, and 80 of them are truly positive, the precision would be 80\%. 
+    
+    Note that, with a model that almost always predicts the negative class, there will be minimal False Positives and True Positives ($FP \to 0$), and thus, this flawed model would have nearly 100\% precision.
+
+    \item Recall (Sensitivity or True Positive Rate): Recall measures the ability of a model to correctly identify all positive instances in the dataset. It is the ratio of true positive predictions to the total number of actual positive instances in the dataset. 
+
+    \begin{align}
+    R &= \dfrac{TP}{TP + FN} \label{eq:def_recall}\\
+    \end{align}
+
+    Example: If there are 100 positive instances in the dataset, and the model correctly identifies 80 of them, the recall would be 80\%.
+
+    Note that, with a model that almost always predicts the positive class, there will be minimal False Negatives ($FN \to 0$), and thus, this flawed model would have nearly 100\% recall.
+
+    \item \fOne{} Score: The \fOne{} score is the harmonic mean of precision and recall. It balances the trade-off between precision and recall and provides a single metric to evaluate a model's performance.
+
+    \begin{align}
+    F_1 &= \left(\dfrac{1}{P} + \dfrac{1}{R}\right)^{-1} \label{eq:def_f1}\\
+        &= 2 * \dfrac{P * R}{P + R}
+    \end{align}
+
+
+    Example: If a model has a precision of 75\% and recall of 80\%, the \fOne{} score would be calculated as $2 * ((0.75 * 0.80) / (0.75 + 0.80)) = 77, 4\%$.
+
+
+    
+\end{itemize}
+
+Now that we have discussed the \fOne{} score, let's take a step further and introduce the \fBeta{} score. The \fBeta{} score extends the concept of \fOne{} by introducing a parameter $\beta$, which allows us to control the trade-off between precision and recall. A higher value of beta emphasizes recall, while a lower value emphasizes precision. The \fOne{} score is a special case of the \fBeta{} score when $\beta$ is set to 1.
+
+
+\begin{align}
+    F_\beta &= (1+\beta^2) \dfrac{P * R}{\beta^2* P + R} \label{eq:def_f_beta}
+\end{align}
+
+
+Example: If $\beta$ is set to $2$, the \fTwo{} score will give more two times more weight to recall than precision, making it suitable for tasks where recall is more important than precision, such as ours.
+
+\putInBox{
+Our task involves distinguishing between events representing health risks and impacting agriculture (the positive class) from harmless events (the negative class). In this context, it becomes vital to identify as many true positive cases as possible, as they represent actual risks with potential consequences for agriculture. We place a higher priority on this aspect, even if it leads to some harmless events classified incorrectly, because, once our systems predict a positive event, subject experts will be alerted and will proceed to take a final decision.
+Consequently, our priority lies in emphasizing recall over precision. Hence, we opt to evaluate our systems using the \fTwo{} score.
+
+
+\todo{Check the style of this paragraph.}
+}
+
+
+
+\customHeader{2}{Evaluating Probabilistic Classifiers}
+\label{02_evaluating_probabilistic_classifiers}
+
+A probabilistic binary classifier is a type of classifier that provides the probability of an item belonging to the positive class rather than making a definitive decision. To ultimately classify items, a threshold or cut-off point is required. For instance, a threshold of 50\% may be set, considering items with probabilities above this threshold as positive and those below as negative. Additionally, this threshold can be adjusted to be more stringent, requiring a higher confidence level (e.g., 60\%) for positive classification, or more lenient, allowing lower confidence (e.g., 40\%) for positive classification, and so on \myparencite{auc_definition}.
+
+When evaluating a probabilistic classifier with a labelled dataset, varying thresholds result in different confusion matrices. Leveraging this observation, we can establish a metric to assess probabilistic classifiers. To begin, we must introduce two key concepts.
+
+\begin{itemize}
+    \item The True Positive Rate (TPR)  is calculated as the proportion of True Positive predictions to all actual Positive instances, that is, it is simply the recall (Equation \ref{eq:def_recall}). It measures the classifier's performance with respect to the positive portion of the dataset.
+
+    \begin{align}
+        TPR &= \dfrac{TP}{TP+FN} =R \label{def_tpr} 
+    \end{align}
+    
+    \item The False Positive Rate (FPR) is calculated as the proportion of False Positive predictions to all actual Negative instances. It measures the classifier's performance with respect to the negative portion of the dataset, in an inverse way \footnote{That is, higher FPR means worse performance regarding the negatives, and lower FPR means better performance.} (See equation \ref{def_fpr_2}).
+    
+    \begin{align}
+        FPR &= \dfrac{FP}{TN+FP} \label{def_fpr} \\
+            &= 1 - \dfrac{TN}{TN+FP} \label{def_fpr_2}
+    \end{align}
+    
+\end{itemize}
+
+The crucial observation is that selecting a fixed probability threshold yields specific values in the confusion matrix, thereby determining a corresponding pair of values $(FPR, TPR)$. These values can be plotted on a plane, resulting in a curve known as the \emph{Receiver Operating Characteristic} (ROC) curve, as the threshold varies.
+
+To introduce the \gls{auc} measure, we first need to make some observations  about the ROC curve (Figure \ref{fig:02_auc}):
+
+\begin{enumerate}
+    \item A threshold of 0\% implies that every item is classified as a positive, thus, there are no True Negatives and no False Negatives, which means that the FPR and TPR are both 1.
+
+    \item A threshold of 100\% implies that every item is classified as a negative, thus, there are no True Positives and no False Positives, which means that the FRP and TPR are both 0.
+
+    \item Combining these two observations, if we plot the curve by decreasing the threshold from 100\% to 0\%, we will obtain a curve starting from point $(0,0)$ and ending at point $(1,1)$.
+
+    \item A perfect classification system would make no mistakes, no matter the probability threshold\footnote{Except for thresholds of 0\% and 100\%, as explained above}. That is, it would have no False Positives and no False Negatives. This would make the TPR always 1, which corresponds to a horizontal line 1 unit above the horizontal axis. 
+
+    \item A completely inaccurate classification system is always wrong, no matter the probability threshold. That is, it would never have True Positives nor True Negatives. This would make the TPR always 0, which corresponds to a horizontal line on top of the horizontal axis.
+
+    \item A classification system that always takes decisions at random, is equally likely to correctly identify positive instances as it is to incorrectly label negative instances as positive. This means, the FPR and TPR would always be equal, which corresponds to a diagonal line.
+
+    \item A classification system that performs better than a random classifier will have a performance tending towards a perfect classifier, which corresponds to a curve above the diagonal.
+
+    \item A classification system that performs worse than a random classifier will have a performance tending towards a completely inaccurate classifier, which corresponds to a curve below the diagonal.
+
+\end{enumerate}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{Figures/02/02_AUC.png}
+    \caption{Area Under Curve}
+    \label{fig:02_auc}
+\end{figure}
+
+
+Thus, we may use the area under the ROC curve to evaluate probabilistic classifiers:
+
+\begin{itemize}
+    \item A perfect classifier has an \gls{auc} of 1.0
+    \item A completely inaccurate classifier has an \gls{auc} of 0.0
+    \item A random classifier has an \gls{auc} of 0.5
+    \item A better-than-random classifier has an \gls{auc} above 0.5
+    \item A worse-than-random classifier has an \gls{auc} below 0.5
+\end{itemize}
+

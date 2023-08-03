@@ -1,0 +1,75 @@
+\customHeader{1}{BERT Models}
+\label{06_bert_models}
+
+
+
+As previously mentioned in \todo{add reference}, the \gls{bert} architecture from \mytextcite{BERT_paper} has been customized for various tasks, resulting in a wide array of models to select from. In this project, we have opted to employ six different \gls{bert} models, based on the characteristics of our data and their specialized task.
+
+Since our data is multilingual in nature, we consistently utilize models that differentiate between upper case and lower case characters (\texttt{cased} versions). Additionally, due to computational constraints, we opt for the basic (\texttt{base}) versions of the models rather than the \texttt{large} ones (Table \ref{tab:06_bert_sizes}).
+
+\input{Tables/06/06_bert_size_comparison}
+
+
+\customHeader{2}{\bertbase{}}
+\label{06_bert_base}
+The original \gls{bert} model developed by Google in \mytextcite{BERT_paper}. It was trained on a large corpus of English text from Wikipedia and Google’s BooksCorpus dataset, using a \gls{wp} tokenizer.
+
+\customHeader{2}{\bertmultilingual{}}
+\label{06_bert_multilingual}
+The Multilingual \gls{bert} \myparencite{BERT_paper} is a version of the \gls{bert} model that is designed to handle text in multiple languages. It was trained on the top 104 languages with the biggest Wikipedia sizes by number of articles, using a \gls{wp} tokenizer. 
+
+\customHeader{2}{\bertbiolinkbert{}}
+\label{06_bert_biolinkbert}
+
+This model was introduced in \mytextcite{linkbert_biolinkbert} as the result of training a classical \gls{bert} architecture while enriching the context of the documents by using corpora of documents linked to one another by hyperlinks. For a given document $doc_1$ containing a hyperlink $doc_1 \to doc_2$, during the training phase, the sections of $doc_2$ that are reachable by the hyperlink will be concatenated to their corresponding sections from $doc_1$. This process increases the context available for the model to learn embeddings. 
+
+The authors present a model for the general domain (Link-BERT), trained on the English Wikipedia with hyperlinks; and a model for the biomedical domain (\bertbiolinkbert{}), trained on PubMed\footnote{\url{https://pubmed.ncbi.nlm.nih.gov/}} abstracts with hyperlinks, using a \gls{wp} tokenizer. As of the culmination of this project, \bertbiolinkbert{} is one of the top performing \gls{bert} models in the \gls{blurb} \myparencite{blurb_biomedical_ranking}.
+
+
+\customHeader{2}{\bertscibert{}}
+\label{06_bert_scibert}
+This model was introduced in \mytextcite{scibert} as a specialized model for scientific texts. It was trained with the classical \gls{bert} architecture using 1.14 million papers in English from Semantic Scholar\footnote{\url{https://www.semanticscholar.org/}}, $82\%$ of which belong to the biomedical domain. The authors use the full text from the papers. 
+
+
+\customHeader{2}{\bertroberta{}}
+\label{06_bert_roberta}
+
+This model was introduced in \mytextcite{roberta} and is an extension and improvement of the original \gls{bert} model. \bertroberta{} follows the same architecture as \gls{bert} but undergoes a more extensive pre-training process, specifically, it uses much larger batch sizes, longer sequences, and removes the ``next sentence prediction" task used in \gls{bert}. Additionally, it is trained on 10 times more data than \gls{bert}, by merging five datasets: Google’s BooksCorpus, the English Wikipedia, Common-Crawl\footnote{\url{https://commoncrawl.org/}} English News \myparencite{ccnews_dataset}, OpenWebText \myparencite{openwebtext}, and the ``Stories" subset of the Common-Crawl \myparencite{stories_dataset}. It uses a \gls{bpe} tokenizer.
+
+\customHeader{2}{\bertxlmroberta{}}
+\label{06_bert_xlmroberta}
+
+This model was introduced in \mytextcite{xlm_roberta} as the multilingual version of \bertroberta{}. For training, the authors constructed the 100-CC corpus for training \bertxlmroberta{}, which consists of monolingual data in 100 languages from the Common-Crawl, and used a SentencePiece tokenizer \myparencite{sentencepiece}, which extends the classical \gls{bpe} tokenization algorithm. 
+
+
+
+
+
+\customHeader{2}{Excluded Models}
+\label{06_bert_excluded_models}
+
+Initially, we considered three other \gls{bert} models; however, after careful consideration, we decided not to include them due to various reasons.
+
+
+
+\begin{paragraph}{ChouBERT}
+    This model was introduced in
+    \mytextcite{choubert} as a specialized model for plant health observation. However, it was trained exclusively on tweets in French, which raises strong concerns about its ability to generalize to our linguistically and thematically diverse dataset.
+\end{paragraph}
+
+\begin{paragraph}{DistilBERT}
+    This model was introduced in
+    \mytextcite{distilbert} as a smaller version of the original \gls{bert} model. It uses a process called ``distillation" to compress the knowledge of a larger \gls{bert} model into a smaller one, while still retaining decent performance. 
+
+    In our case, while conducting our first training experiments along with the \gls{bert} models mentioned above, in the case of DistilBERT, the results were consistently poor. Under various configurations, it would always default to predicting the majority class. As a consequence, we made the decision to exclude DistilBERT from our final selection of models.
+\end{paragraph}
+
+
+\begin{paragraph}{BioBERT}
+    This model was introduced in \mytextcite{biobert} as a \gls{bert} variant specifically designed for biomedical text and tasks. Once again, this model uses the classical \gls{bert} architecture on PubMed abstracts in English. Since it has been vastly outperformed by \bertbiolinkbert{} in several \gls{nlp} tasks \myparencite{linkbert_biolinkbert}, we decided not to include it in our project.
+\end{paragraph}
+
+
+% choubert
+% distilbert
+% biobert

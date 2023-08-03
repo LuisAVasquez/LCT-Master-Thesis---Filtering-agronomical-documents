@@ -1,25 +1,28 @@
 \customHeader{1}{\VSI{} Dataset}
 \label{vsi_dataset}
 
-As mentioned in \headerName{} \todo{Add reference here!}, the \gls{pesv} Platform collects information on any health risk or plant health phenomenon that could potentially affect agriculture. The epidemiologists achieve this by surveilling online articles, which they subsequently screen and collect into the \gls{vsi} dataset.
-
+As mentioned in \headerName{} \ref{01_pesv_platform}, the \gls{pesv} platform collects information on  plant health risks or plant health phenomena that could potentially affect agriculture. The \gls{vsi} experts achieve this by surveying online documents, which they subsequently screen and collect into the \gls{vsi} dataset.
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \customHeader{2}{Dataset Collection}
 \label{vsi_data_collection}
 
-
-The main tools for collecting documents are web scrapping and text mining. Every week, several queries are sent to the Google Search Engine, using the keywords and key phrases in Table \ref{tab:04_query_keywords}. 
-The websites resulting from this Google Search are then manually analyzed by the epidemiologists and stored in the dataset. That is, the \gls{vsi} dataset is in constant construction. 
-For this project, we worked with the documents collected from the 11th of July 2022 to the 16th of April 2023, that is, the data collected over 39 weeks.
+The main tool for collecting documents is the web scrapping tool \emph{ScaleSERP}\footnote{\url{https://www.scaleserp.com/}}. Every week, several queries are sent to various services, including the Google Search Engine, using the keywords and key phrases in Table \ref{tab:04_query_keywords} using a Python script. 
+%The results are then fed to the text-mining tool \emph{PADI-Web} \myparencite{padiweb3}, in order to retrieve information about the document's source, publication date, entities mentioned, locations and more. After extraction, this data is stored in a database and subsequently analysed by the \gls{vsi} experts to assess their relevance for monitoring. 
 
 
-\input{Tables/04/Keywords_for_google_search}
+As part of the \gls{vsi} pipeline, the websites corresponding to the URLs obtained from \emph{ScaleSERP} are downloaded using another Python script. 
+For each website, the tool \trafilatura{} \myparencite{barbaresi-2021-trafilatura} takes its XML and attempts to extract a title and  an abstract from the XML metadata\footnote{The title and the abstract are extracted from the \texttt{metadata.title} and \texttt{metadata.description} fields, respectively.} and the full text from the XML body.
 
-
-The query results are then scrapped using the tool \trafilatura{} \myparencite{barbaresi-2021-trafilatura}, which attempts to extract a title, an abstract, the full text, and other data from the websites.
-Specifically, for a website, \trafilatura{} scrapes the HTML content and parses it into XML. The tool then extracts the title and abstract from the XML metadata\footnote{The title and the abstract are extracted from the \texttt{metadata.title} and \texttt{metadata.description} fields, respectively.} and the full text from the XML body.
+%Then, they are scrapped using the tool \trafilatura{}.
+%the documents  are scrapped using the tool \trafilatura{} \myparencite{barbaresi-2021-trafilatura}, which attempts to extract a title, an abstract, the full text, and other data from the websites.
+%Specifically, for a website, \trafilatura{} scrapes the HTML content and parses it into XML. The tool then extracts the title and abstract from the XML metadata\footnote{The title and the abstract are extracted from the \texttt{metadata.title} and \texttt{metadata.description} fields, respectively.} and the full text from the XML body.
 Given that these articles come from public websites, all the content is in its original language.
-In order to help the annotators make a decision when encountering an article in a foreign language, and due to budget limitations, only the title is translated to English, using the Google Translate API. Thus, we have four sources of text content (Table \ref{tab:04_pesv_sources of content}).
+In order to help the annotators make a decision when encountering an article in a foreign language, and due to budget limitations, only the title is translated to English, using the Google Translate API, which also provides an automatically detected language for the document. 
+
+Since documents are added each week, the \gls{vsi} database is in constant construction. 
+For our project, we worked with the documents collected from the 11th of July 2022 to the 16th of April 2023, that is, the data collected over 39 weeks, comprising approximately 35,000 documents, which corresponds to more than 800 documents per week.
+
+Our project focuses on a subset of the \VSI{} database, specifically its textual data, to obtain the \VSI{} dataset  (Table \ref{tab:04_pesv_sources of content}).
 
 \input{Tables/04/Sources_of_content_trafilatura_google_translate}
 
@@ -29,28 +32,43 @@ In order to help the annotators make a decision when encountering an article in 
 \customHeader{2}{Dataset Annotation}
 \label{vsi_data_annotation}
 
-There are four epidemiologists dedicated to annotating the dataset: 
-
-\begin{itemize}
-    \item \todo{add names of epidemiologists}
-    \item \todo{add names of epidemiologists}
-    \item \todo{add names of epidemiologists}
-    \item \todo{add names of epidemiologists}
-\end{itemize}
+\putInBox{
+There are four \gls{vsi} experts dedicated to annotating the dataset.
+Regrettably, while constructing the dataset, there was no record maintained to track the identity of the annotator responsible for labelling each document. For this reason, we are not able to provide any inter-annotator agreement measures on this dataset \myparencite{agreement_measures}.
+}
 
 
-After obtaining results from the Google Search, the epidemiologists are presented with the URL of an article, which they manually open and proceed to read. Using the interface in Figure \ref{fig:04_pesv_interface_1}, they fill out the fields \emph{Titre} (title), \emph{Auteurs} (authors), \emph{Organism nuisible} (pathogen), \emph{Sujet} (subject), \emph{Fiabilité} (trustworthyness), etc. 
-It is important to note that the title written by the epidemiologists is usually different from the one extracted by \trafilatura{} (for example, they may include different characters). Other fields, like \emph{Date de publication} (publication date) and \emph{Lien} (link) are filled automatically.
+
+%\begin{itemize}
+%    \item \todo{add names of \gls{vsi} experts}
+%    \item \todo{add names of \gls{vsi} experts}
+%    \item \todo{add names of \gls{vsi} experts}
+%    \item \todo{add names of \gls{vsi} experts}
+%\end{itemize}
+
+
+%After obtaining results from the Google Search, the \gls{vsi} experts are presented with the URL of a document, which they manually open and proceed to read. Using the interface in Figure \ref{fig:04_pesv_interface_1}, they fill out the fields \emph{Titre} (title), \emph{Auteurs} (authors), \emph{Organism nuisible} (pathogen), \emph{Sujet} (subject), \emph{Fiabilité} (reliability), etc. 
+
+For annotation, the results of the \gls{vsi} pipeline mentioned above are shared with the \gls{vsi} experts. They utilize the interface shown in Figure \ref{fig:04_pesv_interface_1} to inspect the results for various fields, including the \emph{Date de publication} (publication date), \emph{Auteurs} (authors), \emph{Organism nuisible} (pathogen), etc. Additionally, they manually input information in other fields such as \emph{Sujet} (subject), \emph{Fiabilité} (reliability), and come up with a \emph{Titre} (title).
+It is important to note that the title written by the \gls{vsi} experts is usually different from the one extracted by \trafilatura{} (for example, 
+%they may include different characters
+the wording may vary). 
+%Other fields, like \emph{Date de publication} (publication date) and \emph{Lien} (link) are filled automatically.
 
 After inspection, we found that that annotators exclusively provide titles for articles they find relevant, that is, there are no titles for irrelevant articles. Since our objective is to automate the process of identifying relevant articles, we disregard the titles provided by the annotators. Instead, we rely solely on the titles generated by \trafilatura{} and Google Translate, which are stored even in the case of the documents being rejected.
 
 Special attention must be given to the \emph{Sujet} (subject), as this field will be crucial for preprocessing the dataset (see \headerName{} \ref{vsi_resolving_inconsistencies}).
 
-\begin{tcolorbox}[colback=mylightblue,colframe=gray!50!black]
-As part of their monitoring mission \todo{add reference to the Introduction}, the \gls{pesv} Platform surveys any health risk or plant health phenomenon that has or may have an impact on agriculture. 
-When the epidemiologists encounter an event that catches their attention (that is, that they consider \textbf{relevant}), they assign a \textbf{subject} to the respective document and utilize the interface presented in Figure \ref{fig:04_pesv_interface_2} to allocate a subject ID and description to it. It is possible for multiple documents to share the same subject. In the case of documents considered \textbf{irrelevant} to the monitoring of plant health, the subject field for the document is left empty.
-\end{tcolorbox}
-Some sample entries containing all sources of content can be found in Table \ref{tab:04_sample_entries_vsi}.
+\putInBox{
+%As part of their monitoring mission, the \gls{pesv} Platform surveys any health risk or plant health phenomenon that has or may have an impact on agriculture. 
+When the \gls{vsi} experts encounter an event that catches their attention (that is, that they consider \textbf{relevant}), they assign a \textbf{subject} to the respective document and utilize the interface presented in Figure \ref{fig:04_pesv_interface_2} to allocate a subject ID and description to the document. It is possible for multiple documents to share the same subject. In the case of documents considered \textbf{irrelevant} to the monitoring of plant health, the subject field for the document is left empty.
+}
+
+Subsequently, after a document is deemed relevant by the \gls{vsi} experts, it is officially published in the bulletin of the  \gls{pesv} Platform\footnote{\url{https://plateforme-esv.fr/bulletins_et_points_sur_VSI}} and can be accessed through the \gls{vsi} Document Search Engine\footnote{\url{https://plateforme-esv.fr/moteur-de-recherche-vsi}}. Some sample entries containing all sources of content can be found in Table \ref{tab:04_sample_entries_vsi}.
+
+
+\input{Tables/04/Sample_entries}
+
 
 \begin{landscape}
     \begin{figure}[ht]
@@ -71,13 +89,11 @@ Some sample entries containing all sources of content can be found in Table \ref
 \end{landscape}
 
 
-\input{Tables/04/Sample_entries}
-
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \customHeader{2}{Dataset Stastitics}
 \label{vsi_data_statistics}
 
-There are 34587 entries in the dataset, out of which 3715 have an assigned subject and 30872 do not, producing a highly unbalanced dataset (Figure \ref{fig:04_naive_positives_and_negatives}). 
+There are 34,587 entries in the dataset, out of which 3,715 have an assigned subject and 30,872 do not, producing a highly unbalanced dataset (Figure \ref{fig:04_naive_positives_and_negatives}). 
 
 \begin{figure}
     \centering
@@ -86,7 +102,7 @@ There are 34587 entries in the dataset, out of which 3715 have an assigned subje
     \label{fig:04_naive_positives_and_negatives}
 \end{figure}
 
-The automatic language detection obtained by the Google Translate API  on the \trafilaturaTitle{} can be used to approximately study the distribution of the entries in the dataset. In Figure \ref{fig:04_vsi_language_distribution} it can be seen that around one third of the entries are in English, followed by Italian, Spanish, and French. There is a considerable amount of failed translation attempts, for around one fifth of the entries. The complete data on documents per language is available in Appendix \ref{appendix01:vsi_language_distribution}.
+The automatic language detection obtained by the Google Translate API on the \trafilaturaTitle{} can be used to approximately study the distribution of the entries in the dataset. In Figure \ref{fig:04_vsi_language_distribution} it can be seen that around one third of the entries are in English, followed by Italian, Spanish, and French. There is a considerable amount of failed translation attempts, for around one fifth of the entries. The complete data on documents per language is available in Appendix \ref{appendix01:vsi_language_distribution}.
  
 \begin{figure}
     \centering
@@ -97,7 +113,7 @@ The automatic language detection obtained by the Google Translate API  on the \t
 
 The presence of some Latin documents is surprising. Upon inspecting the data, we discovered that this occurrence was due to scrapped \trafilaturaTitle{}s with several scientific names (Table \ref{tab:appendix01:latin_entries} in the Appendix).
 
-Often, the \trafilatura{} scrapper is not able to retrieve content for the title, abstract, and full text of a website, or the Google Translate API fails. Thus, there are several entries without content for all fields. If we check the unique entries for each source of content, we can see that there must be numerous duplicate entries, since there are at least around 20 000 unique entries per source of content (Figure \ref{fig:04_unique_entries_vsi}).
+Often, the \trafilatura{} scrapper is not able to retrieve content for the title, abstract, and full text of a website, or the Google Translate API fails. Thus, there are several entries without content for all fields. If we check the unique entries for each source of content, we can see that there are numerous duplicate entries, since there are at least around 20,000 unique entries per source of content (Figure \ref{fig:04_unique_entries_vsi}).
 
 \begin{figure}
     \centering
@@ -106,7 +122,9 @@ Often, the \trafilatura{} scrapper is not able to retrieve content for the title
     \label{fig:04_unique_entries_vsi}
 \end{figure}
 
-As one would expect, there are fewer unique entries for the \translationTitle{} as there are for the \trafilaturaTitle{}. At the same time, the \trafilaturaAbstract{} field has fewer unique entries than all the other, while the \trafilaturaFulltext{} has the most. This may be explained by the fact that, usually, the creators of a website omit filling the metadata, and when they do, they frequently include only a title and not a description, while most times, the body of the website will be available. 
+As the\translationTitle{} is derived from the \translationTitle{}, and due to the possibility of failure in the Google Translate API, the number of unique entries for the \translationTitle{} is lower than that for the \trafilaturaTitle{}.
+%As one would expect, there are fewer unique entries for the \translationTitle{} as there are for the \trafilaturaTitle{}. 
+At the same time, the \trafilaturaAbstract{} field has fewer unique entries than all the other, while the \trafilaturaFulltext{} has the most. This may be explained by the fact that, usually, the creators of a website omit filling the metadata, and when they do, they frequently include only a title and not a description, while most times, the body of the website will be available. 
 
 Using naive tokenization (splitting on whitespace), we can study the distribution of the tokens for all sources of content. In the histograms in Figure \ref{fig:04_vsi_token_distribution} the longest documents have been grouped together to facilitate plotting \footnote{This explains the long bars at the end of the right tails of the histograms.}. As one can see, the \trafilaturaTitle{} and \translationTitle{} have a very similar distribution, both are shorter than the \trafilaturaAbstract{}, while the content from the \trafilaturaFulltext{} is the longest.
 
@@ -132,7 +150,9 @@ Using naive tokenization (splitting on whitespace), we can study the distributio
         %\label{fig:image4}
     }
     
-    \caption{Token distribution in the \VSI{} dataset}
+    \caption{
+    Length (in n. of tokens) of the \contentType{}s in the \VSI{} dataset
+    }
     \label{fig:04_vsi_token_distribution}
 \end{figure}
 
@@ -140,9 +160,7 @@ Using naive tokenization (splitting on whitespace), we can study the distributio
 
 
 
-\begin{tcolorbox}[colback=mylightblue,colframe=gray!50!black]
-Regrettably, while constructing the dataset, there was no record maintained to track the identity of the annotator responsible for labelling each document. For this reason, we are not able to provide any inter-annotator agreement measures on this dataset \myparencite{agreement_measures}.
-\end{tcolorbox}
+
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \customHeader{2}{Dataset Issues}
@@ -156,7 +174,7 @@ Upon examining the data, we encountered numerous issues that we proceed to descr
 \label{vsi_issues_duplicates}
 \ \\
 
-As mentioned in \headerName{} \ref{vsi_data_statistics}, there are numerous duplicate entries in the dataset (Figure \ref{fig:04_naive_positives_and_negatives} VS Figure \ref{fig:04_unique_entries_vsi}). According to the epidemiologists, often the Google Search for a query will return the same results from one week to the next, and this introduces duplicate entries.
+As mentioned in \headerName{} \ref{vsi_data_statistics}, there are some duplicate entries in the dataset (Figure \ref{fig:04_naive_positives_and_negatives} VS Figure \ref{fig:04_unique_entries_vsi}). According to the \gls{vsi} experts, often the Google Search for a query will return the same results from one week to the next, and this introduces duplicate entries.
  
 
 
@@ -164,7 +182,7 @@ As mentioned in \headerName{} \ref{vsi_data_statistics}, there are numerous dupl
 \label{vsi_issues_error_messages}
 \ \\
 
-On numerous instances, the \trafilatura{} scrapper either fails or is blocked by website servers that do not allow bots. This introduces error messages to the dataset, some samples of which can be seen in Table \ref{tab:04_error_messages}.
+On some instances, the \trafilatura{} scrapper either fails or is blocked by website servers that do not allow bots. This introduces error messages to the dataset, some samples of which can be seen in Table \ref{tab:04_error_messages}.
 
 \input{Tables/04/Error_messages}
 
@@ -178,8 +196,9 @@ In some other instances, the web scraper successfully extracts content from the 
 
 \input{Tables/04/Headers_and_websites}
 
+This type of scrapping error introduces inconsistencies into the \VSI{} dataset, as multiple documents end up having the same text for several \contentType{}s, as in Table \ref{tab:04_xmol_inconsistencies}\footnote{\href{https://www.x-mol.com/}{X-MOL} is a Chinese search engine for scholars.}.
 
-This introduces inconsistencies into the \VSI{} dataset. In cases where multiple documents originate from the same problematic website, the original content is lost, and we encounter entries that contain identical text but carry different assigned subjects, as in Table \ref{tab:04_xmol_inconsistencies}\footnote{\href{https://www.x-mol.com/}{X-MOL} is a Chinese search engine for scholars.}.
+%This introduces inconsistencies into the \VSI{} dataset. In cases where multiple documents originate from the same problematic website, the original content is lost, and we encounter entries that contain identical text but carry different assigned subjects, as in Table \ref{tab:04_xmol_inconsistencies}\footnote{\href{https://www.x-mol.com/}{X-MOL} is a Chinese search engine for scholars.}.
 
 
 
@@ -212,7 +231,8 @@ Namely, the following  (Table \ref{tab:04_noise}) :
 
 \input{Tables/04/Noise}
 
-However, an unforeseen form of noise arises: occasionally, the content concludes with the website's name, leading to different entries that vary by only a few tokens as a suffix (Table \ref{tab:04_website_names_as_suffixes}).
+
+Furthermore, there exists a source of noise that may not be immediately apparent: occasionally, the content concludes with the website's name, leading to different entries that vary by only a few tokens as a suffix (Table \ref{tab:04_website_names_as_suffixes}).
 
 \input{Tables/04/Similar_entries}
 
@@ -221,7 +241,7 @@ However, an unforeseen form of noise arises: occasionally, the content concludes
 \label{vsi_issues_annotation_inconsistencies}
 \ \\
 
-Finally, human error also introduces inconsistencies into the \VSI{} dataset. In some cases, there are entries with the exact same content, with different or no assigned subjects (Table \ref{tab:04_annotation_inconsistencies}). After consulting with the epidemiologists, they explained that this is due to two factors:
+Finally, human error also introduces inconsistencies into the \VSI{} dataset. In some cases, there are entries with the exact same content, with different or no assigned subjects (Table \ref{tab:04_annotation_inconsistencies}). After consulting with the \gls{vsi} experts, they explained that this is due to two factors:
 
 \begin{itemize}
     \item Different annotators labeling the same content.
@@ -232,11 +252,11 @@ Finally, human error also introduces inconsistencies into the \VSI{} dataset. In
 \input{Tables/04/Annotation_inconsistencies}
 
 
-\begin{tcolorbox}[colback=mylightblue,colframe=gray!50!black]
-Due to all the issues mentioned, one must take the statistics in \headerName{} \ref{vsi_data_statistics} with a grain of salt. In particular, naively checking the entries for the presence of an assigned subject (as in Figure \ref{fig:04_naive_positives_and_negatives}) may lead to very similar or exactly equal content labelled in two different categories, thus rendering the classification task significantly more challenging. 
-\end{tcolorbox}
+\putInBox{
+Due to all the issues mentioned, one must take the statistics in \headerName{} \ref{vsi_data_statistics} with a grain of salt. In particular, naively checking the entries for the presence of an assigned subject (as in Figure \ref{fig:04_naive_positives_and_negatives}) may lead to very similar or exactly equal content labelled in two different categories, thus rendering the classification task significantly more challenging. These issues will addressed during preprocessing (\headerName{} \ref{vsi_preprocessing}).
+}
 
-These issues will addressed during preprocessing in \headerName{} \ref{vsi_preprocessing}.
+
 
 % making sure to print all tables and figures 
 \clearpage

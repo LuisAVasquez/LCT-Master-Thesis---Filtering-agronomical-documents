@@ -15,7 +15,7 @@ We opted to extract sentences containing keywords or key phrases from the conten
 \input{Tables/05/Sources_of_content_after_preprocessing}
 
 
-Figure \ref{fig:05_unique_entries_keyphrases_vsi} offers a comparison of the number of unique entries per content source. In both cases, keeping only the phrases containing keywords dramatically reduces the size of the data. Note that, in the case of keeping the original content, there are slightly less unique entries for both the \trafilaturaAbstract{} and the \trafilaturaFulltext{} ($19939-19798 = 141$ and $26346-24447=1899$, respectively). This may be explained by the fact that some data noise may be removed by the sentence extraction process, especially those cases where several entries differ by a small amount of tokens (see Table \ref{tab:04_website_names_as_suffixes}).
+Figure \ref{fig:05_unique_entries_keyphrases_vsi} offers a comparison of the number of unique entries per content source. In both cases, keeping only the phrases containing keywords dramatically reduces the size of the data, especially for the \trafilaturaAbstract{}. Possible reasons for this will be explained in \headerName{} \ref{vsi_data_cleaning}. Note that, in the case of keeping the original content, there are slightly less unique entries for both the \trafilaturaAbstract{} and the \trafilaturaFulltext{} ($19,939-19,798 = 141$ and $26,346-24,447=1,899$, respectively). This may be explained by the fact that some data noise may be removed by the sentence extraction process, especially those cases where several entries differ by a small amount of tokens (see Table \ref{tab:04_website_names_as_suffixes}).
 
 \begin{figure}
     \centering
@@ -37,7 +37,7 @@ Figure \ref{fig:05_unique_entries_keyphrases_vsi} offers a comparison of the num
 To address the text noise mentioned in \headerName{} \ref{vsi_issues_data_noise}, we use regular expressions to:
 
 \begin{enumerate}
-    \item Remove characters not in any human alphabet.
+    \item Remove characters not in any human alphabet. This handles encoding errors.
     \item Remove emojis, URLs, HTML tags, hours, dates, extra white spaces.
     \item Remove punctuation at beginning and end of the string.
     \item Remove digits at beginning and end of the string.
@@ -63,7 +63,7 @@ Fortunately, error messages in the dataset are very consistent. Given that they 
 
 \input{Tables/05/Error_count}
 
-In Figure \ref{tab:05_vsi_error_message_count}, we present the number of error messages identified using our regular expressions. Notably, the proportion of error messages generally hovers around one-fifth of all entries. In $18.50\%\ (\approx 20\%)$ of cases \trafilatura{} completely fails to obtain any content from the website. This proportion almost doubles ($36.50\approx 40\%$) for the \trafilaturaAbstract{}. This discrepancy in the \trafilaturaAbstract{} could be attributed to the common occurrence of missing metadata, as discussed in \headerName{} \ref{vsi_data_statistics}.
+In Table \ref{tab:05_vsi_error_message_count}, we present the number of error messages identified using our regular expressions. Notably, the proportion of error messages generally hovers around one-fifth of all entries. In $18.50\%\ (\approx 20\%)$ of cases \trafilatura{} completely fails to obtain any content from the website. This proportion almost doubles ($36.50\approx 40\%$) for the \trafilaturaAbstract{}. This discrepancy in the \trafilaturaAbstract{} could be attributed to the common occurrence of missing metadata, as discussed in \headerName{} \ref{vsi_data_statistics}.
 
 
 \customHeader{3}{Handling scrapping errors}
@@ -71,7 +71,7 @@ In Figure \ref{tab:05_vsi_error_message_count}, we present the number of error m
 % second attempt: by length
 
 
-In order to handle scraping errors from \trafilatura{}, such as obtaining the name of the website or certain HTML data headers, our first approach was using regular expressions to filter them out. After removing the error messages from all sources of content, we proceeded to count the occurrences of each entry and ranked them in descending order. Given that our dataset contains approximately 35,000 documents, we focused on entries that appeared at least twice.
+In order to handle scraping errors from \trafilatura{}, such as obtaining the name of the website or certain HTML headers, our first approach was to use regular expressions to filter them out. After removing the error messages from all sources of content, we proceeded to count the occurrences of each entry and ranked them in descending order. Given that our dataset contains approximately 35,000 documents, we focused on entries that appeared at least twice.
 
 Although we attempted to identify common patterns and create regular expressions to match frequent entries, this approach proved unsuccessful. It only filtered around 500 unique entries, accounting for a mere $2\%$ of all unique entries in the best case (\trafilaturaAbstract{}). Consequently, it became apparent that several scraping errors likely appeared only once in the dataset, rendering our previous strategy ineffective.
 
@@ -86,6 +86,11 @@ Our algorithm to filter by length consists in:
     \item Finally, in all other cases, we keep the string.
 \end{enumerate}
 
+\input{Tables/05/Short_document_count}
+
+
+Upon removing error messages, we observed that parsing errors occur in entries for the \trafilaturaTitle{} and the \translationTitle{} approximately 1 in 7 times ($\approx 16\% $), as can be seen in Table \ref{tab:05_vsi_short_document_count}. The \trafilaturaAbstract{} and \trafilaturaFulltext{} are rarely short ($\leq 3\% $), and very few entries have more than one content source that is too brief ($\leq 3\% $).
+
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \customHeader{2}{Resolving Inconsistencies and Duplicate Documents}
@@ -93,11 +98,11 @@ Our algorithm to filter by length consists in:
 
 The initial preprocessing steps focused solely on cleaning the textual content of the dataset. Now, our attention turns to addressing the labeling challenges, specifically, instances where entries have identical content but differ in subject assignment or lack a subject (as in Tables \ref{tab:04_xmol_inconsistencies} and \ref{tab:04_annotation_inconsistencies}).
 
-Considering our main goal is to automate the identification of articles relevant to epidemiologists, where subject assignment signifies their interest, we propose the following strategy:
+Considering our main goal is to automate the identification of articles relevant to the \gls{vsi} experts, where subject assignment signifies their interest, we propose the following strategy:
 
-\begin{tcolorbox}[colback=mylightblue,colframe=gray!50!black]
+\putInBox{
 For each of the eight content sources, we group the dataset based on the text content. If a particular text has been assigned a subject at least once, we categorize it as \textbf{relevant}. Conversely, if no subject has been assigned to a text, we consider it \textbf{irrelevant}.
-\end{tcolorbox}
+}
 
 We believe this strategy reflects the intention of the annotators as they labeled the documents (see \headerName{} \ref{vsi_data_annotation}). Additionally, by design, this strategy eliminates duplicate content. Table \ref{tab:determining_relevance} illustrates this process for the content from the \trafilaturaTitle{}.
 
@@ -111,8 +116,8 @@ We believe this strategy reflects the intention of the annotators as they labele
 
 In this \headerName{}, we present the outcomes of our preprocessing techniques, yielding refined datasets suitable for text classification. Additional numerical results can be found in \appendixname{} \ref{appendix03:vsi_preprocessing results}.
 
-We now proceed to present the results of our preprocessing methods, which produce clean datasets fit to be used for text classification.
-Supplementary numerical results are available in the appendix.
+Figure \ref{fig:05_unique_entries_after_preprocessing} demonstrates that preprocessing leads to a reduction in the number of unique entries. For the majority of \contentType{}s, approximately 5 out of 6 unique entries are retained after the filtering process ($\approx 85\%$), except for the \trafilaturaTitle{} and \trafilaturaAbstract{}, where approximately 4 out of 6 unique entries are preserved ($\approx 67\%$).
+
 
 \begin{figure}
     \centering
@@ -122,6 +127,16 @@ Supplementary numerical results are available in the appendix.
 \end{figure}
 
 \input{Tables/05/Unique_entries_after_preprocessing}
+
+
+Regarding the average token count of the content, the histograms in Figure \ref{fig:05_vsi_token_distribution_after_preprocessing} reveal distributions across the four original \contentType{}s aligning with the original observations in Figure \ref{fig:04_vsi_token_distribution}. The same trend is observed for the \keyphrases{} as well. Upon comparing the means before and after preprocessing (Table \ref{tab:05_vsi_mean_tokens_before_after_preprocessing}), we observe that the means are higher for all the original content sources, except for the \trafilaturaFulltext{}.
+
+The higher means can be attributed to the filtering of error messages, which tend to be short in length, and short entries that may correspond to scrapping errors. As for the \trafilaturaFulltext{}, upon closer inspection of the filtered-out \emph{long} texts identified as error messages, it was observed that they often pertain to topics such as website cookies or terms and conditions. These texts tend to be quite lengthy and are not typically found in website metadata (from where the \trafilaturaTitle{} and the \trafilaturaAbstract{} are extracted). This observation explains the lower mean for the \trafilaturaFulltext{} after preprocessing, which we interpret as a positive indication of our filtering approach.
+
+When analyzing the \keyphrases{}, a significant decrease in the mean is noted, particularly for the \keyphrases{} extracted from the \trafilaturaFulltext{}. This reduction can be attributed to the fact that only a few sentences in an article usually contain the exact keywords used for locating them through Google Search. Consequently, after preprocessing, the mean of the \keyphrases{} decreases substantially when compared to their original sources.
+
+Overall, these observations highlight the effectiveness of our preprocessing in removing undesirable content while retaining relevant information.
+
 
 
 
@@ -194,7 +209,8 @@ Supplementary numerical results are available in the appendix.
     }
 
     
-    \caption{Token distribution after preprocessing the \VSI{} dataset}
+    \caption{
+    Length (in n. of tokens) of the \contentType{}s in the \VSI{} dataset after preprocessing}
     \label{fig:05_vsi_token_distribution_after_preprocessing}
 \end{figure}
 
@@ -202,7 +218,11 @@ Supplementary numerical results are available in the appendix.
 
 \input{Tables/05/Mean_length_comparison}
 
+\putInBox{
+By applying our preprocessing approach, we construct eight labelled datasets for binary \textclassification{} (Figure \ref{fig:05_vsi_pos_neg_balance}). These datasets exhibit a balance of positives and negatives ranging from 12 to 14\% positives, and from 86 to 88\% negatives\footnote{For more details, see Table \ref{appendix03:tab:vsi_positive_negative_balance} in \appendixname{} \ref{appendix03:preprocessing_statistics}}, represents a slight improvement compared to the original dataset, which had 10\% positives to 90\% negatives (Figure \ref{fig:04_naive_positives_and_negatives}). 
+}
 
+The only exception are the \keyphrases{} from the \trafilaturaAbstract{} discarding Original Content (``\keyphrasesAbstractOnly{}"). This specific dataset displays a 27\% positive and 73\% negative balance. The reasons behind this imbalance can be attributed to the factors previously explained. As the metadata required for extracting the \trafilaturaAbstract{} may be empty or uninformative; and few entries may contain the exact search keywords we are looking for; the dataset is substantially reduced, resulting in only 4,050 unique entries for the \keyphrasesAbstractOnly{}  as opposed to the original 19,939  unique entries for the \trafilaturaAbstract{} ($\approx$ 20\%). Consequently, the significantly smaller dataset size has led to a considerable change in the balance of the labels.
 
 
 \begin{figure}[ht]

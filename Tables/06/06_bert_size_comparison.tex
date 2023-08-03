@@ -1,0 +1,22 @@
+\begin{table}
+    \centering
+    \resizebox{\textwidth}{!}{
+\begin{tabular}{|l|l|c|c|c|c|c|}
+\hline
+\textbf{Model} & \textbf{Languages} & \textbf{Tokenization} & Layers & \textbf{Attention Heads} & \textbf{Vocabulary} & \textbf{Parameters} \\
+\hline
+\bertbase{} & 1 & WordPiece & 12 & 12 & 30k & 110M \\
+%BERTLarge & 1 & WordPiece & 24 & 16 & 30k & 335M \\
+\bertmultilingual{} & 104 & WordPiece & 12 & 12 & 110k & 172M \\
+\bertbiolinkbert{}& 1 & WordPiece & 12 & 12 & 30k & 110M \\
+\bertscibert{}& 1 & WordPiece & 12 & 12 & 30k & 110M \\
+\bertroberta{} & 1 & BPE & 12 & 8 & 50k & 125M \\
+%RoBERTa & 1 & bBPE & 24 & 16 & 50k & 355M \\
+\bertxlmroberta{} & 100 & SentencePiece & 12 & 12 & 250k & 270M \\
+%XLM-R & 100 & SPM & 24 & 16 & 250k & 550M \\
+\hline
+\end{tabular}
+}
+    \caption{Sizes of \BERT{} models used for this project. Adapted from \mytextcite{xlm_roberta}}
+    \label{tab:06_bert_sizes}
+\end{table}
