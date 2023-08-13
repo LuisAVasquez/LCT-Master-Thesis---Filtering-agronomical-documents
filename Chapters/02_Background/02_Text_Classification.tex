@@ -1,13 +1,15 @@
-\customHeader{1}{Text Classification}
+\customHeader{1}{\textclassification{}}
 \label{02_text_classification}
 
-Text classification, is a fundamental task in \gls{nlp} that involves automatically assigning predefined categories or labels to text documents based on their content. The goal of text classification is to develop computational models that can accurately classify text documents into predefined categories, enabling automated organization, retrieval, and analysis of large volumes of textual data.
+\textclassification{} is a fundamental task in \gls{nlp} that involves automatically assigning predefined categories or labels to text documents based on their content. The goal of \textclassification{} is to develop computational models that can accurately classify text documents into predefined categories, enabling automated organization, retrieval, and analysis of large volumes of textual data.
 
 Formally, given a set $V$ called the \emph{Vocabulary}, and a set $C$ of \emph{categories}, a \emph{\textclassification{} System} is a function 
 $$f: V^*\times C \mapsto \{ \texttt{True}, \texttt{False} \}$$
 
 where $V^*$ is the set of finite sequences of elements of $V$, that is, the set of \emph{documents}. 
-While the general definition of document classification accommodates multi-label classification scenarios, the specific focus of this project is on \emph{Binary \textclassification{}}. In this particular case, the classification task involves assigning documents to one of two mutually exclusive categories \myparencite{Shen2009_text_classification_formal_definition}.
+While the general definition of \textclassification{} accommodates multi-label classification scenarios, the specific focus of this project is on \emph{Binary \textclassification{}}. In this particular case, the classification task involves assigning documents to one of two mutually exclusive categories 
+\myparencite{Shen2009_text_classification_formal_definition,text_classification_embeddings_survey}.
 
-In the context of document classification, the fundamental objective is to leverage a training set, comprising a collection of training documents $(d_i, c_i)$, and employ a learning method or algorithm to derive a \emph{Classifier} $\gamma$. The primary purpose of this classifier is to establish a mapping from documents to classes, denoted as 
+In our particular scenario, we will be handling entire documents for analysis rather than, for example, individual words or proper names. Thus, the task is termed \emph{Document Classification}.
+In the context of Document Classification, the fundamental objective is to leverage a training set, comprising a collection of training documents $(d_i, c_i)$, and employ a learning method or algorithm to derive a \emph{Classifier} $\gamma$. The primary purpose of this classifier is to establish a mapping from documents to two classes, denoted as 
 $$\gamma : V^* \mapsto \{1, 0\}$$

@@ -32,7 +32,7 @@
 \newcommand{\tokenization}[0]{Tokenization}
 \newcommand{\wordpiece}[0]{Word Piece}
 \newcommand{\bpe}[0]{Byte-Pair Encoding}
-\newcommand{\finetuning}[0]{Finetuning}
+\newcommand{\finetuning}[0]{Fine-tuning}
 \newcommand{\PET}[0]{PET}
 
 
@@ -40,7 +40,7 @@
 \newcommand{\fOne}[0]{\ensuremath{F_1}}
 \newcommand{\fTwo}[0]{\ensuremath{F_2}}
 \newcommand{\fBeta}[0]{\ensuremath{F_\beta}}
-
+\newcommand{\auc}[0]{AUC}
 
 \newcommand{\contentType}[0]{Content Source}
 
@@ -65,9 +65,8 @@
 \newcommand{\sanba}[0]{Sanba}
 \newcommand{\BERT}[0]{BERT}
 
-
-\newcommand{\balanced}[0]{Balanced Finetuning}
-\newcommand{\unbalanced}[0]{Unbalanced Finetuning}
+\newcommand{\balanced}[0]{Balanced \finetuning{}}
+\newcommand{\unbalanced}[0]{Unbalanced \finetuning{}}
 \newcommand{\petFifty}[0]{PET 50}
 \newcommand{\petOneHundred}[0]{PET 100}
 \newcommand{\petTwoHundred}[0]{PET 200}
@@ -83,6 +82,13 @@
 \newcommand{\bertxlmroberta}[0]{XLM-RoBERTa}
 
 \newcommand{\neuralNetwork}[0]{Neural Network}
+
+\newcommand{\mycoloredcell}[1]{
+\cellcolor[rgb]{\fpeval{1-#1}, \fpeval{#1}, 0} \fpeval{round(100*#1, 2)} \%
+}
+
+\newcommand{\toPercentage}[1]{\fpeval{round(100*#1, 2)} \%}
+
 
 %%% Colored table
 
@@ -100,16 +106,135 @@
     {#1}{}%
     {
     \csvcolii
-    & \cellcolor[rgb]{\fpeval{1-\csvcoliii}, \fpeval{0.1+\csvcoliii}, 0} \fpeval{round(100*\csvcoliii, 2)}\% 
-    & \cellcolor[rgb]{\fpeval{1-\csvcoliv}, \fpeval{0.1+\csvcoliv}, 0} \fpeval{round(100*\csvcoliv, 2)}\% 
-    & \cellcolor[rgb]{\fpeval{1-\csvcolv}, \fpeval{0.1+\csvcolv}, 0} \fpeval{round(100*\csvcolv, 2)}\%
-    & \cellcolor[rgb]{\fpeval{1-\csvcolvi}, \fpeval{0.1+\csvcolvi}, 0} \fpeval{round(100*\csvcolvi, 2)}\%
-    & \cellcolor[rgb]{\fpeval{1-\csvcolvii}, \fpeval{0.1+\csvcolvii}, 0} \fpeval{round(100*\csvcolvii, 2)}\% 
-    & \cellcolor[rgb]{\fpeval{1-\csvcolviii}, \fpeval{0.1+\csvcolviii}, 0} \fpeval{round(100*\csvcolviii, 2)}\%
-    & \cellcolor[rgb]{\fpeval{1-\csvcolix}, \fpeval{0.1+\csvcolix}, 0} \fpeval{round(100*\csvcolix, 2)}\%
+    & \cellcolor[rgb]{\fpeval{(1-\csvcoliii)}, \fpeval{\csvcoliii}, 0} \fpeval{round(100*\csvcoliii, 2)}\% 
+    & \cellcolor[rgb]{\fpeval{1-\csvcoliv}, \fpeval{\csvcoliv}, 0} \fpeval{round(100*\csvcoliv, 2)}\% 
+    & \cellcolor[rgb]{\fpeval{1-\csvcolv}, \fpeval{\csvcolv}, 0} \fpeval{round(100*\csvcolv, 2)}\%
+    & \cellcolor[rgb]{\fpeval{1-\csvcolvi}, \fpeval{\csvcolvi}, 0} \fpeval{round(100*\csvcolvi, 2)}\%
+    & \cellcolor[rgb]{\fpeval{1-\csvcolvii}, \fpeval{\csvcolvii}, 0} \fpeval{round(100*\csvcolvii, 2)}\% 
+    & \cellcolor[rgb]{\fpeval{1-\csvcolviii}, \fpeval{\csvcolviii}, 0} \fpeval{round(100*\csvcolviii, 2)}\%
+    & \cellcolor[rgb]{\fpeval{1-\csvcolix}, \fpeval{\csvcolix}, 0} \fpeval{round(100*\csvcolix{}, 2)}\%
     & \cellcolor{white} \csvcolii
     }
 }
 
 
+}
+
+
+%%% Split Statistics table
+
+\newcommand{\splitsFinetuningTable}[1]{
+
+    \centering
+    \resizebox{\textwidth}{!}{
+    \csvreader[
+        tabular=|p{4cm}|*{9}{c|},
+        table head=\hline
+        \contentType{}
+        & Train-Size
+        & Positives
+        & Negatives
+        & Dev-Size
+        & Positives
+        & Negatives
+        & Test-Size
+        & Positives
+        & Negatives
+        \\ \hline,
+        late after line=\\, 
+        late after last line=\\\hline
+        ]%
+        {#1}{}%
+        {
+        \csvcolii
+        & \csvcoliii
+        & \csvcoliv
+        & \csvcolv
+        & \csvcolvi
+        & \csvcolvii
+        & \csvcolviii
+        & \csvcolix
+        & \csvcolx
+        & \csvcolxi
+        }
+    }
+}
+
+\newcommand{\splitsPetTable}[1]{
+
+    \centering
+    \resizebox{\textwidth}{!}{
+    \csvreader[
+        tabular=|p{4cm}|*{10}{c|},
+        table head=\hline
+        \contentType{}
+        & Train-Size
+        & Positives
+        & Negatives
+        & Dev-Size
+        & Positives
+        & Negatives
+        & Test-Size
+        & Positives
+        & Negatives
+        & Unlabeled
+        \\ \hline,
+        late after line=\\, 
+        late after last line=\\\hline
+        ]%
+        {#1}{}%
+        {
+        \csvcolii
+        & \csvcoliii
+        & \csvcoliv
+        & \csvcolv
+        & \csvcolvi
+        & \csvcolvii
+        & \csvcolviii
+        & \csvcolix
+        & \csvcolx
+        & \csvcolxi
+        & \csvcolxii
+        }
+    }
+}
+
+
+
+
+%%% Epchs Statistics table
+
+\newcommand{\epochTable}[1]{
+
+    \centering
+    \resizebox{\textwidth}{!}{
+    \csvreader[
+        tabular=|p{4cm}|*{8}{c|},
+        table head=\hline
+        Model 
+        & \trafilaturaTitle{}
+        & \trafilaturaAbstract{}
+        & \trafilaturaFulltext{}
+        & \translationTitle{}
+        & \keyphrasesAbstractOnly{}
+        & \keyphrasesAbstractOC{}
+        & \keyphrasesFulltextOnly{}
+        & \keyphrasesFulltextOC{}
+        \\ \hline,
+        late after line=\\, 
+        late after last line=\\\hline
+        ]%
+        {#1}{}%
+        {
+        \csvcoli
+        & \csvcolii
+        & \csvcoliii
+        & \csvcoliv
+        & \csvcolv
+        & \csvcolvi
+        & \csvcolvii
+        & \csvcolviii
+        & \csvcolix
+        }
+    }
 }

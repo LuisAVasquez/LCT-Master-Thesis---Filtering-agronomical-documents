@@ -1,3 +1,20 @@
 \customHeader{0}{Related Work}
 \label{03_related_work}
 
+
+As in almost all industries, \neuralNetwork{}s-based \gls{ai} is being adopted in Agriculture \myparencite{ai_for_agriculture}. Some of the most prominent uses of \gls{ai} and Deep Learning have been the automatization of decisions or alerts produced by sensors \myparencite{sensors_for_agriculture};  and the use of the \href{https://en.wikipedia.org/wiki/Internet_of_things}{Internet of Things}\footnote{\url{https://en.wikipedia.org/wiki/Internet_of_things}} to integrate sensors and software, in order to warn farmers of possible issues with their crops \myparencite{iot_for_agriculture}. 
+
+On the other hand, the application of \gls{nlp} to Agriculture, and especially to Epidemiological Surveillance, has been rather timid. A popular approach has been to use data mining from social media to gather textual data \myparencite{data_mining_for_plant_health}. Twitter has been used as a source of crowdsourced knowledge about ecological events \myparencite{twitter_detect_influenza_epidemics_2011, social_media_disease_surveillance_2015_no_bert}. However, there have been concerns about the reliability of social media data for Epidemiological Surveillance, as the public and the agricultural workers may lack the specialized knowledge to accurately identify risky events \myparencite{limitations_of_social_media_for_biosecurity_events}.
+
+
+Moreover, until recently, the advancements in Neural Network-based Language Models didn't significantly influence \gls{nlp} applications in Epidemiological Surveillance \myparencite{BioMedicalBERT_ALBERT_ELECTRA_2021, BioNER_with_multilingualBERT_2019}.
+This landscape shifted during the COVID-19 Pandemic when both computer vision and \gls{nlp} emerged as vital tools for diagnosis, prevention, and notably for our work, monitoring the spread of the disease. Still, these technological strides haven't been extensively applied in the field of Plant Health Surveillance.
+
+
+\mytextcite{social_media_crop_health_monitoring} introduced the idea of using social media data to monitor crop health. They collected a corpus of 5530 Tweets and used Binary \textclassification{} to detect ``agriculturally relevant tweets", using embeddings and a Support Vector Machine Classifier, and obtained an accuracy of 86.5\%. 
+However, their choice of embedding techniques, namely \emph{Word2Vec} and \emph{Doc2Vec}, seems to be a bit dated.
+Based on their provided confusion matrix, additional metrics for their results can be deduced as: Precision at $72.4\%$, Recall at $21.1\%$, \fOne{} at $32.7\%$, and \fTwo{} at $24.6\%$.
+ The stark contrast between their reported accuracy and the other metrics likely stems from the skewed nature of their dataset, which consists of $24\%$ relevant tweets and $76\%$ that are not. Our research offers a marked improvement over these findings.
+
+
+To the best of our knowledge, the research most aligned with ours is by \mytextcite{choubert}, who introduce \emph{ChouBERT}, a \gls{bert} model tailored for Plant Health Surveillance. \emph{ChouBERT} emerges from adapting the French \gls{bert} model, \emph{CamemBERT} \myparencite{martin-etal-2020-camembert}, to fit a custom Plant Health Dataset. This dataset comprises Tweets and French \href{https://agriculture.gouv.fr/bulletins-de-sante-du-vegetal}{French Plant Health Bulletins}\footnote{\url{https://agriculture.gouv.fr/bulletins-de-sante-du-vegetal}}. Notably, the authors only disclosed the Precision metric for \emph{ChouBERT}, which stands at $88.7\%$. However, since \emph{ChouBERT} is designed exclusively for French content, its applicability to International Plant Health Monitoring remains limited.

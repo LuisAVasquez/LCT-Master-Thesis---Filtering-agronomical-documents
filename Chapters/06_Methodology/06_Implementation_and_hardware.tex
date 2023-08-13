@@ -1,0 +1,44 @@
+\customHeader{1}{Implementation, Hyperparameters, and Hardware}
+\label{06_implementation_and_hardware}
+
+For this work, we worked in Python 3.9.2 and implemented a package for preprocessing the datasets and training \gls{bert} language models. This package is built around the \texttt{Transformers} library from the \emoji{hugging-face} HuggingFace company  for \finetuning{} \myparencite{transformers_hf_library}, \texttt{Scikit-learn} for metrics and statistics \myparencite{scikit-learn}, \texttt{pandas} for handling the datasets \myparencite{pandas}, \texttt{BeautifulSoup4} for parsing XML \myparencite{beautiful_soup_4}, among others. We also modified the code repository for \gls{pet} to include our own task-specific patterns and verbalizers.  Our implementation is designed to run on one GPU.
+
+
+% Beautiful soup
+% hugging face
+% sci kit learn
+% preprocessing and classification REPO
+% PET repo
+
+\input{Tables/06/Repositories}
+
+
+During training, we keep track of the accuracy, precision, recall, \fOne{}, and \fTwo{} on the training and development splits per epoch. For the final models, we calculate all these metrics plus the \gls{auc} on the development and test splits. Due to memory limitations, we were not able to save  checkpoints of the models during training. Thus, we performed two rounds of training, one to find the optimal epoch, and one to only train up to the optimal epochs.
+
+
+% Maiage computers
+% LabIA cluster
+
+We performed some experiments on the \MAIAGE{} local computers, but the bulk of the training was performed on the \href{http://hebergement.universite-paris-saclay.fr/lab-ia/}{\texttt{Lab-IA}} cluster \todo{cite Lab-IA}. This is a GPU cluster associated to the University of Paris-Saclay, and serves researchers in the Paris region. For our experiments, we conducted various tests and executed our code, but the GPU selection was beyond our control, contingent on the availability of GPUs. Table \ref{tab:06_labia_specs} shows the specifications of this cluster.
+
+\input{Tables/06/labia}
+
+
+
+
+
+After several preliminary experiments, it became clear that the size of our datasets and the implementations our training methods (specifically, \gls{pet}) would pose a problem for the available hardware. 
+Also, after these experiments we could observe some general tendencies in the training results, which we used to select the hyperparameters to use. For example, we noticed that \finetuning{} was faster than \gls{pet}, that large batch sizes filled the GPU memory, and that huge and minuscule learning rates made the learning unstable. Table \ref{tab:06_hyperparameters} lists the hyperparameters we used for our final setup, for the hyperparameters not mentioned in the Table, we use their default values as given by the \texttt{Transformers} and original \gls{pet} implementations.
+
+% input size % PET patterns.
+% batch size
+% learning rate
+% epochs
+% optimizer
+
+\input{Tables/06/hyperparameters}
+
+
+
+
+

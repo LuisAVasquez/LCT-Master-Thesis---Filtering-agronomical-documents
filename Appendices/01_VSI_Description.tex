@@ -9,7 +9,7 @@ This appendix presents tables and statistics to provide a deeper insight into th
 
 \begin{table}[!htbp]
     \centering
-    \resizebox{\textwidth}{!}{
+    \resizebox{0.75\textwidth}{!}{
     \begin{tabular}{|l|}
         \hline
         Text \\
@@ -54,12 +54,13 @@ This appendix presents tables and statistics to provide a deeper insight into th
 \label{appendix01:vsi_language_distribution}
 
 
-Table \ref{appendix01:tab:language_distribution} shows the distribution of languages (ISO code) in the \VSI{} dataset as automatically detected by the Google Translate API.
+Table \ref{appendix01:tab:language_distribution} shows the distribution of languages (by ISO code) in the \VSI{} dataset as automatically detected by the Google Translate API.
 
 
-\begin{table}[!htbp]
+\begin{table}%[!htbp]
 \centering
-\begin{tabular}{llllll}
+\resizebox{0.55\textwidth}{!}{
+\begin{tabular}{lclclc}
 \textbf{Language} & \textbf{Entries} & \textbf{Language} & \textbf{Entries} & \textbf{Language} & \textbf{Entries} \\
 \hline
 af & 18 & id & 226 & ro & 77 \\
@@ -102,9 +103,9 @@ ht & 4 & pt & 1292 & \ & \ \\
 hu & 184 & qu & 4 & \ & \ \\
 hy & 2 & \ & \ & \ & \ \\
 \end{tabular}
-\caption{Language Entries}
+}
+\caption{Number of entries per language in the \VSI{} Dataset}
 \label{appendix01:tab:language_distribution}
 \end{table}
 
 
-\clearpage

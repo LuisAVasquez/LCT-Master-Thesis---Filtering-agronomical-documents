@@ -1,0 +1,1448 @@
+\customHeader{0}{Training Results}
+\label{appendix05:training_results}
+
+In this \appendixname{} we present the numerical results and metrics from our training experiments.
+
+
+
+\customHeader{1}{\VSI{} Optimal Epochs}
+\label{appendix05:vsi_optimal_epochs}
+
+\input{Tables/07/Epochs/All_epochs}
+
+
+\clearpage
+\customHeader{1}{\VSI{} Metrics at Optimal Epochs}
+\label{appendix05:vsi_metrics_optimal_epochs}
+
+
+\begin{landscape}
+\begin{table}%[]
+    \coloredTable{
+    Tables/07/F2/eval_f_beta_2.0__BERT-base.csv
+    }
+    \caption{\bertbase{} \fTwo{} on Development split}
+    \label{tab:07_f2_bert_base}
+\end{table}
+
+\begin{table}%[]
+    \coloredTable{
+    Tables/07/F2/eval_f_beta_2.0__mBERT.csv
+    }
+    \caption{\bertmultilingual{} \fTwo{} on Development split}
+    \label{tab:07_f2_bert_multilingual}
+\end{table}
+\end{landscape}
+
+\begin{landscape}
+\begin{table}%[]
+    \coloredTable{
+    Tables/07/F2/eval_f_beta_2.0__Bio-Link-BERT.csv
+    }
+    \caption{\bertbiolinkbert{} \fTwo{} on Development split}
+    \label{tab:07_f2_bert_biolinkbert}
+\end{table}
+
+\begin{table}%[]
+    \coloredTable{
+    Tables/07/F2/eval_f_beta_2.0__SciBERT.csv
+    }
+    \caption{\bertscibert{} \fTwo{} on Development split}
+    \label{tab:07_f2_scibert}
+\end{table}
+\end{landscape}
+
+
+\begin{landscape}
+\begin{table}%[]
+    \coloredTable{
+    %Tables/07/F2/eval_f_beta_2.0__roBERTa-base.csv
+    Tables/07/F2/eval_f_beta_2.0__RoBERTa-base.csv
+    }
+    \caption{\bertroberta{} \fTwo{} on Development split}
+    \label{tab:07_f2_roberta}
+\end{table}
+
+
+\begin{table}%[]
+    \coloredTable{
+    %Tables/07/F2/eval_f_beta_2.0__XLM-roBERTa.csv
+    Tables/07/F2/eval_f_beta_2.0__XLM-RoBERTa.csv
+    }
+    \caption{\bertxlmroberta{} \fTwo{} on Development split}
+    \label{tab:07_f2_bert_xlmroberta}
+\end{table}
+\end{landscape}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+% AUC
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{landscape}
+\begin{table}%[]
+    \coloredTable{
+    Tables/07/AUCdev/auc-dev__BERT-base.csv
+    }
+    \caption{\bertbase{} \auc{} on Development split}
+    \label{tab:07_auc_dev_bert_base}
+\end{table}
+
+\begin{table}%[]
+    \coloredTable{
+    Tables/07/AUCdev/auc-dev__mBERT.csv
+    }
+    \caption{\bertmultilingual{} \auc{} on Development split}
+    \label{tab:07_auc_dev_bert_multilingual}
+\end{table}
+\end{landscape}
+
+\begin{landscape}
+\begin{table}%[]
+    \coloredTable{
+    Tables/07/AUCdev/auc-dev__Bio-Link-BERT.csv
+    }
+    \caption{\bertbiolinkbert{} \auc{} on Development split}
+    \label{tab:07_auc_dev_bert_biolinkbert}
+\end{table}
+
+\begin{table}%[]
+    \coloredTable{
+    Tables/07/AUCdev/auc-dev__SciBERT.csv
+    }
+    \caption{\bertscibert{} \auc{} on Development split}
+    \label{tab:07_auc_dev_scibert}
+\end{table}
+\end{landscape}
+
+
+\begin{landscape}
+\begin{table}%[]
+    \coloredTable{
+    Tables/07/AUCdev/auc-dev__RoBERTa-base.csv
+    }
+    \caption{\bertroberta{} \auc{} on Development split}
+    \label{tab:07_auc_dev_roberta}
+\end{table}
+
+
+\begin{table}%[]
+    \coloredTable{
+    Tables/07/AUCdev/auc-dev__XLM-RoBERTa.csv
+    }
+    \caption{\bertxlmroberta{} \auc{} on Development split}
+    \label{tab:07_auc_dev_bert_xlmroberta}
+\end{table}
+\end{landscape}
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+
+% Best performing models
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{table}
+\centering
+%\resizebox{\textwidth}{!}{
+\resizebox*{!}{\textheight}{
+\begin{tabular}{lllcc}
+\textbf{Model} &
+  \textbf{\contentType{}} &
+  \textbf{Training Method} & 
+  \textbf{Development \fTwo{}}  &
+  \textbf{Development \auc{}}  
+  \\ \hline
+\bertbase{} &
+  \trafilaturaFulltext{} &
+  \petFiveHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.8135283364}, \fpeval{0.8135283364},0} \fpeval{round(100*0.8135283364, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.7965584598}, \fpeval{0.7965584598},0} \fpeval{round(100*0.7965584598, 2)}\% \\
+\bertbase{} &
+  \trafilaturaFulltext{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.8310463122}, \fpeval{0.8310463122},0} \fpeval{round(100*0.8310463122, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8508844377}, \fpeval{0.8508844377},0} \fpeval{round(100*0.8508844377, 2)}\% \\
+\bertbase{} &
+  \keyphrasesAbstractOC{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.8015963512}, \fpeval{0.8015963512},0} \fpeval{round(100*0.8015963512, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8019744303}, \fpeval{0.8019744303},0} \fpeval{round(100*0.8019744303, 2)}\% \\ \hline
+\bertmultilingual{} &
+  \trafilaturaAbstract{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.7970682547}, \fpeval{0.7970682547},0} \fpeval{round(100*0.7970682547, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8280530965}, \fpeval{0.8280530965},0} \fpeval{round(100*0.8280530965, 2)}\% \\
+\bertmultilingual{} &
+  \trafilaturaFulltext{} &
+  \petTwoHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.8329266309}, \fpeval{0.8329266309},0} \fpeval{round(100*0.8329266309, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8028656932}, \fpeval{0.8028656932},0} \fpeval{round(100*0.8028656932, 2)}\% \\
+\bertmultilingual{} &
+  \trafilaturaFulltext{} &
+  \petFiveHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.8472269479}, \fpeval{0.8472269479},0} \fpeval{round(100*0.8472269479, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8675110953}, \fpeval{0.8675110953},0} \fpeval{round(100*0.8675110953, 2)}\% \\
+\bertmultilingual{} &
+  \trafilaturaFulltext{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.8274771609}, \fpeval{0.8274771609},0} \fpeval{round(100*0.8274771609, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8882393048}, \fpeval{0.8882393048},0} \fpeval{round(100*0.8882393048, 2)}\% \\
+\bertmultilingual{} &
+  \keyphrasesAbstractOC{} &
+  \petOneHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.7935153584}, \fpeval{0.7935153584},0} \fpeval{round(100*0.7935153584, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.6922544727}, \fpeval{0.6922544727},0} \fpeval{round(100*0.6922544727, 2)}\% \\
+\bertmultilingual{} &
+  \keyphrasesAbstractOC{} &
+  \petTwoHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.8128400435}, \fpeval{0.8128400435},0} \fpeval{round(100*0.8128400435, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.7440772733}, \fpeval{0.7440772733},0} \fpeval{round(100*0.7440772733, 2)}\% \\
+\bertmultilingual{} &
+  \keyphrasesAbstractOC{} &
+  \petFiveHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.7933960101}, \fpeval{0.7933960101},0} \fpeval{round(100*0.7933960101, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8180499997}, \fpeval{0.8180499997},0} \fpeval{round(100*0.8180499997, 2)}\% \\
+\bertmultilingual{} &
+  \keyphrasesAbstractOC{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.816373728}, \fpeval{0.816373728},0} \fpeval{round(100*0.816373728, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8451289487}, \fpeval{0.8451289487},0} \fpeval{round(100*0.8451289487, 2)}\% \\
+\bertmultilingual{} &
+  \keyphrasesFulltextOnly{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.8025357432}, \fpeval{0.8025357432},0} \fpeval{round(100*0.8025357432, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8243020694}, \fpeval{0.8243020694},0} \fpeval{round(100*0.8243020694, 2)}\% \\
+\bertmultilingual{} &
+  \keyphrasesFulltextOC{} &
+  \petFiveHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.7926489697}, \fpeval{0.7926489697},0} \fpeval{round(100*0.7926489697, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8161855269}, \fpeval{0.8161855269},0} \fpeval{round(100*0.8161855269, 2)}\% \\
+\bertmultilingual{} &
+  \keyphrasesFulltextOC{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.822866642}, \fpeval{0.822866642},0} \fpeval{round(100*0.822866642, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8335477668}, \fpeval{0.8335477668},0} \fpeval{round(100*0.8335477668, 2)}\% \\
+\bertmultilingual{} &
+  \trafilaturaTitle{} &
+  \petFiveHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.8106251431}, \fpeval{0.8106251431},0} \fpeval{round(100*0.8106251431, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.809322314}, \fpeval{0.809322314},0} \fpeval{round(100*0.809322314, 2)}\% \\
+\bertmultilingual{} &
+  \trafilaturaTitle{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.8244310265}, \fpeval{0.8244310265},0} \fpeval{round(100*0.8244310265, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8345520661}, \fpeval{0.8345520661},0} \fpeval{round(100*0.8345520661, 2)}\% \\
+\bertmultilingual{} &
+  \translationTitle{} &
+  \petOneHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.7950065703}, \fpeval{0.7950065703},0} \fpeval{round(100*0.7950065703, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.7018869614}, \fpeval{0.7018869614},0} \fpeval{round(100*0.7018869614, 2)}\% \\
+\bertmultilingual{} &
+  \translationTitle{} &
+  \petFiveHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.8032407407}, \fpeval{0.8032407407},0} \fpeval{round(100*0.8032407407, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8187682022}, \fpeval{0.8187682022},0} \fpeval{round(100*0.8187682022, 2)}\% \\
+\bertmultilingual{} &
+  \translationTitle{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.8286908078}, \fpeval{0.8286908078},0} \fpeval{round(100*0.8286908078, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8526575213}, \fpeval{0.8526575213},0} \fpeval{round(100*0.8526575213, 2)}\% \\ \hline
+\bertbiolinkbert{} &
+  \trafilaturaTitle{} &
+  \balanced{} &
+  \cellcolor[rgb]{\fpeval{1-0.7996592016}, \fpeval{0.7996592016},0} \fpeval{round(100*0.7996592016, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8418022231}, \fpeval{0.8418022231},0} \fpeval{round(100*0.8418022231, 2)}\% \\
+\bertbiolinkbert{} &
+  \trafilaturaTitle{} &
+  \petFifty{} &
+  \cellcolor[rgb]{\fpeval{1-0.7911120653}, \fpeval{0.7911120653},0} \fpeval{round(100*0.7911120653, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.6314240588}, \fpeval{0.6314240588},0} \fpeval{round(100*0.6314240588, 2)}\% \\
+\bertbiolinkbert{} &
+  \trafilaturaTitle{} &
+  \petFiveHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.8193979933}, \fpeval{0.8193979933},0} \fpeval{round(100*0.8193979933, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.7664940312}, \fpeval{0.7664940312},0} \fpeval{round(100*0.7664940312, 2)}\% \\
+\bertbiolinkbert{} &
+  \trafilaturaTitle{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.8119560238}, \fpeval{0.8119560238},0} \fpeval{round(100*0.8119560238, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.7980121212}, \fpeval{0.7980121212},0} \fpeval{round(100*0.7980121212, 2)}\% \\
+\bertbiolinkbert{} &
+  \trafilaturaFulltext{} &
+  \petFiveHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.8193730304}, \fpeval{0.8193730304},0} \fpeval{round(100*0.8193730304, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8240769245}, \fpeval{0.8240769245},0} \fpeval{round(100*0.8240769245, 2)}\% \\
+\bertbiolinkbert{} &
+  \trafilaturaFulltext{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.8324873096}, \fpeval{0.8324873096},0} \fpeval{round(100*0.8324873096, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8515599597}, \fpeval{0.8515599597},0} \fpeval{round(100*0.8515599597, 2)}\% \\
+\bertbiolinkbert{} &
+  \translationTitle{} &
+  \petFifty{} &
+  \cellcolor[rgb]{\fpeval{1-0.837712207}, \fpeval{0.837712207},0} \fpeval{round(100*0.837712207, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.6729223488}, \fpeval{0.6729223488},0} \fpeval{round(100*0.6729223488, 2)}\% \\
+\bertbiolinkbert{} &
+  \translationTitle{} &
+  \petOneHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.8130780813}, \fpeval{0.8130780813},0} \fpeval{round(100*0.8130780813, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.7144782614}, \fpeval{0.7144782614},0} \fpeval{round(100*0.7144782614, 2)}\% \\
+\bertbiolinkbert{} &
+  \translationTitle{} &
+  \petTwoHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.8002183406}, \fpeval{0.8002183406},0} \fpeval{round(100*0.8002183406, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.7333059819}, \fpeval{0.7333059819},0} \fpeval{round(100*0.7333059819, 2)}\% \\
+\bertbiolinkbert{} &
+  \translationTitle{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.8064516129}, \fpeval{0.8064516129},0} \fpeval{round(100*0.8064516129, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8302702593}, \fpeval{0.8302702593},0} \fpeval{round(100*0.8302702593, 2)}\% \\
+\bertbiolinkbert{} &
+  \keyphrasesAbstractOC{} &
+  \petOneHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.8194530125}, \fpeval{0.8194530125},0} \fpeval{round(100*0.8194530125, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.6777114212}, \fpeval{0.6777114212},0} \fpeval{round(100*0.6777114212, 2)}\% \\
+\bertbiolinkbert{} &
+  \keyphrasesAbstractOC{} &
+  \petFiveHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.8120035305}, \fpeval{0.8120035305},0} \fpeval{round(100*0.8120035305, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.7749095864}, \fpeval{0.7749095864},0} \fpeval{round(100*0.7749095864, 2)}\% \\
+\bertbiolinkbert{} &
+  \keyphrasesAbstractOC{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.793525017}, \fpeval{0.793525017},0} \fpeval{round(100*0.793525017, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.7901007668}, \fpeval{0.7901007668},0} \fpeval{round(100*0.7901007668, 2)}\% \\
+\bertbiolinkbert{} &
+  \keyphrasesFulltextOnly{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.801899235}, \fpeval{0.801899235},0} \fpeval{round(100*0.801899235, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.7768755674}, \fpeval{0.7768755674},0} \fpeval{round(100*0.7768755674, 2)}\% \\
+\bertbiolinkbert{} &
+  \keyphrasesFulltextOC{} &
+  \petFiveHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.794960116}, \fpeval{0.794960116},0} \fpeval{round(100*0.794960116, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.7891797349}, \fpeval{0.7891797349},0} \fpeval{round(100*0.7891797349, 2)}\% \\
+\bertbiolinkbert{} &
+  \keyphrasesFulltextOC{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.7973820059}, \fpeval{0.7973820059},0} \fpeval{round(100*0.7973820059, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8222998558}, \fpeval{0.8222998558},0} \fpeval{round(100*0.8222998558, 2)}\% \\ \hline
+\bertscibert{} & 
+  \trafilaturaTitle{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.8036752733}, \fpeval{0.8036752733},0} \fpeval{round(100*0.8036752733, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8087610652}, \fpeval{0.8087610652},0} \fpeval{round(100*0.8087610652, 2)}\% \\
+\bertscibert{} &
+  \trafilaturaFulltext{} &
+  \petFiveHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.824291498}, \fpeval{0.824291498},0} \fpeval{round(100*0.824291498, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.7981787677}, \fpeval{0.7981787677},0} \fpeval{round(100*0.7981787677, 2)}\% \\
+\bertscibert{} &
+  \trafilaturaFulltext{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.8395082519}, \fpeval{0.8395082519},0} \fpeval{round(100*0.8395082519, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8482610821}, \fpeval{0.8482610821},0} \fpeval{round(100*0.8482610821, 2)}\% \\
+\bertscibert{} &
+  \keyphrasesFulltextOC{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.8013172338}, \fpeval{0.8013172338},0} \fpeval{round(100*0.8013172338, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8120455118}, \fpeval{0.8120455118},0} \fpeval{round(100*0.8120455118, 2)}\% \\ \hline
+\bertroberta{} &
+  \trafilaturaAbstract{} &
+  \balanced{} &
+  \cellcolor[rgb]{\fpeval{1-0.7977475364}, \fpeval{0.7977475364},0} \fpeval{round(100*0.7977475364, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8534620862}, \fpeval{0.8534620862},0} \fpeval{round(100*0.8534620862, 2)}\% \\
+\bertroberta{} &
+  \trafilaturaAbstract{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.7966217759}, \fpeval{0.7966217759},0} \fpeval{round(100*0.7966217759, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8168870465}, \fpeval{0.8168870465},0} \fpeval{round(100*0.8168870465, 2)}\% \\
+\bertroberta{} &
+  \trafilaturaFulltext{} &
+  \balanced{} &
+  \cellcolor[rgb]{\fpeval{1-0.7940963419}, \fpeval{0.7940963419},0} \fpeval{round(100*0.7940963419, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.897221416}, \fpeval{0.897221416},0} \fpeval{round(100*0.897221416, 2)}\% \\
+\bertroberta{} &
+  \trafilaturaFulltext{} &
+  \petTwoHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.7901174168}, \fpeval{0.7901174168},0} \fpeval{round(100*0.7901174168, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.7305962623}, \fpeval{0.7305962623},0} \fpeval{round(100*0.7305962623, 2)}\% \\
+\bertroberta{} &
+  \trafilaturaFulltext{} &
+  \petFiveHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.8271543912}, \fpeval{0.8271543912},0} \fpeval{round(100*0.8271543912, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8102995837}, \fpeval{0.8102995837},0} \fpeval{round(100*0.8102995837, 2)}\% \\
+\bertroberta{} &
+  \trafilaturaFulltext{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.8317804506}, \fpeval{0.8317804506},0} \fpeval{round(100*0.8317804506, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8493570338}, \fpeval{0.8493570338},0} \fpeval{round(100*0.8493570338, 2)}\% \\
+\bertroberta{} &
+  \translationTitle{} &
+  \petFifty{} &
+  \cellcolor[rgb]{\fpeval{1-0.835375817}, \fpeval{0.835375817},0} \fpeval{round(100*0.835375817, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.6442531608}, \fpeval{0.6442531608},0} \fpeval{round(100*0.6442531608, 2)}\% \\
+\bertroberta{} &
+  \translationTitle{} &
+  \petFiveHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.8024976873}, \fpeval{0.8024976873},0} \fpeval{round(100*0.8024976873, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8201377011}, \fpeval{0.8201377011},0} \fpeval{round(100*0.8201377011, 2)}\% \\
+\bertroberta{} &
+  \translationTitle{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.8102069614}, \fpeval{0.8102069614},0} \fpeval{round(100*0.8102069614, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8420179017}, \fpeval{0.8420179017},0} \fpeval{round(100*0.8420179017, 2)}\% \\
+\bertroberta{} &
+  \keyphrasesAbstractOnly{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.8278145695}, \fpeval{0.8278145695},0} \fpeval{round(100*0.8278145695, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.6370944025}, \fpeval{0.6370944025},0} \fpeval{round(100*0.6370944025, 2)}\% \\
+\bertroberta{} &
+  \keyphrasesAbstractOC{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.8050847458}, \fpeval{0.8050847458},0} \fpeval{round(100*0.8050847458, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8180387156}, \fpeval{0.8180387156},0} \fpeval{round(100*0.8180387156, 2)}\% \\ \hline
+\bertxlmroberta{} &
+  \trafilaturaTitle{} &
+  \petFiveHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.8011243851}, \fpeval{0.8011243851},0} \fpeval{round(100*0.8011243851, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8247992654}, \fpeval{0.8247992654},0} \fpeval{round(100*0.8247992654, 2)}\% \\ 
+\bertxlmroberta{} &
+  \trafilaturaTitle{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.8312226571}, \fpeval{0.8312226571},0} \fpeval{round(100*0.8312226571, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8354894399}, \fpeval{0.8354894399},0} \fpeval{round(100*0.8354894399, 2)}\% \\
+\bertxlmroberta{} &
+  \trafilaturaAbstract{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.8233701782}, \fpeval{0.8233701782},0} \fpeval{round(100*0.8233701782, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8415276893}, \fpeval{0.8415276893},0} \fpeval{round(100*0.8415276893, 2)}\% \\
+\bertxlmroberta{} &
+  \trafilaturaFulltext{} &
+  \balanced{} &
+  \cellcolor[rgb]{\fpeval{1-0.8361531612}, \fpeval{0.8361531612},0} \fpeval{round(100*0.8361531612, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.9057368386}, \fpeval{0.9057368386},0} \fpeval{round(100*0.9057368386, 2)}\% \\
+\bertxlmroberta{} &
+  \trafilaturaFulltext{} &
+  \petOneHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.8262218774}, \fpeval{0.8262218774},0} \fpeval{round(100*0.8262218774, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.7000351933}, \fpeval{0.7000351933},0} \fpeval{round(100*0.7000351933, 2)}\% \\
+\bertxlmroberta{} &
+  \trafilaturaFulltext{} &
+  \petTwoHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.8050565536}, \fpeval{0.8050565536},0} \fpeval{round(100*0.8050565536, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.7804467105}, \fpeval{0.7804467105},0} \fpeval{round(100*0.7804467105, 2)}\% \\
+\bertxlmroberta{} &
+  \trafilaturaFulltext{} &
+  \petFiveHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.8563581891}, \fpeval{0.8563581891},0} \fpeval{round(100*0.8563581891, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8666316571}, \fpeval{0.8666316571},0} \fpeval{round(100*0.8666316571, 2)}\% \\
+\bertxlmroberta{} &
+  \trafilaturaFulltext{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.8573388203}, \fpeval{0.8573388203},0} \fpeval{round(100*0.8573388203, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8884577866}, \fpeval{0.8884577866},0} \fpeval{round(100*0.8884577866, 2)}\% \\
+\bertxlmroberta{} &
+  \translationTitle{} &
+  \balanced{} &
+  \cellcolor[rgb]{\fpeval{1-0.80155453}, \fpeval{0.80155453},0} \fpeval{round(100*0.80155453, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8424168788}, \fpeval{0.8424168788},0} \fpeval{round(100*0.8424168788, 2)}\% \\
+\bertxlmroberta{} &
+  \translationTitle{} &
+  \petFifty{} &
+  \cellcolor[rgb]{\fpeval{1-0.8288770053}, \fpeval{0.8288770053},0} \fpeval{round(100*0.8288770053, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.6383815066}, \fpeval{0.6383815066},0} \fpeval{round(100*0.6383815066, 2)}\% \\
+\bertxlmroberta{} &
+  \translationTitle{} &
+  \petOneHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.8027373452}, \fpeval{0.8027373452},0} \fpeval{round(100*0.8027373452, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.7052471454}, \fpeval{0.7052471454},0} \fpeval{round(100*0.7052471454, 2)}\% \\
+\bertxlmroberta{} &
+  \translationTitle{} &
+  \petTwoHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.8121882455}, \fpeval{0.8121882455},0} \fpeval{round(100*0.8121882455, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.7427653476}, \fpeval{0.7427653476},0} \fpeval{round(100*0.7427653476, 2)}\% \\
+\bertxlmroberta{} &
+  \translationTitle{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.7991081906}, \fpeval{0.7991081906},0} \fpeval{round(100*0.7991081906, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8419240015}, \fpeval{0.8419240015},0} \fpeval{round(100*0.8419240015, 2)}\% \\
+\bertxlmroberta{} &
+  \keyphrasesAbstractOnly{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.8284762698}, \fpeval{0.8284762698},0} \fpeval{round(100*0.8284762698, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.705715126}, \fpeval{0.705715126},0} \fpeval{round(100*0.705715126, 2)}\% \\
+\bertxlmroberta{} &
+  \keyphrasesAbstractOC{} &
+  \petOneHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.8193979933}, \fpeval{0.8193979933},0} \fpeval{round(100*0.8193979933, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.7201896006}, \fpeval{0.7201896006},0} \fpeval{round(100*0.7201896006, 2)}\% \\
+\bertxlmroberta{} &
+  \keyphrasesAbstractOC{} &
+  \petFiveHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.8078851413}, \fpeval{0.8078851413},0} \fpeval{round(100*0.8078851413, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8208681964}, \fpeval{0.8208681964},0} \fpeval{round(100*0.8208681964, 2)}\% \\
+\bertxlmroberta{} &
+  \keyphrasesAbstractOC{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.8113120074}, \fpeval{0.8113120074},0} \fpeval{round(100*0.8113120074, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8482165526}, \fpeval{0.8482165526},0} \fpeval{round(100*0.8482165526, 2)}\% \\
+\bertxlmroberta{} &
+  \keyphrasesFulltextOnly{} &
+  \petTwoHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.8004078511}, \fpeval{0.8004078511},0} \fpeval{round(100*0.8004078511, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.7447917071}, \fpeval{0.7447917071},0} \fpeval{round(100*0.7447917071, 2)}\% \\
+\bertxlmroberta{} &
+  \keyphrasesFulltextOnly{} &
+  \petFiveHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.7959022853}, \fpeval{0.7959022853},0} \fpeval{round(100*0.7959022853, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.7952180694}, \fpeval{0.7952180694},0} \fpeval{round(100*0.7952180694, 2)}\% \\
+\bertxlmroberta{} &
+  \keyphrasesFulltextOnly{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.790034639}, \fpeval{0.790034639},0} \fpeval{round(100*0.790034639, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8014001288}, \fpeval{0.8014001288},0} \fpeval{round(100*0.8014001288, 2)}\% \\
+\bertxlmroberta{} &
+  \keyphrasesFulltextOC{} &
+  \petFiveHundred{} &
+  \cellcolor[rgb]{\fpeval{1-0.8248978867}, \fpeval{0.8248978867},0} \fpeval{round(100*0.8248978867, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.8072937891}, \fpeval{0.8072937891},0} \fpeval{round(100*0.8072937891, 2)}\% \\
+\bertxlmroberta{} &
+  \keyphrasesFulltextOC{} &
+  \petThousand{} &
+  \cellcolor[rgb]{\fpeval{1-0.8051320193}, \fpeval{0.8051320193},0} \fpeval{round(100*0.8051320193, 2)}\% &
+  \cellcolor[rgb]{\fpeval{1-0.834611845}, \fpeval{0.834611845},0} \fpeval{round(100*0.834611845, 2)}\% \\ \hline
+\end{tabular}
+}
+\caption{Development \fTwo{} and \auc{} of top performing classifiers by \BERT{} Model}
+\label{appendix05:tab:f2_auc_top_pergorming_by_model}
+\end{table}
+
+
+
+
+\begin{table}%[]
+\resizebox{\textwidth}{!}{
+\begin{tabular}{lllccc}
+\contentType{} &
+  Model &
+  Training Method &
+  Development \fTwo{} &
+  Development \auc{} &
+  Development \fOne{} \\ \hline
+\trafilaturaTitle{} &
+  \bertbiolinkbert{} &
+  \balanced{} &
+  \mycoloredcell{0.799659201557935} &
+  \mycoloredcell{0.841802223131084} &
+  \mycoloredcell{0.784477611940298} \\
+\trafilaturaTitle{} &
+  \bertxlmroberta{} &
+  \petFiveHundred{} &
+  \mycoloredcell{0.801124385101897} &
+  \mycoloredcell{0.824799265381083} &
+  \mycoloredcell{0.762541806020066} \\
+\trafilaturaTitle{} &
+  \bertscibert{} &
+  \petThousand{} &
+  \mycoloredcell{0.803675273319376} &
+  \mycoloredcell{0.808761065197428} &
+  \mycoloredcell{0.757675438596491} \\
+\trafilaturaTitle{} &
+  \bertmultilingual{} &
+  \petFiveHundred{} &
+  \mycoloredcell{0.810625143118845} &
+  \mycoloredcell{0.809322314049586} &
+  \mycoloredcell{0.748414376321353} \\
+\trafilaturaTitle{} &
+  \bertbiolinkbert{} &
+  \petThousand{} &
+  \mycoloredcell{0.81195602382043} &
+  \mycoloredcell{0.798012121212121} &
+  \mycoloredcell{0.749867794817556} \\
+\trafilaturaTitle{} &
+  \bertmultilingual{} &
+  \petThousand{} &
+  \mycoloredcell{0.824431026474686} &
+  \mycoloredcell{0.834552066115702} &
+  \mycoloredcell{0.775532495903877} \\
+\trafilaturaTitle{} &
+  \bertxlmroberta{} &
+  \petThousand{} &
+  \mycoloredcell{0.831222657149435} &
+  \mycoloredcell{0.835489439853076} &
+  \mycoloredcell{0.773019271948608} \\ \hline
+\trafilaturaAbstract{} &
+  \bertroberta{} &
+  \petThousand{} &
+  \mycoloredcell{0.796621775850262} &
+  \mycoloredcell{0.816887046494108} &
+  \mycoloredcell{0.761177753544165} \\
+\trafilaturaAbstract{} &
+  \bertmultilingual{} &
+  \petThousand{} &
+  \mycoloredcell{0.797068254695373} &
+  \mycoloredcell{0.828053096485715} &
+  \mycoloredcell{0.765255634964266} \\
+\trafilaturaAbstract{} &
+  \bertroberta{} &
+  \balanced{} &
+  \mycoloredcell{0.797747536367902} &
+  \mycoloredcell{0.853462086151655} &
+  \mycoloredcell{0.79161816065192} \\
+\trafilaturaAbstract{} &
+  \bertxlmroberta{} &
+  \petThousand{} &
+  \mycoloredcell{0.823370178208887} &
+  \mycoloredcell{0.841527689334504} &
+  \mycoloredcell{0.774125132555673} \\ \hline
+\trafilaturaFulltext{} &
+  \bertroberta{} &
+  \balanced{} &
+  \mycoloredcell{0.794096341905106} &
+  \mycoloredcell{0.897221415974432} &
+  \mycoloredcell{0.818097014925373} \\
+\trafilaturaFulltext{} &
+  \bertbase{} &
+  \petFiveHundred{} &
+  \mycoloredcell{0.813528336380255} &
+  \mycoloredcell{0.796558459809987} &
+  \mycoloredcell{0.742792109256449} \\
+\trafilaturaFulltext{} &
+  \bertbiolinkbert{} &
+  \petFiveHundred{} &
+  \mycoloredcell{0.819373030353292} &
+  \mycoloredcell{0.824076924469876} &
+  \mycoloredcell{0.746223564954682} \\
+\trafilaturaFulltext{} &
+  \bertscibert{} &
+  \petFiveHundred{} &
+  \mycoloredcell{0.824291497975708} &
+  \mycoloredcell{0.79817876766848} &
+  \mycoloredcell{0.728704366499642} \\
+\trafilaturaFulltext{} &
+  \bertroberta{} &
+  \petFiveHundred{} &
+  \mycoloredcell{0.827154391168232} &
+  \mycoloredcell{0.810299583743068} &
+  \mycoloredcell{0.747023809523809} \\
+\trafilaturaFulltext{} &
+  \bertmultilingual{} &
+  \petThousand{} &
+  \mycoloredcell{0.827477160927617} &
+  \mycoloredcell{0.888239304826517} &
+  \mycoloredcell{0.815231501514495} \\
+\trafilaturaFulltext{} &
+  \bertbase{} &
+  \petThousand{} &
+  \mycoloredcell{0.831046312178387} &
+  \mycoloredcell{0.850884437722467} &
+  \mycoloredcell{0.791343405471621} \\
+\trafilaturaFulltext{} &
+  \bertroberta{} &
+  \petThousand{} &
+  \mycoloredcell{0.831780450618329} &
+  \mycoloredcell{0.8493570338131} &
+  \mycoloredcell{0.778747026169706} \\
+\trafilaturaFulltext{} &
+  \bertbiolinkbert{} &
+  \petThousand{} &
+  \mycoloredcell{0.83248730964467} &
+  \mycoloredcell{0.851559959657641} &
+  \mycoloredcell{0.778173190984578} \\
+\trafilaturaFulltext{} &
+  \bertmultilingual{} &
+  \petTwoHundred{} &
+  \mycoloredcell{0.83292663087685} &
+  \mycoloredcell{0.802865693169748} &
+  \mycoloredcell{0.740419378163412} \\
+\trafilaturaFulltext{} &
+  \bertxlmroberta{} &
+  \balanced{} &
+  \mycoloredcell{0.836153161175422} &
+  \mycoloredcell{0.905736838618287} &
+  \mycoloredcell{0.839517210549843} \\
+\trafilaturaFulltext{} &
+  \bertscibert{} &
+  \petThousand{} &
+  \mycoloredcell{0.839508251936679} &
+  \mycoloredcell{0.84826108214205} &
+  \mycoloredcell{0.779820101681658} \\
+\trafilaturaFulltext{} &
+  \bertmultilingual{} &
+  \petFiveHundred{} &
+  \mycoloredcell{0.847226947941476} &
+  \mycoloredcell{0.867511095329687} &
+  \mycoloredcell{0.797757308770524} \\
+\trafilaturaFulltext{} &
+  \bertxlmroberta{} &
+  \petFiveHundred{} &
+  \mycoloredcell{0.856358189081225} &
+  \mycoloredcell{0.866631657099396} &
+  \mycoloredcell{0.78340312143129} \\
+\trafilaturaFulltext{} &
+  \bertxlmroberta{} &
+  \petThousand{} &
+  \mycoloredcell{0.857338820301783} &
+  \mycoloredcell{0.888457786571285} &
+  \mycoloredcell{0.815993472052223} \\ \hline
+\translationTitle{} &
+  \bertxlmroberta{} &
+  \petThousand{} &
+  \mycoloredcell{0.799108190565594} &
+  \mycoloredcell{0.84192400147929} &
+  \mycoloredcell{0.771671388101983} \\
+\translationTitle{} &
+  \bertxlmroberta{} &
+  \balanced{} &
+  \mycoloredcell{0.801554529997571} &
+  \mycoloredcell{0.842416878780024} &
+  \mycoloredcell{0.792316926770708} \\
+\translationTitle{} &
+  \bertroberta{} &
+  \petFiveHundred{} &
+  \mycoloredcell{0.802497687326549} &
+  \mycoloredcell{0.820137701090976} &
+  \mycoloredcell{0.759299781181619} \\
+\translationTitle{} &
+  \bertmultilingual{} &
+  \petFiveHundred{} &
+  \mycoloredcell{0.80324074074074} &
+  \mycoloredcell{0.818768202200443} &
+  \mycoloredcell{0.760964912280701} \\
+\translationTitle{} &
+  \bertbiolinkbert{} &
+  \petThousand{} &
+  \mycoloredcell{0.806451612903225} &
+  \mycoloredcell{0.830270259338017} &
+  \mycoloredcell{0.766685052399338} \\
+\translationTitle{} &
+  \bertroberta{} &
+  \petThousand{} &
+  \mycoloredcell{0.810206961429915} &
+  \mycoloredcell{0.842017901719674} &
+  \mycoloredcell{0.784738041002277} \\
+\translationTitle{} &
+  \bertmultilingual{} &
+  \petThousand{} &
+  \mycoloredcell{0.828690807799442} &
+  \mycoloredcell{0.852657521264792} &
+  \mycoloredcell{0.788079470198675} \\ \hline
+\keyphrasesAbstractOC{} &
+  \bertmultilingual{} &
+  \petFiveHundred{} &
+  \mycoloredcell{0.793396010089429} &
+  \mycoloredcell{0.818049999717898} &
+  \mycoloredcell{0.754223433242507} \\
+\keyphrasesAbstractOC{} &
+  \bertbiolinkbert{} &
+  \petThousand{} &
+  \mycoloredcell{0.79352501697985} &
+  \mycoloredcell{0.790100766752613} &
+  \mycoloredcell{0.741406663141195} \\
+\keyphrasesAbstractOC{} &
+  \bertbase{} &
+  \petThousand{} &
+  \mycoloredcell{0.801596351197263} &
+  \mycoloredcell{0.801974430295473} &
+  \mycoloredcell{0.756320602474448} \\
+\keyphrasesAbstractOC{} &
+  \bertroberta{} &
+  \petThousand{} &
+  \mycoloredcell{0.805084745762711} &
+  \mycoloredcell{0.818038715647056} &
+  \mycoloredcell{0.764130434782608} \\
+\keyphrasesAbstractOC{} &
+  \bertxlmroberta{} &
+  \petFiveHundred{} &
+  \mycoloredcell{0.807885141294439} &
+  \mycoloredcell{0.820868196410537} &
+  \mycoloredcell{0.761546723952739} \\
+\keyphrasesAbstractOC{} &
+  \bertxlmroberta{} &
+  \petThousand{} &
+  \mycoloredcell{0.811312007417709} &
+  \mycoloredcell{0.848216552603517} &
+  \mycoloredcell{0.782997762863534} \\
+\keyphrasesAbstractOC{} &
+  \bertmultilingual{} &
+  \petThousand{} &
+  \mycoloredcell{0.816373728029602} &
+  \mycoloredcell{0.845128948719539} &
+  \mycoloredcell{0.7853170189099} \\ \hline
+\keyphrasesFulltextOnly{} &
+  \bertxlmroberta{} &
+  \petThousand{} &
+  \mycoloredcell{0.790034638955502} &
+  \mycoloredcell{0.801400128800986} &
+  \mycoloredcell{0.741713570981863} \\
+\keyphrasesFulltextOnly{} &
+  \bertxlmroberta{} &
+  \petFiveHundred{} &
+  \mycoloredcell{0.795902285263987} &
+  \mycoloredcell{0.795218069381832} &
+  \mycoloredcell{0.733212341197822} \\
+\keyphrasesFulltextOnly{} &
+  \bertmultilingual{} &
+  \petThousand{} &
+  \mycoloredcell{0.802535743188562} &
+  \mycoloredcell{0.824302069350796} &
+  \mycoloredcell{0.766258853831294} \\ \hline
+\keyphrasesFulltextOC{} &
+  \bertmultilingual{} &
+  \petFiveHundred{} &
+  \mycoloredcell{0.792648969741971} &
+  \mycoloredcell{0.81618552688812} &
+  \mycoloredcell{0.758436944937833} \\
+\keyphrasesFulltextOC{} &
+  \bertbiolinkbert{} &
+  \petThousand{} &
+  \mycoloredcell{0.797382005899705} &
+  \mycoloredcell{0.822299855772532} &
+  \mycoloredcell{0.755788553953691} \\
+\keyphrasesFulltextOC{} &
+  \bertscibert{} &
+  \petThousand{} &
+  \mycoloredcell{0.801317233809001} &
+  \mycoloredcell{0.812045511778576} &
+  \mycoloredcell{0.751608751608751} \\
+\keyphrasesFulltextOC{} &
+  \bertxlmroberta{} &
+  \petThousand{} &
+  \mycoloredcell{0.805132019338044} &
+  \mycoloredcell{0.834611844966919} &
+  \mycoloredcell{0.772180115916183} \\
+\keyphrasesFulltextOC{} &
+  \bertmultilingual{} &
+  \petThousand{} &
+  \mycoloredcell{0.822866642039157} &
+  \mycoloredcell{0.833547766763581} &
+  \mycoloredcell{0.781921895568231} \\
+\keyphrasesFulltextOC{} &
+  \bertxlmroberta{} &
+  \petFiveHundred{} &
+  \mycoloredcell{0.824897886698632} &
+  \mycoloredcell{0.807293789061605} &
+  \mycoloredcell{0.744391025641025} \\ \hline
+\end{tabular}
+}
+\caption{Development \fTwo{}, \auc{}, and \fOne{} of top performing classifiers by \contentType{} }
+\label{appendix05:tab:f2_auc_f1_top_pergorming_by_content_type}
+\end{table}
+
+
+\iffalse
+\begin{landscape}
+
+\begin{table}%[]
+\centering
+    \resizebox{\paperwidth}{!}{
+    \begin{tabular}{|p{3cm}lp{2cm}|p{2.5cm}p{2.5cm}p{2.5cm}p{2.5cm}|p{2.5cm}p{2.5cm}p{2.5cm}p{2.5cm}p{2.5cm}p{2.5cm}|}
+    \hline
+\contentType{} &
+  Model &
+  Training Method &
+  Development F2 &
+  Development AUC &
+  Development F1 &
+  Development Accuracy &
+  Test F2 &
+  Test AUC &
+  Test F1 &
+  Test Accuracy &
+  Test Precision &
+  Test Recall \\ \hline
+\trafilaturaTitle{} &
+  \bertmultilingual{} &
+  \petThousand{} &
+  82.44\% &
+  83.46\% &
+  \mycoloredcell{0.7755} & %77.55\% &
+  \mycoloredcell{0.7509} &%75.09\% &
+  \mycoloredcell{0.6056}       &%60.56\% &
+  \mycoloredcell{0.8250}    &%82.50\% &
+  \mycoloredcell{0.4203}     &%\% &
+  \mycoloredcell{0.6673}     &%\% &
+  \mycoloredcell{0.2783}     &%\% &
+  \mycoloredcell{0.8578}     %\% \\
+  \\
+\trafilaturaTitle{} &
+  \bertxlmroberta{} &
+  \petThousand{} &
+  \mycoloredcell{0.8312}    & %83.12\% &
+  \mycoloredcell{0.8355}    &%83.55\% &
+  77.30\% &
+  74.30\% &
+  58.40\% &
+  80.80\% &
+  39.92\% &
+  64.24\% &
+  26.13\% &
+  84.48\% \\ \hline
+\trafilaturaAbstract{} &
+  \bertxlmroberta{} &
+  \petThousand{} &
+    \mycoloredcell{0.8234} &
+    \mycoloredcell{0.8415} &
+    \mycoloredcell{0.7741} &
+    \mycoloredcell{0.7491} &
+    \mycoloredcell{0.6057} &
+    \mycoloredcell{0.8460} &
+    \mycoloredcell{0.4279} &
+    \mycoloredcell{0.6914} &
+    \mycoloredcell{0.2874} &
+    \mycoloredcell{0.8376} \\ \hline
+  %82.34\% &
+  %84.15\% &
+  %77.41\% &
+  %74.91\% &
+  %60.57\% &
+  %84.60\% &
+  %42.79\% &
+  %69.14\% &
+  %28.74\% &
+  %83.76\% \\ \hline
+\trafilaturaFulltext{} &
+  \bertmultilingual{} &
+  \petThousand{} &
+  82.75\% &
+    \mycoloredcell{0.8882} &
+    \mycoloredcell{0.8152} &
+    \mycoloredcell{0.8106} &
+    \mycoloredcell{0.6697} &
+    \mycoloredcell{0.8961} &
+    \mycoloredcell{0.5021} &
+    \mycoloredcell{0.7924} &
+    \mycoloredcell{0.3544} &
+  %88.82\% &
+  %81.52\% &
+  %81.06\% &
+  %66.97\% &
+  %89.61\% &
+  %50.21\% &
+  %79.24\% &
+  %35.44\% &
+  86.13\% \\
+\trafilaturaFulltext{} &
+  \bertbase{} &
+  \petThousand{} &
+  83.10\% &
+  85.09\% &
+  79.13\% &
+  77.33\% &
+  59.65\% &
+  84.84\% &
+  40.58\% &
+  69.08\% &
+  26.47\% &
+  86.86\% \\
+\trafilaturaFulltext{} &
+  \bertroberta{} &
+  \petThousand{} &
+  83.18\% &
+  84.94\% &
+  77.87\% &
+  75.24\% &
+  57.83\% &
+  85.96\% &
+  38.00\% &
+  64.82\% &
+  24.18\% &
+  88.69\% \\
+\trafilaturaFulltext{} &
+  \bertbiolinkbert{} &
+  \petThousand{} &
+  83.25\% &
+  85.16\% &
+  77.82\% &
+  75.11\% &
+  59.15\% &
+  85.66\% &
+  39.23\% &
+  66.33\% &
+  25.13\% &
+  89.42\% \\
+\trafilaturaFulltext{} &
+  \bertxlmroberta{} &
+  \balanced{} &
+  83.62\% &
+  \mycoloredcell{0.9057} &
+  \mycoloredcell{0.8395} &
+  \mycoloredcell{0.8406} &
+  \mycoloredcell{0.6372} &
+  %90.57\% &
+  %83.95\% &
+  %84.06\% &
+  %63.72\% &
+  87.22\% &
+  \mycoloredcell{0.5110} &
+  \mycoloredcell{0.8224} &
+  \mycoloredcell{0.3842} &
+  %51.10\% &
+  %82.24\% &
+  %38.42\% &
+  76.28\% \\
+\trafilaturaFulltext{} &
+  \bertscibert{} &
+  \petThousand{} &
+  83.95\% &
+  84.83\% &
+  77.98\% &
+  75.02\% &
+  56.23\% &
+  85.13\% &
+  36.49\% &
+  62.78\% &
+  23.02\% &
+  87.96\% \\
+\trafilaturaFulltext{} &
+  \bertmultilingual{} &
+  \petFiveHundred{} &
+  \mycoloredcell{0.8472} &
+  %84.72\% &
+  86.75\% &
+  79.78\% &
+  77.60\% &
+  61.25\% &
+  \mycoloredcell{0.8761} &
+  %87.61\% &
+  41.60\% &
+  69.48\% &
+  27.10\% &
+  \mycoloredcell{0.8942} \\
+  %89.42\% \\
+\trafilaturaFulltext{} &
+  \bertxlmroberta{} &
+  \petFiveHundred{} &
+  \mycoloredcell{0.8564} &
+  %85.64\% &
+  86.66\% &
+  78.34\% &
+  74.76\% &
+  56.84\% &
+  87.59\% &
+  36.31\% &
+  61.09\% &
+  22.67\% &
+  \mycoloredcell{0.9124} \\
+  %91.24\% \\
+\trafilaturaFulltext{} &
+  \bertxlmroberta{} &
+  \petThousand{} &
+    \mycoloredcell{0.8573} &
+    \mycoloredcell{0.8885} &
+    \mycoloredcell{0.8160} &
+    \mycoloredcell{0.7999} &
+    \mycoloredcell{0.6379} &
+    \mycoloredcell{0.8966} &
+    \mycoloredcell{0.4434} &
+    \mycoloredcell{0.7249} &
+    \mycoloredcell{0.2940} &
+    \mycoloredcell{0.9015} \\ \hline
+  %85.73\% &
+  %88.85\% &
+  %81.60\% &
+  %79.99\% &
+  %63.79\% &
+  %89.66\% &
+  %44.34\% &
+  %72.49\% &
+  %29.40\% &
+  %90.15\% \\ \hline
+\translationTitle{} &
+  \bertroberta{} &
+  \petThousand{} &
+  81.02\% &
+  84.20\% &
+  78.47\% &
+  \mycoloredcell{0.7728} &
+  %77.28\% &
+  59.18\% &
+  83.72\% &
+  44.44\% &
+  \mycoloredcell{0.7386} &
+  %73.86\% &
+  31.41\% &
+  75.98\% \\
+\translationTitle{} &
+  \bertmultilingual{} &
+  \petThousand{} &
+    \mycoloredcell{0.8287} &
+    \mycoloredcell{0.8527} &
+    \mycoloredcell{0.7881} &
+  %82.87\% &
+  %85.27\% &
+  %78.81\% &
+  76.92\% &
+    \mycoloredcell{0.6381} &
+    \mycoloredcell{0.8420} &
+    \mycoloredcell{0.4637} &
+  %63.81\% &
+  %84.20\% &
+  %46.37\% &
+  72.90\% &
+    \mycoloredcell{0.3186} &
+    \mycoloredcell{0.8515} \\ \hline
+  %31.86\% &
+  %85.15\% \\ \hline
+\keyphrasesAbstractOC{} &
+  \bertxlmroberta{} &
+  \petThousand{} &
+  81.13\% &
+  \mycoloredcell{0.8482} &
+  %84.82\% &
+  78.30\% &
+  76.96\% &
+  58.48\% &
+    \mycoloredcell{0.8378} &
+    \mycoloredcell{0.4248} &
+    \mycoloredcell{0.7138} &
+    \mycoloredcell{0.2918} &
+  %83.78\% &
+  %42.48\% &
+  %71.38\% &
+  %29.18\% &
+  78.07\% \\
+\keyphrasesAbstractOC{} &
+  \bertmultilingual{} &
+  \petThousand{} &
+  \mycoloredcell{0.8164} &
+  %81.64\% &
+  84.51\% &
+    \mycoloredcell{0.7853} &
+    \mycoloredcell{0.7708} &
+    \mycoloredcell{0.5869} &
+  %78.53\% &
+  %77.08\% &
+  %58.69\% &
+  83.37\% &
+  42.19\% &
+  70.55\% &
+  28.73\% &
+  \mycoloredcell{0.7939} \\ \hline
+  %79.39\% \\ \hline
+\keyphrasesFulltextOC{} &
+  \bertmultilingual{} &
+  \petThousand{} &
+    \mycoloredcell{0.8229} &
+    \mycoloredcell{0.8335} &
+    \mycoloredcell{0.7819} &
+    \mycoloredcell{0.7622} &
+    \mycoloredcell{0.5641} &
+    \mycoloredcell{0.8200} &
+    \mycoloredcell{0.3861} &
+    \mycoloredcell{0.6865} &
+    \mycoloredcell{0.2531} &
+    \mycoloredcell{0.8142} \\ \hline
+  %82.29\% &
+  %83.35\% &
+  %78.19\% &
+  %76.22\% &
+  %56.41\% &
+  %82.00\% &
+  %38.61\% &
+  %68.65\% &
+  %25.31\% &
+  %81.42\%  \\ \hline
+\end{tabular}
+}
+    \caption{Development and Test metrics for Best Performing classifiers}
+    \label{appendix05:tab:metrics_for_best_classifiers}
+\end{table}
+\end{landscape}
+\fi
+
+%{p{3cm}ll|*{6}{c}|*{6}{c}|}
+\begin{landscape}
+\begin{table}%[]
+\centering
+    \resizebox{\paperwidth}{!}{
+\begin{tabular}{|p{3cm}lp{2.5cm}|*{6}{P{2.25cm}}|*{6}{P{2cm}}|}
+\hline
+\contentType{} &
+  Model &
+  Training Method &
+  Development \fTwo{} &
+  Development \auc{} &
+  Development \fOne{} &
+  Development Accuracy &
+  Development Precision &
+  Development Recall &
+  Test \fTwo{} &
+  Test \auc{} &
+  Test Precision &
+  Test Recall &
+  Test \fOne{} &
+  Test Accuracy \\ \hline
+\trafilaturaTitle{} &
+  \bertmultilingual{} &
+  \petThousand{} &
+  \toPercentage{0.8244310265} &
+  \toPercentage{0.8345520661} &
+  \mycoloredcell{0.7755324959} &
+  \mycoloredcell{0.7509090909} &
+  \mycoloredcell{0.7057654076} &
+  \toPercentage{0.8606060606} &
+  \mycoloredcell{0.6055995131} &
+  \mycoloredcell{0.8249796338} &
+  \mycoloredcell{0.2783216783} &
+  \mycoloredcell{0.8577586207} &
+  \mycoloredcell{0.4202745512} &
+  \mycoloredcell{0.6672727273} \\
+\trafilaturaTitle{} &
+  \bertxlmroberta{} &
+  \petThousand{} &
+  \mycoloredcell{0.8312226571} &
+  \mycoloredcell{0.8354894399} &
+  \toPercentage{0.7730192719} &
+  \toPercentage{0.743030303} &
+  \toPercentage{0.6922339406} &
+  \toPercentage{0.8751515152} &
+  \toPercentage{0.5840286055} &
+  \toPercentage{0.8079951121} &
+  \toPercentage{0.2613333333} &
+  \toPercentage{0.8448275862} &
+  \toPercentage{0.399185336} &
+  \toPercentage{0.6424242424} \\ \hline
+\trafilaturaAbstract{} &
+  \bertxlmroberta{} &
+  \petThousand{} &
+  \mycoloredcell{0.8233701782} &
+  \mycoloredcell{0.8415276893} &
+  \mycoloredcell{0.7741251326} &
+  \mycoloredcell{0.7491166078} &
+  \mycoloredcell{0.7039537126} &
+  \mycoloredcell{0.8598351001} &
+  \mycoloredcell{0.6056860321} &
+  \mycoloredcell{0.8460210289} &
+  \mycoloredcell{0.2873900293} &
+  \mycoloredcell{0.8376068376} &
+  \mycoloredcell{0.4279475983} &
+  \mycoloredcell{0.691401649} \\ \hline
+\trafilaturaFulltext{} &
+  \bertmultilingual{} &
+  \petThousand{} &
+  \toPercentage{0.8274771609} &
+  \mycoloredcell{0.8882393048} &
+  \mycoloredcell{0.8152315015} &
+  \mycoloredcell{0.8105590062} &
+  \mycoloredcell{0.7956081081} &
+  \toPercentage{0.8358473824} &
+  \mycoloredcell{0.6696935301} &
+  \mycoloredcell{0.8961402345} &
+  \mycoloredcell{0.5021276596} &
+  \mycoloredcell{0.7923691216} &
+  \mycoloredcell{0.3543543544} &
+  \toPercentage{0.8613138686} \\
+\trafilaturaFulltext{} &
+  \bertbase{} &
+  \petThousand{} &
+  \toPercentage{0.8310463122} &
+  \toPercentage{0.8508844377} &
+  \toPercentage{0.7913434055} &
+  \toPercentage{0.7732919255} &
+  \toPercentage{0.7329803328} &
+  \toPercentage{0.8598047915} &
+  \toPercentage{0.5964912281} &
+  \toPercentage{0.848370567} &
+  \toPercentage{0.4057971014} &
+  \toPercentage{0.690771961} &
+  \toPercentage{0.2647385984} &
+  \toPercentage{0.8686131387} \\
+\trafilaturaFulltext{} &
+  \bertroberta{} &
+  \petThousand{} &
+  \toPercentage{0.8317804506} &
+  \toPercentage{0.8493570338} &
+  \toPercentage{0.7787470262} &
+  \toPercentage{0.7524401065} &
+  \toPercentage{0.7039426523} &
+  \toPercentage{0.8713398403} &
+  \toPercentage{0.5782960495} &
+  \toPercentage{0.8595941163} &
+  \toPercentage{0.3799843628} &
+  \toPercentage{0.6481810115} &
+  \toPercentage{0.2417910448} &
+  \toPercentage{0.8868613139} \\
+\trafilaturaFulltext{} &
+  \bertbiolinkbert{} &
+  \petThousand{} &
+  \toPercentage{0.8324873096} &
+  \toPercentage{0.8515599597} &
+  \toPercentage{0.778173191} &
+  \toPercentage{0.7511091393} &
+  \toPercentage{0.7018544936} &
+  \toPercentage{0.8731144632} &
+  \toPercentage{0.59150169} &
+  \toPercentage{0.8566375433} &
+  \toPercentage{0.3923138511} &
+  \toPercentage{0.6632653061} &
+  \toPercentage{0.2512820513} &
+  \toPercentage{0.8941605839} \\
+\trafilaturaFulltext{} &
+  \bertxlmroberta{} &
+  \balanced{} &
+  \toPercentage{0.8361531612} &
+  \mycoloredcell{0.9057368386} &
+  \mycoloredcell{0.8395172105} &
+  \mycoloredcell{0.8405861456} &
+  \mycoloredcell{0.8451845185} &
+  \toPercentage{0.8339253996} &
+  \mycoloredcell{0.637195122} &
+  \toPercentage{0.8721908143} &
+  \mycoloredcell{0.511002445} &
+  \mycoloredcell{0.8223801066} &
+  \mycoloredcell{0.3841911765} &
+  \toPercentage{0.7627737226} \\
+\trafilaturaFulltext{} &
+  \bertscibert{} &
+  \petThousand{} &
+  \toPercentage{0.8395082519} &
+  \toPercentage{0.8482610821} &
+  \toPercentage{0.7798201017} &
+  \toPercentage{0.7502218279} &
+  \toPercentage{0.6972027972} &
+  \mycoloredcell{0.884649512} &
+  \toPercentage{0.5622958469} &
+  \toPercentage{0.8512515668} &
+  \toPercentage{0.3648750946} &
+  \toPercentage{0.6277728483} &
+  \toPercentage{0.2301814709} &
+  \toPercentage{0.8795620438} \\
+\trafilaturaFulltext{} &
+  \bertmultilingual{} &
+  \petFiveHundred{} &
+  \mycoloredcell{0.8472269479} &
+  \toPercentage{0.8675110953} &
+  \toPercentage{0.7977573088} &
+  \toPercentage{0.7759538598} &
+  \toPercentage{0.7270072993} &
+  \toPercentage{0.8837622005} &
+  \toPercentage{0.6125} &
+  \mycoloredcell{0.8760709283} &
+  \toPercentage{0.415959253} &
+  \toPercentage{0.6947648625} &
+  \toPercentage{0.2710176991} &
+  \mycoloredcell{0.8941605839} \\
+\trafilaturaFulltext{} &
+  \bertxlmroberta{} &
+  \petFiveHundred{} &
+  \mycoloredcell{0.8563581891} &
+  \toPercentage{0.8666316571} &
+  \toPercentage{0.7834031214} &
+  \toPercentage{0.7475598935} &
+  \toPercentage{0.686} &
+  \mycoloredcell{0.9130434783} &
+  \toPercentage{0.5684402001} &
+  \toPercentage{0.8759124088} &
+  \toPercentage{0.3631082062} &
+  \toPercentage{0.6109139308} &
+  \toPercentage{0.2266545784} &
+  \mycoloredcell{0.9124087591} \\
+\trafilaturaFulltext{} &
+  \bertxlmroberta{} &
+  \petThousand{} &
+  \mycoloredcell{0.8573388203} &
+  \mycoloredcell{0.8884577866} &
+  \mycoloredcell{0.8159934721} &
+  \mycoloredcell{0.7999112689} &
+  \mycoloredcell{0.7552870091} &
+  \mycoloredcell{0.8873114463} &
+  \mycoloredcell{0.6379132231} &
+  \mycoloredcell{0.896623166} &
+  \mycoloredcell{0.4434470377} &
+  \mycoloredcell{0.7249334516} &
+  \mycoloredcell{0.294047619} & 
+  \mycoloredcell{0.901459854} \\ \hline
+\translationTitle{} &
+  \bertroberta{} &
+  \petThousand{} &
+  0.8102069614 &
+  \toPercentage{0.8420179017} &
+  \toPercentage{0.784738041} &
+  \mycoloredcell{0.7728365385} &
+  \mycoloredcell{0.7456709957} &
+  \toPercentage{0.828125} &
+  \toPercentage{0.5918367347} &
+  \toPercentage{0.8371894162} &
+  \toPercentage{0.3140794224} &
+  \toPercentage{0.7598253275} &
+  \toPercentage{0.4444444444} &
+  \mycoloredcell{0.7385817308} \\
+\translationTitle{} &
+  \bertmultilingual{} &
+  \petThousand{} &
+  \mycoloredcell{0.8286908078} &
+  \mycoloredcell{0.8526575213} &
+  \mycoloredcell{0.7880794702} &
+  \toPercentage{0.7692307692} &
+  \toPercentage{0.7285714286} &
+  \mycoloredcell{0.8581730769} &
+  \mycoloredcell{0.6380890052} &
+  \mycoloredcell{0.8419944312} &
+  \mycoloredcell{0.318627451} &
+  \mycoloredcell{0.8515283843} &
+  \mycoloredcell{0.4637336504} &
+  0.7289663462 \\ \hline
+\keyphrasesAbstractOC{} &
+  \bertxlmroberta{} &
+  \petThousand{} &
+  \toPercentage{0.8113120074} &
+  \mycoloredcell{0.8482165526} &
+  0.7829977629 &
+  \toPercentage{0.7695961995} &
+  \mycoloredcell{0.7399577167} &
+  \toPercentage{0.8313539192} &
+  \toPercentage{0.5847568988} &
+  \mycoloredcell{0.8378488288} &
+  \mycoloredcell{0.2918032787} &
+  \toPercentage{0.7807017544} &
+  \mycoloredcell{0.4248210024} &
+  \mycoloredcell{0.7137767221} \\
+\keyphrasesAbstractOC{} &
+  \bertmultilingual{} &
+  \petThousand{} &
+  \mycoloredcell{0.816373728} &
+  \toPercentage{0.8451289487} &
+  \mycoloredcell{0.7853170189} &
+  \mycoloredcell{0.770783848} &
+  \toPercentage{0.7384937238} &
+  \mycoloredcell{0.83847981} &
+  \mycoloredcell{0.5869001297} &
+  \toPercentage{0.8336526412} &
+  \toPercentage{0.2873015873} &
+  \mycoloredcell{0.7938596491} &
+  \toPercentage{0.4219114219} &
+  \toPercentage{0.7054631829} \\ \hline
+\keyphrasesFulltextOC{} &
+  \bertmultilingual{} &
+  \petThousand{} &
+  \mycoloredcell{0.822866642} &
+  \mycoloredcell{0.8335477668} &
+  \mycoloredcell{0.7819218956} &
+  \mycoloredcell{0.7622009569} &
+  \mycoloredcell{0.7220421394} &
+  \mycoloredcell{0.8526315789} &
+  \mycoloredcell{0.5640744797} &
+  \mycoloredcell{0.8199514325} &
+  \mycoloredcell{0.2530712531} &
+  \mycoloredcell{0.814229249} &
+  \mycoloredcell{0.3861293346} &
+  \mycoloredcell{0.6864528483} \\ \hline
+\end{tabular}
+}
+\caption{Development and Test metrics for Best Performing classifiers}
+\label{appendix05:tab:metrics_for_best_classifiers}
+\end{table}
+\end{landscape}

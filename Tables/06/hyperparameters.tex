@@ -1,0 +1,19 @@
+
+\begin{table}%[]
+    \centering
+    \begin{tabular}{c|c}
+      \hline
+      \textbf{Hyperparameter} & \textbf{Value} \\ \hline
+      Input size   &  300 tokens \\
+      Batch size & 32 \\
+      Optimizer & AdamW \\
+      Train-dev-test splits & 80\%-10\%-10\% \\ \hline
+      Epochs for \finetuning{} & 10 \\
+      Learning rate for \finetuning{} & 5e-5 \\ \hline
+      Epochs for \gls{pet} Ensemble & 5\\
+      Epochs for \gls{pet} Document Classifier  & 5\\
+      Learning rate for \gls{pet} & 1e-5 \\ \hline
+    \end{tabular}
+    \caption{Hyperparameters}
+    \label{tab:06_hyperparameters}
+\end{table}

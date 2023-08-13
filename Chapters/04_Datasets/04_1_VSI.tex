@@ -1,16 +1,25 @@
-\customHeader{1}{\VSI{} Dataset}
-\label{vsi_dataset}
+%\customHeader{1}{\VSI{} Dataset}
+%\label{vsi_dataset}
 
-As mentioned in \headerName{} \ref{01_pesv_platform}, the \gls{pesv} platform collects information on  plant health risks or plant health phenomena that could potentially affect agriculture. The \gls{vsi} experts achieve this by surveying online documents, which they subsequently screen and collect into the \gls{vsi} dataset.
+
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\customHeader{2}{Dataset Collection}
+\customHeader{1}{Dataset Collection}
 \label{vsi_data_collection}
 
-The main tool for collecting documents is the web scrapping tool \emph{ScaleSERP}\footnote{\url{https://www.scaleserp.com/}}. Every week, several queries are sent to various services, including the Google Search Engine, using the keywords and key phrases in Table \ref{tab:04_query_keywords} using a Python script. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{Figures/04/04_vsi_dataset_collection.png}
+    \caption{\VSI{} Data Collection Pipeline}
+    \label{fig:04_vsi_data_collection_pipeline}
+\end{figure}
+
+
+The main tool for collecting documents is the web scrapping tool \emph{ScaleSERP}\footnote{\url{https://www.scaleserp.com/}}. Every week, several queries are sent to various services, including the Google Search Engine, using the keywords and key phrases related to pathogens of interest (Table \ref{tab:04_query_keywords}).%, using a Python script. 
 %The results are then fed to the text-mining tool \emph{PADI-Web} \myparencite{padiweb3}, in order to retrieve information about the document's source, publication date, entities mentioned, locations and more. After extraction, this data is stored in a database and subsequently analysed by the \gls{vsi} experts to assess their relevance for monitoring. 
 
 
-As part of the \gls{vsi} pipeline, the websites corresponding to the URLs obtained from \emph{ScaleSERP} are downloaded using another Python script. 
+As part of the \gls{vsi} pipeline, shown in Figure \ref{fig:04_vsi_data_collection_pipeline}, the websites corresponding to the URLs obtained from \emph{ScaleSERP} are downloaded using a Python script. 
 For each website, the tool \trafilatura{} \myparencite{barbaresi-2021-trafilatura} takes its XML and attempts to extract a title and  an abstract from the XML metadata\footnote{The title and the abstract are extracted from the \texttt{metadata.title} and \texttt{metadata.description} fields, respectively.} and the full text from the XML body.
 
 %Then, they are scrapped using the tool \trafilatura{}.
@@ -20,16 +29,14 @@ Given that these articles come from public websites, all the content is in its o
 In order to help the annotators make a decision when encountering an article in a foreign language, and due to budget limitations, only the title is translated to English, using the Google Translate API, which also provides an automatically detected language for the document. 
 
 Since documents are added each week, the \gls{vsi} database is in constant construction. 
-For our project, we worked with the documents collected from the 11th of July 2022 to the 16th of April 2023, that is, the data collected over 39 weeks, comprising approximately 35,000 documents, which corresponds to more than 800 documents per week.
-
-Our project focuses on a subset of the \VSI{} database, specifically its textual data, to obtain the \VSI{} dataset  (Table \ref{tab:04_pesv_sources of content}).
+For our work, we utilized with the documents collected from the 11th of July 2022 to the 16th of April 2023, that is, the data collected over 39 weeks, comprising approximately 35,000 documents, which corresponds to more than 800 documents per week. We focus on a subset of the \VSI{} database, specifically its textual data, to obtain the \VSI{} dataset  (Table \ref{tab:04_pesv_sources of content}).
 
 \input{Tables/04/Sources_of_content_trafilatura_google_translate}
 
 
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\customHeader{2}{Dataset Annotation}
+\customHeader{1}{Dataset Annotation}
 \label{vsi_data_annotation}
 
 \putInBox{
@@ -90,7 +97,7 @@ Subsequently, after a document is deemed relevant by the \gls{vsi} experts, it i
 
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\customHeader{2}{Dataset Stastitics}
+\customHeader{1}{Dataset Stastitics}
 \label{vsi_data_statistics}
 
 There are 34,587 entries in the dataset, out of which 3,715 have an assigned subject and 30,872 do not, producing a highly unbalanced dataset (Figure \ref{fig:04_naive_positives_and_negatives}). 
@@ -102,18 +109,18 @@ There are 34,587 entries in the dataset, out of which 3,715 have an assigned sub
     \label{fig:04_naive_positives_and_negatives}
 \end{figure}
 
-The automatic language detection obtained by the Google Translate API on the \trafilaturaTitle{} can be used to approximately study the distribution of the entries in the dataset. In Figure \ref{fig:04_vsi_language_distribution} it can be seen that around one third of the entries are in English, followed by Italian, Spanish, and French. There is a considerable amount of failed translation attempts, for around one fifth of the entries. The complete data on documents per language is available in Appendix \ref{appendix01:vsi_language_distribution}.
+The automatic language detected by the Google Translate API on the \trafilaturaTitle{} can be used to approximately study the distribution of the entries in the dataset. In Figure \ref{fig:04_vsi_language_distribution} it can be seen that around one third of the entries are in English, followed by Italian, Spanish, and French. There is a considerable amount of failed translation attempts, for around one fifth of the entries. The complete data on documents per language is available in Appendix \ref{appendix01:vsi_language_distribution}.
  
 \begin{figure}
     \centering
-    \includegraphics[width=0.75\textwidth]{Figures/04/Entries by detected language.png}
+    \includegraphics[width=\textwidth]{Figures/04/Entries by detected language.png}
     \caption{Language distribution of entries in the \VSI{} dataset}
     \label{fig:04_vsi_language_distribution}
 \end{figure}
 
 The presence of some Latin documents is surprising. Upon inspecting the data, we discovered that this occurrence was due to scrapped \trafilaturaTitle{}s with several scientific names (Table \ref{tab:appendix01:latin_entries} in the Appendix).
 
-Often, the \trafilatura{} scrapper is not able to retrieve content for the title, abstract, and full text of a website, or the Google Translate API fails. Thus, there are several entries without content for all fields. If we check the unique entries for each source of content, we can see that there are numerous duplicate entries, since there are at least around 20,000 unique entries per source of content (Figure \ref{fig:04_unique_entries_vsi}).
+Often, the \trafilatura{} scrapper is not able to retrieve content for the \trafilaturaTitle{}, \trafilaturaAbstract{}, and \trafilaturaFulltext{} of a website, or the Google Translate API fails. Thus, there are several entries without content for all fields. If we check the unique entries for each source of content, we can see that there are numerous duplicate entries, since there are at least around 20,000 unique entries per source of content (Figure \ref{fig:04_unique_entries_vsi}).
 
 \begin{figure}
     \centering
@@ -124,7 +131,7 @@ Often, the \trafilatura{} scrapper is not able to retrieve content for the title
 
 As the\translationTitle{} is derived from the \translationTitle{}, and due to the possibility of failure in the Google Translate API, the number of unique entries for the \translationTitle{} is lower than that for the \trafilaturaTitle{}.
 %As one would expect, there are fewer unique entries for the \translationTitle{} as there are for the \trafilaturaTitle{}. 
-At the same time, the \trafilaturaAbstract{} field has fewer unique entries than all the other, while the \trafilaturaFulltext{} has the most. This may be explained by the fact that, usually, the creators of a website omit filling the metadata, and when they do, they frequently include only a title and not a description, while most times, the body of the website will be available. 
+At the same time, the \trafilaturaAbstract{} field has fewer unique entries than all the other \contentType{}s, while the \trafilaturaFulltext{} has the most. This may be explained by the fact that, usually, the creators of a website omit filling the metadata, and when they do, they frequently include only a title and not a description, while most times, the body of the website will be available. 
 
 Using naive tokenization (splitting on whitespace), we can study the distribution of the tokens for all sources of content. In the histograms in Figure \ref{fig:04_vsi_token_distribution} the longest documents have been grouped together to facilitate plotting \footnote{This explains the long bars at the end of the right tails of the histograms.}. As one can see, the \trafilaturaTitle{} and \translationTitle{} have a very similar distribution, both are shorter than the \trafilaturaAbstract{}, while the content from the \trafilaturaFulltext{} is the longest.
 
@@ -163,14 +170,14 @@ Using naive tokenization (splitting on whitespace), we can study the distributio
 
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\customHeader{2}{Dataset Issues}
+\customHeader{1}{Dataset Issues}
 \label{vsi_data_issues}
 
 
-Upon examining the data, we encountered numerous issues that we proceed to describe and which will be addressed during preprocessing in \headerName{} \ref{vsi_preprocessing}.
+Upon examining the data, we encountered numerous issues that we proceed to describe and which will be addressed during preprocessing (\headerName{} \ref{vsi_preprocessing}).
 
 
-\customHeader{3}{Duplicate Entries}
+\customHeader{2}{Duplicate Entries}
 \label{vsi_issues_duplicates}
 \ \\
 
@@ -178,7 +185,7 @@ As mentioned in \headerName{} \ref{vsi_data_statistics}, there are some duplicat
  
 
 
-\customHeader{3}{Scrapping Failures}
+\customHeader{2}{Scrapping Failures}
 \label{vsi_issues_error_messages}
 \ \\
 
@@ -188,7 +195,7 @@ On some instances, the \trafilatura{} scrapper either fails or is blocked by web
 
 
 
-\customHeader{3}{Scrapping errors}
+\customHeader{2}{Scrapping errors}
 \label{vsi_issues_scrapping_errors}
 \ \\
 
@@ -208,7 +215,7 @@ This type of scrapping error introduces inconsistencies into the \VSI{} dataset,
 
 
 
-\customHeader{3}{Data Noise}
+\customHeader{2}{Data Noise}
 \label{vsi_issues_data_noise}
 \ \\
 
@@ -237,7 +244,7 @@ Furthermore, there exists a source of noise that may not be immediately apparent
 \input{Tables/04/Similar_entries}
 
 
-\customHeader{3}{Annotation Inconsistencies}
+\customHeader{2}{Annotation Inconsistencies}
 \label{vsi_issues_annotation_inconsistencies}
 \ \\
 

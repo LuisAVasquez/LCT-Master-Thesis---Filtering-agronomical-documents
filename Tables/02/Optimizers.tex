@@ -1,0 +1,17 @@
+\begin{table}%[]
+    \centering
+    %\resizebox{0.75\textwidth}{!}{
+    \begin{tabular}{p{0.3\textwidth}|p{0.6\textwidth}}
+        \textbf{Optimization method} &  \multicolumn{1}{c}{\textbf{Description}} \\ \hline
+        Gradient Descent &  Classical Gradient Descent\\
+        Stochastic Gradient Descent (SGD) & Estimates the gradient by only using a randomly selected subset of the data \\
+        SGD with Momentum & Uses the estimated gradient and the previous value of \texttt{Update}\\
+        Averaged SGD &  Takes into account several past values of \texttt{Update} and averages them while giving less importance to older values \\
+        Adaptive Gradient (AdaGrad) & A version of SGD where each weight is updated with its own learning rate, instead of all weights using the same one. It calculates \texttt{Update} by averaging and normalizing over the history of updates \\
+        Adam & AdaGrad + Momentum \\
+        AdamW & Extension of Adam, controlling for the magnitude of each weight \\
+    \end{tabular}
+    %}
+    \caption{Common optimization methods for backpropagation}
+    \label{tab:02_nn_common_optimizers}
+\end{table}
