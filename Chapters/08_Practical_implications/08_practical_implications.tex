@@ -1,16 +1,19 @@
 \customHeader{0}{Practical Implications}
 \label{08_practical_implications}
 
+
+In this \headerName{}, we discuss the real-world impact of our research, detailing its application, updates, and the effects it will have on the work of the \gls{vsi} experts.
+
 \customHeader{1}{Overview}
 \label{08_overview}
 
 
-After obtaining the hyperparameters for training the best classifiers (Table \ref{tab:07_best_classifiers}), the \gls{pesv} team will include our results into their data collection pipeline, as part of the \gls{tiersesv} project.
+Upon determining the optimal hyperparameters for the most effective classifiers (as seen in Table \ref{tab:07_best_classifiers}), the \gls{pesv} team plans to integrate our findings into their data collection pipeline as a component of the \gls{tiersesv} initiative.
 
-We implement two services for the \gls{tiersesv} project:
+For the \gls{tiersesv} project, we have developed two key services:
 \begin{itemize}
-    \item An inference service.
-    \item A training service.
+\item A service for inference.
+\item A service for training.
 \end{itemize}
 
 
@@ -26,32 +29,31 @@ We implement two services for the \gls{tiersesv} project:
     \label{fig:08_vsi_data_collection_pipeline_with_classifier}
 \end{figure}
 
-
-We assemble a filter consisting of two modules:
+Our Document Classification system will be integrated into the \gls{vsi} data collection pipeline, as depicted in Figure \ref{fig:08_vsi_data_collection_pipeline_with_classifier}. This system is composed of two primary components:
 \begin{enumerate}
-    \item Heuristics 
-    \item Neural \textclassification{}
+\item Heuristic methods
+\item Neural-based \textclassification{}
 \end{enumerate}
 
-The heuristics module helps discard entries without content. For \textclassification{}, the filter applies our models to the documents with content.
+The heuristic component is designed to eliminate entries that lack substantial content. For those documents that do contain content, the \textclassification{} component of the system applies our trained models.
+The results produced by this filter will be fed into the \gls{vsi} database. Overall, we anticipate that this addition will significantly reduce the manual effort required by the \gls{vsi} specialists.
 
-The filter's output will be incorporated into the \gls{vsi} database, and in general, we expect it to alleviate the workload for the \gls{vsi} experts.
+The implementation of this filter will utilize the Python package developed during this thesis.
 
-The implementation of this filter will be done using the Python package made for this thesis. 
 
 \begin{enumerate}
-    \item First, the scrapping results fed to the tool we developed to extract the \trafilaturaTitle{}, \trafilaturaAbstract{}, \trafilaturaFulltext{}, and the \translationTitle{}.
 
-    \item Then, the noise (HTML tags, URLs, etc) is removed from the text, for each \contentType{}
+    \item First, the results from web scraping are processed using our tool to extract the \trafilaturaTitle{}, \trafilaturaAbstract{}, \trafilaturaFulltext{}, and the \translationTitle{}.
     
-    \item Afterward, the heuristics' module uses the tools developed during preprocessing. By exposing the functions used to detect error messages and scrapping failures, we can discard documents without content.
+    \item Subsequently, any noise such as HTML tags, URLs, and the like are filtered out from the text for each \contentType{}.
 
+    \item The heuristic module then employs the tools developed for preprocessing. By using functions that identify error messages and scraping issues, we can eliminate documents that lack substantial content.
 
     \item  Then, for each \contentType{}, the cleaned text is given as input for the \textclassification{} model.
 
     \item Finally, the output of the filter for a particular document consists of
     \begin{itemize}
-        \item A boolean indicating whether the document was discarded.
+        \item A boolean flag indicating whether the document was discarded.
         \item The cleaned text
         \item The prediction: Relevant VS Irrelevant
         \item The label probabilities
@@ -60,34 +62,35 @@ The implementation of this filter will be done using the Python package made for
 
 \end{enumerate}
 
-By considering the observations about deleting error messages and handling scrapping errors (\headerName{}s \ref{vsi_deleting_error_messages} and \ref{05_vsi_handling_scrapping_errors}), we can expect the heuristics model to discard from 20\% to 30\% of unique documents, depending on the \contentType{}.
+Given our observations on addressing error messages and managing scraping errors (as discussed in \headerName{}s \ref{vsi_deleting_error_messages} and \ref{05_vsi_handling_scrapping_errors}), we anticipate that the heuristic model will exclude between 20\% to 30\% of unique documents, depending on the \contentType{}.
 
-This filter will be used for inference on the documents scrapped every week by the \gls{pesv} Platform. For easy of use, it will be implemented using a \texttt{REST} API, running on the \MAIAGE{} servers, and added to the \href{https://bibliome.github.io/alvisnlp/)}{\emph{AlvisNLP-ML}}\footnote{\url{https://bibliome.github.io/alvisnlp/)}} suite of the \bibliome{} group \myparencite{alvisnlp}.
-Finally, when publishing selected documents to the official bulletin of the   \gls{pesv} Platform, these will be ordered by descending relevance.
+This filtering system will be applied to the documents scraped weekly by the \gls{pesv} Platform. 
+For user convenience, it will be encapsulated within a \texttt{REST} API, hosted on the \MAIAGE{} servers, and integrated into the \href{https://bibliome.github.io/alvisnlp/)}{\emph{AlvisNLP-ML}}\footnote{\url{https://bibliome.github.io/alvisnlp/}} toolkit of the \bibliome{} group \myparencite{alvisnlp}. 
+Lastly, when publishing selected documents in the official bulletin of the \gls{pesv} Platform, they will be arranged in order of decreasing relevance.
 
 
 
 \customHeader{1}{Training Service}
 \label{08_training_service}
 
-As more entries are added to the \gls{vsi} database, it will become necessary to update the models used for \textclassification{}. This is handled by the training service, which implements the complete pipeline for training the best performing classifiers (Table \ref{tab:07_best_classifiers}).
+As the \gls{vsi} Database expands with new entries, there will be a need to update the models utilized for \textclassification{}. This responsibility falls on the training service, which implements the entire pipeline to train the best performing classifiers from Table \ref{tab:07_best_classifiers}.
 
-The \gls{vsi} experts will have to decide on the frequency and data to be used for training. 
-That is, if the training is done every week, or every two or three weeks. Also, if, as their interests change over time, it would be more convenient to restrict the data used for training, for example, using only the last two or three months.
+The frequency and data selection for training will be at the discretion of the \gls{vsi} experts. They must determine whether training should occur weekly, bi-weekly, etc. Additionally, as their priorities and interests evolve, they might find it beneficial to limit the training data, perhaps only focusing on data from recent months.
 
-The training service should be executed on the \texttt{Lab-IA} cluster. The scripts for the training service are available in our GitHub repository.
+The training service is designed to run on the \texttt{Lab-IA} cluster. All scripts related to this service can be found in our GitLab repository.
 
 
 
 \customHeader{1}{Consequences for Plant Health Monitoring}
 \label{08_consequences}
 
-Up to now, the \gls{vsi} experts at the \gls{pesv} Platform have been manually revising every scrapped document. Including \textclassification{} into the annotation pipeline will alleviate the workload of the \gls{vsi} experts, helping with Plant Health Surveillance in the long term.
 
-Including the Heuristics module will allow the \gls{vsi} experts to know which queries and websites are problematic for their scrapping tools. 
+Until now, the \gls{vsi} experts at the \gls{pesv} Platform have been meticulously reviewing every scraped document. 
+Integrating \textclassification{} into the annotation process will significantly reduce the burden on the \gls{vsi} experts, ultimately aiding in long-term Plant Health Surveillance.
 
-Given that the \gls{vsi} experts will read the documents flagged as Relevant by our system, we decided to calculate the ratio of positives for the best classifiers on their test splits. Also, we prefer lower rates of false negatives, that is, the proportion of documents that are actually Relevant but that our system flags as Irrelevant (Table \ref{tab:08_ratio_of_positives}).
+By incorporating the Heuristics module, the \gls{vsi} experts can identify which queries and websites pose challenges for their scraping tools.
 
+Given that the \gls{vsi} experts will review documents marked as Relevant by our system, we decided to calculate the positive ratio for the top classifiers on their test splits. Moreover, we aim for a reduced rate of false negatives, meaning the percentage of genuinely Relevant documents that our system mistakenly labels as Irrelevant (refer to Table \ref{tab:08_ratio_of_positives}). The rationale behind this is that overlooking an event that poses a risk to Plant Health (a positive) is more dangerous than mistakenly identifying a benign event (a negative) as Relevant.
 
 \begin{table}[ht]
 \centering
@@ -108,13 +111,14 @@ Given that the \gls{vsi} experts will read the documents flagged as Relevant by 
 \label{tab:08_ratio_of_positives}
 \end{table}
 
-The low False Negative rates mean that only 2 of 100 Relevant (unique) documents will be ignored by our systems, which we consider a great result. 
-As mentioned in \headerName{} \ref{vsi_results_of_preprocessing}, the real balances in the \gls{vsi} Dataset range from 12\% to 14\% positives. The closest one of our classifiers approaches this percentage, the fewer documents the \gls{vsi} experts will have to manually revise.
+The minimal False Negative rates indicate that our systems will overlook only around 2 out of every 100 Relevant (unique) documents, which we view as an impressive outcome. 
+As mentioned in \headerName{} \ref{vsi_results_of_preprocessing}, the actual proportions in the \gls{vsi} Dataset fluctuate between 12\% and 14\% positives. The closer our classifiers approaches to this balance, the fewer documents the \gls{vsi} experts will need to review manually.
 
-In the best case, with a $24\%$ Positive ratio, the \gls{vsi} experts will be presented with around $76\% \approx 3/4$ fewer documents than now. In the worst case, with a $43\%$ Positive ratio, they will be presented $57\% \approx 1/2$ fewer documents. 
+In the most favorable scenario, with a Positive ratio of $24\%$, the \gls{vsi} experts will encounter roughly $76\% \approx 3/4$ fewer documents than they currently do. Conversely, in the least favorable scenario, with a Positive ratio of $43\%$, they will see about $57\% \approx 1/2$ fewer documents.
+
 
 \putInBox{
-This shows that including our system into their monitoring pipeline will substantially reduce the documents to be manually reviewed, enabling the \gls{vsi} experts to either review the same amount of documents in less time, to use the same time to review more documents, or to expand their surveillance to more pathogens. We consider this outcome to be satisfactory and a fitting conclusion to the project.
+This demonstrates that integrating our system into their monitoring mission will significantly decrease the number of documents requiring manual review. This will allow the \gls{vsi} experts to either assess the same volume of documents more quickly, allocate the same duration to evaluate a larger set of documents, or broaden their surveillance to additional pathogens. We consider this outcome to be satisfactory and a fitting conclusion to the project.
 }
 
 

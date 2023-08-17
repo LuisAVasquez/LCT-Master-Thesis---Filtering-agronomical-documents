@@ -5,9 +5,9 @@
 % 8 content sources
 % 6 Training methods
 
-To recapitulate, we have eight content sources (each one has a labeled dataset), seven training setups (two for \finetuning{} and five for \gls{pet}), and six different \gls{bert} models. This gives us $8\times 7 \times 6 = 336$ training scenarios.
+To recapitulate, we have eight \contentType{}s (each one has a labeled dataset), seven training setups (two for \finetuning{} and five for \gls{pet}), and six different \gls{bert} models. This gives us $8\times 7 \times 6 = 336$ training scenarios.
 
 \input{Tables/06/training_time}
 
 Table \ref{tab:06_training times} shows the approximate training times for each \contentType{} for single instances of \finetuning{} and \gls{pet}. Since there are two \finetuning{} setups and five \gls{pet} setups, the total training time was approximately $2\times 41 + 5 \times 102 = 594 $ GPU hours, or about $3.5$ GPU weeks.
-Since we had two rounds of training, this amounts to approximately $7$ GPU weeks.
+Factoring in the two training cycles, the total comes to about $7$ GPU weeks.

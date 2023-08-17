@@ -24,9 +24,9 @@ In this model, $H$ and $T$ are termed the \emph{features} of a location, serving
 
 In practice, the values for the weights and bias of this model have been determined to be:
 \begin{align*}
-w_{Temp} & = 1.1\
-w_{Hum} &= 0.047 \
-c &= -10.3
+w_{Temp} & = 1.1\\
+w_{Hum} &= 0.047 F^\circ \\
+c &= -10.3 F^\circ
 \end{align*}
 
 Yet, this basic representation has its limitations. Interestingly, by introducing an additional computational step, we can achieve more accurate results. Let's consider incorporating a minor squared term through the function $f(u) = u + 0.0002 u^2$. With this, our model evolves to:
@@ -44,11 +44,11 @@ In general, this kind of model allows us to use numerical features, to obtain a 
 
 
 
-When dealing with increasingly complex phenomena, it becomes challenging to explicitly define the parameters for a model. This necessitates a broader approach. In the realm of Machine Learning, the concept of \emph{neurons} serves as a generalization of the model described earlier.
+When dealing with increasingly complex phenomena, it becomes challenging to explicitly define the parameters for a model. This requires a broader approach. In the realm of Machine Learning, the concept of \emph{neurons} serves as a generalization of the model described earlier.
 
 \input{Figures/02/Basic_neuron}
 
-Imagine a model where the inputs encompass $n$ distinct features, represented as $(x_1, x_2,\ldots,x_n)$. The diagram depicted in Figure \ref{fig:02_neuron} represents the following equation:
+Consider a model where the inputs encompass $n$ distinct features, represented as $(x_1, x_2,\ldots,x_n)$. The diagram depicted in Figure \ref{fig:02_neuron} represents the following equation:
 
 \begin{align*}
 z &= f(w_1 x_1 + w_2 x_2 + \ldots + w_d x_d + b)
@@ -57,7 +57,7 @@ z &= f(w_1 x_1 + w_2 x_2 + \ldots + w_d x_d + b)
 Here, $w_1, w_2,\ldots,w_n$ denote the weights, $b$ signifies the bias, $f$ is the activation function, and $z$ stands for the prediction.
 
 One of the main insights in \gls{ml} is that one does not need to manually define the parameters $(w_1, w_2,\ldots,w_n,b)$ for this kind of model.
-Instead, with ample data comprising input features and observed target values, it's feasible to determine the best parameter values. This ensures the model's predictions closely align with the observed target values. Once established, this model can be applied to new data. The process of finding the optimal parameters is called \emph{training}.
+Instead, with ample data comprising input features and observed target values, it is feasible to determine the best parameter values. This ensures the model's predictions closely align with the observed target values. Once established, this model can be applied to new data. The process of finding the optimal parameters is called \emph{training}.
 
 In order to find the optimal parameters, we first need to decide how to produce our final predictions, how to measure how well the model is performing, and how to update the model's parameters.
 
@@ -278,7 +278,7 @@ For classification tasks, the \gls{softmax} activation function is typically emp
 \customHeader{2}{Hyperparameters}
 \label{02_nn_hyperparameters}
 
-When training a \neuralNetwork{}, the goal is to fine-tune its parameters or weights to minimize the loss. However, several critical choices need to be made by the designers of the \neuralNetwork{}.
+When training a \neuralNetwork{}, the goal is to progressively adapt its parameters or weights to minimize the loss. However, several critical choices need to be made by the designers of the \neuralNetwork{}.
 
 Some decisions concern the \emph{architecture} of the \neuralNetwork{}, such as:
 

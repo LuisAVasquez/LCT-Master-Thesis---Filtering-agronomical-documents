@@ -13,7 +13,7 @@ Considering the ever-changing nature of natural language, the initial phase in \
 \end{figure}
 
 However, naive word tokenization\footnote{Another simple tokenization technique is \emph{character-level tokenization}, where text is simply divided into individual characters. This tokenization technique falls outside the scope of this work.} can lead to challenges with out-of-vocabulary (OOV) words when presented with new data. 
-A more modern tokenization approach involves using \emph{subword units}. This strategy addresses OOV words by breaking words down into smaller segments. In English, for instance, one might consider prefixes and suffixes as subwords (like \texttt{pre-}, \texttt{-ing}, \texttt{-ed}, and so on), enhancing the \gls{nlp} system's ability to understand morphology. Nevertheless, instead of manually defining rules to divide words into subwords, there are two widely-used algorithms based on frequency to create such tokenizers:
+A more modern tokenization approach involves using \emph{subword units}. This strategy addresses OOV words by breaking words down into smaller segments. In English, for instance, one might consider prefixes and suffixes as subwords (like \texttt{pre-}, \texttt{-ing}, \texttt{-ed}, and so on), enhancing the \gls{nlp} system's ability to understand morphology. Nevertheless, instead of manually defining rules to divide words into subwords, there are two widely-used algorithms based on character distribution to create such tokenizers:
 
 
 \begin{itemize}

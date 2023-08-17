@@ -9,9 +9,16 @@
 
 Leveraging the available keywords and key phrases used for the Search Engine queries used to construct the dataset (Table \ref{tab:04_query_keywords}), we obtained four more sources of content. 
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{Figures/05/05_keyphrase_extraction.png}
+    \caption{Extracting phrases with Keywords}
+    \label{fig:05_keyphrase_extraction}
+\end{figure}
 
 %We opted to extract sentences containing keywords or key phrases from the content. 
-Using the Python package \texttt{NLTK} \myparencite{nltk}, we divided each document into phrases and selected those containing at least one of the keywords or key phrases. This process was carried out for both the \trafilaturaAbstract{} and \trafilaturaFulltext{} sources of content. However, considering the diverse range of languages in the documents, it was not always apparent whether we should discard the content entirely or retain it. For example, even if the keyword is not present in the text, maybe its translation is; or we could be facing a language written in a non-Latin script.
+Using the Python package \texttt{NLTK} \myparencite{nltk}, we divided each document into phrases and selected those containing at least one of the keywords or key phrases. This process was carried out for both the \trafilaturaAbstract{} and \trafilaturaFulltext{} sources of content (Figure \ref{fig:05_keyphrase_extraction}). 
+However, considering the diverse range of languages in the documents, it was not always apparent whether we should discard the content entirely or retain it. For example, even if the keyword is not present in the text, maybe its translation is; or we could be facing a language written in a non-Latin script.
 Consequently, we pursued two different approaches: in one case, we discarded the original content (O.C.), and in the other, we retained it, resulting in four new sources of content (Table \ref{tab:05_pesv_sources of content after preprocessing}).
 
 \input{Tables/05/Sources_of_content_after_preprocessing}

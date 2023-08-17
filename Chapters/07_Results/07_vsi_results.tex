@@ -1,5 +1,12 @@
 
-Due to space restrictions, we cannot include all the metrics of the training data. The complete training plots logs of our training are available on our GitLab repository. To illustrate the results of our first round of training, see Figures \ref{fig:07_vsi_sample_training_logs_unbalanced} and \ref{fig:07_vsi_sample_training_logs_pet_1000}. In the first figure, we can see that the optimal epoch to avoid overfitting is the fourth epoch, which coincidentally also maximizes the \fTwo{}, and in the second image, the first epoch is optimal, while it does not have the best \fTwo{}.
+
+In this \headerName{}, we present the results of our training experiments, and provide insights on them.
+
+
+Due to space constraints, we're unable to display all the metrics from the training data. Comprehensive training plots and logs can be found in our GitLab repository. For a glimpse into the results from our initial training round, refer to Figures \ref{fig:07_vsi_sample_training_logs_unbalanced} and \ref{fig:07_vsi_sample_training_logs_pet_1000}. 
+In the first figure, we can see that the optimal epoch to avoid overfitting in that particular scenario is the fourth epoch, which coincidentally also maximizes the \fTwo{}. 
+In contrast, in the second image, the first epoch is optimal, while it does not have the best \fTwo{}.
+
 
 
 \begin{figure}[ht]
@@ -37,20 +44,33 @@ Due to space restrictions, we cannot include all the metrics of the training dat
     \label{fig:07_vsi_sample_training_logs_pet_1000}
 \end{figure}
 
+The optimal epochs for each training scenario are detailed in \appendixname{} \ref{appendix05:vsi_optimal_epochs}. It's evident that \unbalanced{} takes the longest to reach the optimal epoch, especially when compared to the other methods, where the majority reach the optimum within the first or second epoch. The disparity between the two \finetuning{} techniques is significant, with \balanced{} often reaching its peak performance in just one epoch. When it comes to \gls{pet}, all five scenarios exhibit a consistent pattern, typically achieving their optimal epoch before the fourth one. This suggests that any variations in the rate of convergence might occur during the training of the \gls{pet} Ensembles. Given that all Ensembles undergo training for five epochs, it must be that this sufficient for achieving satisfactory results. Unfortunately, we did not record the evolution of the custom losses used to train the \gls{pet} Ensembles.
 
-The optimal epochs for each training scenario can be found in \appendixname{} \ref{appendix05:vsi_optimal_epochs}. It is immediately clear that \unbalanced{} is the slowest method to reach the optimal epoch, as all the other methods have more than half of the optimal epochs be either 1 or 2. In fact, between the two \finetuning{} techniques, there is a huge gap in favor of \balanced{}, which, for most cases, takes only one epoch to reach the optimum. As for \gls{pet}, the five scenarios show very similar behavior, in general reaching the optimal epoch before the fourth epoch. This makes us think that, if there are differences in convergence speed, they must happen during the training of the \gls{pet} Ensembles. As all the Ensembles are trained for five epochs, this must be enough for them to get decent performance. Unfortunately, we did not log the evolution of the custom losses calculated during training the \gls{pet} Ensembles.
+Based on these findings, we moved forward to the second round, trained models up to their optimal epochs, and evaluated their final performance.
+The metrics for the best classifiers across each training scenario and for every \gls{bert} model are detailed in \appendixname{} \ref{appendix05:vsi_metrics_optimal_epochs}. 
+A direct comparison of the Development \fTwo{} outcomes reveals that \unbalanced{} consistently underperforms compared to other training techniques
+\footnote{A \fTwo{} score of 0\% indicates the model defaulted to predict the predominant class (negative)}.
+In fact, \balanced{} outperforms \unbalanced{} in nearly all instances, with only one exception\footnote{This specific instance pertains to \bertbase{} on the \trafilaturaTitle{}, showing a marginal difference of about 3\%}.
+
+When examining \gls{pet}, a noticeable trend emerges: performance improves as the document count per category grows. Specifically, the Development \fTwo{} for \petFifty{} generally lags behind other \gls{pet} variants and seldom matches their levels. Conversely, both \petFiveHundred{} and \petThousand{} consistently register superior results.
 
 
-Using these results, we were able to proceed to the second training round, and train models up to the optimal epochs and evaluate their performance there. In \appendixname{} \ref{appendix05:vsi_metrics_optimal_epochs} one can find the metrics for the optimal classifiers for each training scenario, for each \gls{bert} model. By comparing the results for the Development \fTwo{}, it is immediately clear that \unbalanced{} has the worst performance of all the training methods\footnote{An \fTwo{} of 0\% means that the model defaulted to predict the majority class (negative)}. In fact, it is surpassed by \balanced{} in all cases but one\footnote{This particular case is \bertbase{} on the \trafilaturaTitle{}, with a difference of approximately 3\%}. 
-Regarding \gls{pet}, there is a clear performance improvement as the number of documents per category increases. On one hand, the Development \fTwo{} for \petFifty{} is in general lower than for the other \gls{pet}s and only rarely compares to them. On the other hand, \petFiveHundred{} and \petThousand{} consistently achieve the best performance.
+Given the high number of training scenarios (totaling $336$), we may impose a stringent performance threshold, focusing only on classifiers that achieve a Development \fTwo{} of at least 80\%. 
+Out of all the scenarios, only 72 classifiers meet this criterion, which is roughly one-fifth of the total.
+A summary of these top-performing classifiers is provided in Table \ref{appendix05:tab:f2_auc_top_pergorming_by_model}. It's evident from the table that \gls{pet} training typically surpasses \finetuning{}\footnote{The sole exception being \bertxlmroberta{} on the \trafilaturaFulltext{}}, and that 
+\unbalanced{} never makes it to the list. 
+Among the \gls{pet} configurations, both \petFiveHundred{} and \petThousand{} consistently exceed the set threshold.
 
-Given the high number of training scenarios ($336$), we may impose a high performance threshold, and only consider those classifiers with at least around 80\% Development \fTwo{}. There are 72 classifiers that satisfy this constraint, which is round one fifth of  all scenarios. These can be found summarized in Table \ref{appendix05:tab:f2_auc_top_pergorming_by_model}, where it can be seen that training with \gls{pet} almost always outperforms \finetuning{}\footnote{Except for \bertxlmroberta{} on the \trafilaturaFulltext{}}, and that \unbalanced{} never makes it to the list. Within the \gls{pet} setups, using \petFiveHundred{} and \petThousand{} guarantees performing over the threshold. 
 
-The top \gls{bert} models by number of top classifiers are \bertxlmroberta{} (22), \bertmultilingual{} (16), and \bertbiolinkbert{} (16). This may be an indication that the multilingual aspect of our dataset is more relevant than its biomedical aspect for determining relevance. This is consistent with the observation that 4 top classifiers correspond to \bertscibert{}, and only 3 to \bertbase{}. \bertroberta{} falls somewhat in the middle, with 11 top classifiers, which may reflect that overall it is a more powerful model than \bertbase{} and \bertscibert{}, but being only trained for English limits it.
+When ranking the \gls{bert} models based on the number of top-performing classifiers, \bertxlmroberta{} leads with 22, followed closely by \bertmultilingual{} and \bertbiolinkbert{}, each with 16. 
+This suggests that the multilingual nature of our dataset might play a more pivotal role in determining relevance than its biomedical aspect. 
+This aligns with the fact that only 4 top classifiers are associated with \bertscibert{}, and a mere 3 with \bertbase{}. 
+\bertroberta{}, with its 11 top classifiers, occupies a middle ground, possibly indicating its superior capabilities compared to \bertbase{} and \bertscibert{}. However, its training exclusively on English text might be a limiting factor.
 
-
-At the same time, we can notice that several of the top classifiers have alarmingly low Development \auc{}s, between 60\% and 80\% (Figure \ref{fig:07_vsi_sample_auc}). A low \auc{} means that these models have trouble distinguishing positives and negatives, while a high \fTwo{} means that they have a high recall compared to precision. Combining these observations, we can say that these models are obtaining a high \fTwo{} by almost defaulting to mark all documents as positive.
-
+At the same time, it's concerning to observe that several top classifiers exhibit worryingly low Development \auc{} values, ranging between 60\% and 80\% (Figure \ref{fig:07_vsi_sample_auc}). 
+A low \auc{} indicates challenges faced by these models in differentiating between positive and negative instances. 
+Yet, their high \fTwo{} scores suggest a pronounced recall relative to precision. 
+Piecing these insights together, it's plausible that these models achieve elevated \fTwo{} scores by predominantly categorizing most documents as positive.
 
 
 \begin{figure}[ht]
@@ -70,24 +90,44 @@ At the same time, we can notice that several of the top classifiers have alarmin
     \label{fig:07_vsi_sample_auc}
 \end{figure}
 
-As we prefer models that actually ``understand" what relevance means, instead of just flagging everything as a positive, we decide to impose a threshold of 80\% for the Development \fTwo{}. In this way, we obtain 49 scenarios, summarized in Table \ref{appendix05:tab:f2_auc_f1_top_pergorming_by_content_type}. It is notable that the \contentType{} with the most top classifiers is the \trafilaturaFulltext{}, obtaining 15 top classifiers over all the \gls{bert} models. This suggests that the \trafilaturaFulltext{}, being on average much longer than the other \contentType{}s, provides enough content so that the task can be well learned by any of the models.
 
-At the same time, note that the \keyphrasesAbstractOnly{} do \textbf{not} make it to the list. As explained at the end of \headerName{} \ref{vsi_preprocessing}, this dataset is severely reduced during preprocessing, and thus, may not be left with enough content. Since we still have four top classifiers for the \trafilaturaAbstract{}, we decide to \textbf{discard} the \keyphrasesAbstractOnly{} as a \contentType{}.
+Prioritizing models that genuinely grasp the concept of relevance rather than indiscriminately marking everything as positive, we set a threshold of 80\% for the Development \auc{}. By doing so, we narrow down to 49 classifiers, detailed in Table \ref{appendix05:tab:f2_auc_f1_top_pergorming_by_content_type}.
+Interestingly, the \contentType{} with the highest number of top-performing classifiers is the \trafilaturaFulltext{}, boasting 15 top classifiers across all \gls{bert} models.
+This indicates that the \trafilaturaFulltext{}, typically longer than other \contentType{}s, offers ample content, enabling all models to effectively learn the task.
 
-To avoid classifiers that flag almost everything as a positive, we impose a 75\% threshold on the Development \fOne{}. In this way, we are left with 17 classifiers. Table \ref{appendix05:tab:metrics_for_best_classifiers} contains all the Development and Test metrics for these classifiers, highlighting the best metrics. Again, the \trafilaturaFulltext{} the most classifiers in this list (9), and we highlight the best three metrics. 
+Conversely, it's worth noting that the \keyphrasesAbstractOnly{} doesn't feature on the list. 
+As discussed in \headerName{} \ref{vsi_preprocessing}, this dataset undergoes significant reduction during preprocessing, potentially leaving it with insufficient content.
+Given that we still have four top-performing classifiers for the \trafilaturaAbstract{}, we opt to \textbf{exclude} the \keyphrasesAbstractOnly{} as a \contentType{}.
 
-As one would expect, the Test metrics are lower than the Development metrics. However, it is immediately noticeable that, the \fOne{} and precision decrease considerable, going below 50\% in most cases. This may be explained by our focus on the \fTwo{}, which disfavors Precision and favors Recall. At the same time, the best Test Recalls are close to 80\% and above.
 
-Note that the \keyphrasesFulltextOnly{} does not make it to the list. As before, this may be explained by the fact that taking only the sentences containing keywords really decreases the content of the dataset. At the same time, notice that the top metrics for the \keyphrasesAbstractOC{} and the \keyphrasesFulltextOC{} are always below the \trafilaturaAbstract{} and the \trafilaturaFulltext{}. These observations imply that leveraging the keywords in the content does \textbf{not} help improve performance, contrary to our hypothesis in \headerName{} \ref{vsi_leveraging_keywords}. Thus, we decide to not include these sources of content moving forward.
+To avoid classifiers that flag almost everything as a positive, we impose a 75\% threshold on the Development \fOne{}.
+This criterion narrows our selection to 17 classifiers. 
+Table \ref{appendix05:tab:metrics_for_best_classifiers} presents the Development and Test metrics for these classifiers, emphasizing the top-performing metrics.
+Once more, the \trafilaturaFulltext{} dominates with the most classifiers on this list (9), and its best three metrics are highlighted.
 
-Taking the best performing classifiers (Table \ref{tab:07_best_classifiers}), we are left with the four original \contentType{}s and the classifiers we will use for our system. Note that all but one of the best classifiers are obtained with \petThousand{}. Also, all the best classifiers are obtained with the multilingual \gls{bert} models. This reinforces the idea that the multilingual aspect of our data is crucial for determining relevance, instead of the biomedical aspect.
+Predictably, the Test metrics are lower than the Development metrics. 
+Yet, it's striking to see a significant drop in the \fOne{} and precision, with most falling below the 50\% mark. 
+This trend can be attributed to our emphasis on the \fTwo{}, which leans towards Recall at the expense of Precision. At the same time, the highest Test Recalls hover around or exceed 80\%.
+
+
+Observe that the \keyphrasesFulltextOnly{} is absent from the list. 
+This can be attributed to the significant reduction in dataset content when only sentences containing keywords are considered. 
+Additionally, the peak metrics for \keyphrasesAbstractOC{} and \keyphrasesFulltextOC{} consistently fall short of those for \trafilaturaAbstract{} and \trafilaturaFulltext{}, respectively.
+These findings suggest that incorporating \keyphrases{} as \contentType{}s does \textbf{not} enhance performance, contrary to our hypothesis in \headerName{} \ref{vsi_leveraging_keywords}. 
+Consequently, we opt to \textbf{exclude} these sources of content moving forward, and thus, we are left with the four original \contentType{}s.
+
+
+Considering the best performing classifiers (Table \ref{tab:07_best_classifiers}), it's noteworthy that, except for one, all top classifiers are derived from \petThousand{}.
+Moreover, the best classifiers are consistently obtained by training multilingual \gls{bert} models. This highlights the significance of the multilingual nature of our dataset in determining relevance over its biomedical aspect.
+
 
 \input{Tables/07/best_classifiers}
 
-Finally, we propose an explanation for the better performance of \gls{pet} over \finetuning{}. Our hypothesis is that, by using task descriptions, \gls{pet} helps the model get a better understanding of the task.
-To explain this point, we borrow an example from the original \gls{pet} paper by \mytextcite{pet_paper}.
 
-Consider the following three sentences, where the first two are labelled, and we are tasked to label the third one:
+Finally, we put forward a reason for the enhanced performance of \gls{pet} compared to \finetuning{}. We theorize that the use of task descriptions in \gls{pet} enables the model to have a clearer comprehension of the task. To illustrate this idea, we reference an example from the foundational \gls{pet} paper by \mytextcite{pet_paper}.
+
+Take into account the next three statements: the first two have labels, and our challenge is to assign a label to the third.
+
 
 \begin{itemize}
     \item[1.] Category A: This \textit{was} the best \textit{pizza} I've ever had.
@@ -95,11 +135,10 @@ Consider the following three sentences, where the first two are labelled, and we
     \item[3.] Category ?: \textit{Pizza} \textit{was} average. Not worth the \textit{price}.
 \end{itemize}
 \vspace{4pt}
-Just with this information, it is hard to assign a label: Is the task about pizza? Or is it about detecting verb tense (Past VS Present)? However, if we are told that the task is to find the sentences talking about pizza, we would immediately assign category A to the third sentence, and if the task is about prices, we would assign Category B.
 
+Based solely on this data, determining a label is challenging: Is the focus on pizza or price? Or is it about identifying verb tenses (Past vs. Present)? Yet, if we're informed that the objective is to identify sentences discussing pizza, we'd promptly label the third sentence in category A. Conversely, if it's about prices, category B would be the appropriate label. 
 
 For our task, consider the three following (artificial) sentences:
-
 \begin{itemize}
     \item[1.] Relevant: Oriental Fruit fly (Bactrocera dorsalis) detected in a new location in Central Asia.
     \item[2.] Irrelevant: Check out the best decorative plants for your garden this summer, and beware of insects! 
@@ -107,14 +146,20 @@ For our task, consider the three following (artificial) sentences:
 \end{itemize}
 \vspace{4pt}
 
+For the task of identifying document relevance for Plant Health Surveillance, we categorize the third sentence as 'Irrelevant'. However, such subtleties might be overlooked by a language model without additional context.
 
 
-Our task being detection of document relevance for Plant Health Surveillance, we assign the third sentence to the Irrelevant category, however, this nuance may be lost to a language model, needing supplementary knowledge.
+Indeed, referring to Table \ref{tab:07_best_classifiers}, it's evident that \finetuning{} yields one of the top classifiers only when applied to the \trafilaturaFulltext{}. 
+Throughout our analysis, we've observed that many top-performing classifiers were also trained on the \trafilaturaFulltext{}. 
+This suggests that due to its length (averaging 1102 tokens, but cut at 300 input tokens), the \trafilaturaFulltext{} provides ample content, enabling any \gls{bert} model to grasp the task effectively.
+In contrast, other \contentType{}s, being much shorter than the \trafilaturaFulltext{}, might not offer sufficient context for the models. For instance, the \trafilaturaTitle{} averages 11 tokens, the \trafilaturaAbstract{} 50 tokens, and the \translationTitle{} 12 tokens. 
+As a result, classifiers benefit from the added context given by \gls{pet} patterns.
 
-In fact, looking at Table \ref{tab:07_best_classifiers}, notice that the only time that  \finetuning{} produces one of the best classifiers, it is for the \trafilaturaFulltext{}. Additionally, along our discussion, we have seen that several of the top performing classifiers are trained on the \trafilaturaFulltext{}. These observations suggest that the \trafilaturaFulltext{}, being longer than all the other \contentType{}s (1102 tokens on average), has enough content so that any \gls{bert} model eventually picks up the task.
-All the other \contentType{}s, being significantly shorter than the \trafilaturaFulltext{}, do not provide enough content for the models (on average, the \trafilaturaTitle{} has 11 tokens, the \trafilaturaAbstract{} has 50, and the \translationTitle{} has 12), and thus, the classifiers benefit from the additional knowledge provided by \gls{pet} patterns.
-Also, notice that all the other best classifiers are trained using \petThousand{}. This means that, the more one shows the model examples of documents plus knowledge about the task, the better performance one gets. However, this performance gains eventually stale, as one can see that the gains from using \petFiveHundred{} to \petThousand{} are only a couple of points (Tables \ref{tab:07_f2_bert_base}-\ref{tab:07_f2_bert_xlmroberta}).
-In conclusion, by using \gls{pet} and its patterns, we inject task-specific knowledge, guiding the model. 
+Furthermore, it's worth noting that all other best classifiers predominantly use \petThousand{}. 
+This suggests that exposing the model to more document examples combined with task-specific knowledge enhances its performance.
+However, the performance improvement stales over time, as the incremental gains from transitioning from \petFiveHundred{} to \petThousand{} are marginal, as seen in Tables \ref{tab:07_f2_bert_base}-\ref{tab:07_f2_bert_xlmroberta}.
+
+In summary, by employing \gls{pet} and its patterns, we inject task-specific knowledge, thereby guiding the model. 
 
 
 \clearpage
