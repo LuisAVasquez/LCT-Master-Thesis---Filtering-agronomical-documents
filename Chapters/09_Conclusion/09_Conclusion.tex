@@ -2,10 +2,8 @@
 \label{09_conclusion}
 
 
-In the course of this master's thesis, we embarked on a comprehensive exploration of Document Classification, with a keen focus on its application to Plant Health Surveillance. The challenges faced by the \gls{vsi} experts at the \gls{pesv} Platform, who have been meticulously reviewing every document manually, underscored the need for a more efficient and automated system.
+%In the course of this master's thesis, we embarked on a comprehensive exploration of Document Classification, with a keen focus on its application to Plant Health Surveillance. The challenges faced by the \gls{vsi} experts at the \gls{pesv} Platform, who have been meticulously reviewing every document manually, underscored the need for a more efficient and automated system.
 
-
-\todo{finish the Conclusions chapter}
 
 
 This master thesis has explored an application of \gls{nlp} in the field of Plant Health Surveillance, a critical area that impacts agriculture, food security, and environmental sustainability. Conducted at the \INRAE{} Laboratory, a renowned French research institute, and in collaboration with the \gls{pesv} Platform this work stands at the intersection of advanced computational methods and biological research.
@@ -16,11 +14,11 @@ Furthermore, the thesis outlines the development of a Document Classification sy
 The heuristic component is designed to filter out entries that lack substantial content. For documents that do contain content, the \textclassification{} component of the system applies trained models to categorize the documents as 'Relevant' or 'Irrelevant' for Plant Health Surveillance. The results produced by this filter are intended to be fed into the \gls{vsi} database.
 
 The thesis provides a detailed analysis of the performance of various \gls{bert} models, with \bertmultilingual{} and \bertxlmroberta{} producing the best results, due to the multilingual nature of the data. The Pattern Exploiting Training (\gls{pet}) method, which was used extensively in this research, proved to be effective, especially when numerous examples (from 500 to 1,000 per category) were provided to the model during training. 
-The thesis shows that using \trafilaturaFulltext{}, due to its length and richness, allows the models to grasp the task effectively, highlighting the importance of context in \textclassification{} tasks.
+The thesis shows that using the document's \trafilaturaFulltext{}, due to its length and richness, allows the models to grasp the task effectively, highlighting the importance of context in \textclassification{} tasks.
 
 As the \gls{vsi} Database expands with new entries, there will be a need to update the models used for \textclassification{}. The thesis outlines a training service that is designed to be flexible and adaptive to the evolving needs and priorities of the \gls{vsi} experts.
 
-In summary, this thesis makes a contribution to the field of \textclassification{} in the context of Plant Health Surveillance. It not only provides a robust and automated solution to a real-world problem but also offers insights into the effectiveness of various training strategies and the importance of context in \textclassification{} tasks. The work presented in this thesis holds promise for significantly aiding long-term Plant Health Surveillance and reducing the manual workload of \gls{vsi} experts.
+In summary, this thesis makes a contribution to the field of \textclassification{} in the context of Plant Health Surveillance. It not only provides a robust and automated solution to a real-world problem but also offers insights into the effectiveness of various training strategies and the importance of context in \textclassification{} tasks. The work presented in this thesis holds promise for significantly reducing the manual workload of the \gls{vsi} experts, thus aiding long-term Plant Health Surveillance.
 
 
 \clearpage

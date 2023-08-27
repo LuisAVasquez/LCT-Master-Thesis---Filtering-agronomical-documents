@@ -9,7 +9,7 @@ The most straightforward splitting method is for \finetuning{} on an unbalanced 
 For \finetuning{} on a balanced dataset, we retain the split sizes and replicate the test split from the previous step. 
 We then create balanced development and training segments by oversampling the positive category and randomly discarding from the negative category. Considering the original distribution was 90\% negatives to 10\% positives, we believe there will still be a sufficient representation of the negative category.
 
-For \gls{pet}, we select a specific number of documents per category, for instance, 50. We then replicate the test and development splits from the balanced \finetuning{} split. From the balanced \finetuning{} training split, we select the first 50 documents from both the positive and negative categories to form the \gls{pet} training split (keeping in mind that \gls{pet} was first proposed for Few-shot learning). The remaining documents are used to construct the unlabeled split, by discarding their labels. Ditto for 100, 200, 500, and 1000 documents per category.
+For \gls{pet}, we select a specific number of documents per category, for instance, 50. We then replicate the test and development splits from the balanced \finetuning{} split. From the balanced \finetuning{} training split, we select the first 50 documents from both the positive and negative categories to form the \gls{pet} training split (keeping in mind that \gls{pet} was first proposed for Few-shot learning). The remaining documents are used to construct the unlabeled split, by discarding their labels. Likewise for 100, 200, 500, and 1000 documents per category.
 
 A detailed breakdown of the split sizes can be found in Appendix \ref{appendix04:statistics_for_splits}.
 

@@ -1,7 +1,7 @@
 \customHeader{1}{Pattern-Exploiting Training}
 \label{06_pet}
 
-Few-shot learning is a \gls{ml} technique that aims to train models to generalize and perform well on tasks with very limited labeled data.
+Few-shot learning is a \gls{ml} set of techniques that aim to train models to generalize and perform well on tasks with very limited labeled data.
 \gls{pet} was introduced by \mytextcite{pet_paper} as a technique for Few-shot learning in \gls{nlp} using basic prompt engineering, and has provided improvements over standard training approaches.
 
 
@@ -13,7 +13,7 @@ The model then tries to ``fill-in the blank" by estimating the likelihood of all
 The pattern is intended to guide the model towards specific predictions. 
 Next, we use a \emph{verbalizer}, a list of words tied to a category. 
 We then combine these predictions to determine the final likelihood for each category, as illustrated in Figure \ref{fig:06_pet_intuition}.
-Finally, we aggregate the probabilities for the relevant tokens into artificial or \emph{synthetic} probabilities for each category (Figure \ref{fig:06_pet_intuition}).
+Finally, we aggregate the probabilities for the relevant tokens into artificial or \emph{synthetic} scores for each category (Figure \ref{fig:06_pet_intuition}).
 
 \begin{figure}
     \centering
@@ -23,14 +23,20 @@ Finally, we aggregate the probabilities for the relevant tokens into artificial 
 \end{figure}
 
 
-Implementing \gls{pet} is more intricate. It requires creating multiple patterns, with each pattern aimed at guiding the model's token predictions by emphasizing different aspects of the task. Additionally, each category requires its own verbalizer. It's important to remember that the model's vocabulary is tied to its tokenization method. For instance, in Figure \ref{fig:06_pet_intuition}, while we use terms like ``Definitely", in reality it might be tokenized differently, like ``Definite-ly". We're generally limited to concealing a single token, even though there are ways to expand this\footnote{The \gls{pet} paper's authors suggest a method for multiple tokens, however, the trade-off is that the training time increases significantly}.
+Implementing \gls{pet} is more intricate. It requires creating multiple patterns, with each pattern aimed at guiding the model's token predictions by emphasizing a different aspect of the task. Additionally, each category requires its own verbalizer. It's important to remember that the model's vocabulary is tied to its tokenization method. For instance, in Figure \ref{fig:06_pet_intuition}, while we use terms like ``Definitely", in reality it might be tokenized differently, like ``Definite-ly". We're generally limited to concealing a single token, even though there are ways to expand this\footnote{The \gls{pet} paper's authors suggest a method for multiple tokens, however, the trade-off is that the training time increases significantly}.
 
 
 
 In our case, we aim to determine if a document is relevant to Plant Health Surveillance using the \gls{bert} models discussed in \headerName{} \ref{06_bert_models}. 
 Each \gls{bert} model has a unique vocabulary and tokenization technique, so we had to pick words that would be consistently tokenized across models. 
-As our task is Binary Classification, we opted to create patterns using polar questions\footnote{Polar questions typically have a "yes/no" answer}.
-Given the 512-token input limit of \gls{bert} models and the length of some documents, we ensured the masked token was positioned early in the input, avoiding patterns like "$<document>$ $<question>$ [\_\_\_]" or "$<document>$ [\_\_\_] $<question>$".
+As our task is Binary Classification, we opted to create patterns using polar questions\footnote{Polar questions typically have a ``yes/no" answer}.
+Given the 512-token input limit of \gls{bert} models and the length of some documents, we ensured the masked token was positioned early in the input, avoiding patterns like the following:
+\begin{align*}
+  <document>&<question> [\_\_\_] \\
+  <document>& [\_\_\_] <question>
+\end{align*}
+
+
 After initial tests revealed that \gls{pet} training took much longer than \finetuning{}, we settled on just three patterns. The specific patterns and verbalizers we used are detailed in Table \ref{tab:06_pet_patterns_and_verbalizers}.
 
 \input{Tables/06/PET_patterns_and_tokenizers}
@@ -38,13 +44,16 @@ After initial tests revealed that \gls{pet} training took much longer than \fine
 The \gls{pet} method involves two steps: first training multiple models to generate synthetic labels, followed by fine-tuning a model for classification.
 
 Unlike conventional training approaches, \gls{pet} requires dividing the dataset into \emph{four} distinct splits: training, development, testing, and an additional split of unlabeled documents known as the \emph{unlabeled} split. The rationale behind this will become clear as we delve deeper into the method. Given that this technique is designed for Few-shot learning, the training split typically has only few entries per category.
+
+The first phase involves training a set, or \emph{ensemble}, of models. For every pattern, we take a copy of a \gls{bert} model, such as \bertmultilingual{}, and prompt it to predict the concealed token for a specific document in the training segment. Each ensemble model yields different probability estimates for the tokens in the vocabulary.
+
 These probabilities are then combined by averaging their logits for each token\footnote{Meaning, the aggregated logit for a token is the average of the logits generated by the ensemble models.} and using \gls{softmax} to determine a probability for every vocabulary token.
 Subsequently, the verbalizers transform the probabilities of pertinent tokens into category label probabilities. 
 These synthetic label probabilities are then compared against the true labels in order to calculate a cross entropy loss.
 This procedure is depicted in Figure \ref{fig:06_pet_1_pet_ensemble}\footnote{This approach bears some similarity to the "distillation" method introduced by \mytextcite{distilbert}}.
 
 
-Simultaneously, during this phase, the ensemble models undergo training for \gls{mlm} on our dataset to learn the typical contexts for our task\footnote{We haven't provided a visual representation for this process}. This method of training an ensemble for both synthetic annotation and \gls{mlm} on a dataset requires a custom loss function, which the authors define as a weighted sum of the cross-entropy loss and the \gls{mlm} loss.
+Simultaneously, during this phase, the ensemble models undergo training for \gls{mlm} on our dataset to learn the typical contexts for our task. This method of training an ensemble for both synthetic annotation and \gls{mlm} on a dataset requires a custom loss function, which the authors define as a weighted sum of the cross-entropy loss and the \gls{mlm} loss.
 
 % L = L_CE + L_MLM
 

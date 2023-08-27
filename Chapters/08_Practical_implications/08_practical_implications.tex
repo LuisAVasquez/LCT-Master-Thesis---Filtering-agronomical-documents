@@ -1,4 +1,4 @@
-\customHeader{0}{Practical Implications}
+\customHeader{0}{Practical Implications and Future Work}
 \label{08_practical_implications}
 
 
@@ -36,24 +36,24 @@ Our Document Classification system will be integrated into the \gls{vsi} data co
 \end{enumerate}
 
 The heuristic component is designed to eliminate entries that lack substantial content. For those documents that do contain content, the \textclassification{} component of the system applies our trained models.
-The results produced by this filter will be fed into the \gls{vsi} database. Overall, we anticipate that this addition will significantly reduce the manual effort required by the \gls{vsi} specialists.
+The results produced by this filter will be fed into the \gls{vsi} database. Overall, we anticipate that this addition will significantly reduce the manual effort required by the \gls{vsi} experts.
 
 The implementation of this filter will utilize the Python package developed during this thesis.
 
 
 \begin{enumerate}
 
-    \item First, the results from web scraping are processed using our tool to extract the \trafilaturaTitle{}, \trafilaturaAbstract{}, \trafilaturaFulltext{}, and the \translationTitle{}.
+    \item First, the results from web scraping, as an XML/TEI file, are processed using our tool to extract the \trafilaturaTitle{}, the \trafilaturaAbstract{}, the \trafilaturaFulltext{}, and the \translationTitle{}.
     
-    \item Subsequently, any noise such as HTML tags, URLs, and the like are filtered out from the text for each \contentType{}.
+    \item Subsequently, any noise such as HTML tags, URLs, website names, and the like are filtered out from the text for each \contentType{}.
 
-    \item The heuristic module then employs the tools developed for preprocessing. By using functions that identify error messages and scraping issues, we can eliminate documents that lack substantial content.
+    \item The heuristic module then employs the tools we developed for preprocessing. By using functions that identify error messages and scraping issues, one can eliminate document that lack substantial content.
 
     \item  Then, for each \contentType{}, the cleaned text is given as input for the \textclassification{} model.
 
     \item Finally, the output of the filter for a particular document consists of
     \begin{itemize}
-        \item A boolean flag indicating whether the document was discarded.
+        \item A boolean flag indicating whether the document was kept.
         \item The cleaned text
         \item The prediction: Relevant VS Irrelevant
         \item The label probabilities
@@ -81,7 +81,7 @@ The training service is designed to run on the \texttt{Lab-IA} cluster. All scri
 
 
 
-\customHeader{1}{Consequences for Plant Health Monitoring}
+\customHeader{1}{Consequences for Plant Health Surveillance}
 \label{08_consequences}
 
 
@@ -90,35 +90,18 @@ Integrating \textclassification{} into the annotation process will significantly
 
 By incorporating the Heuristics module, the \gls{vsi} experts can identify which queries and websites pose challenges for their scraping tools.
 
-Given that the \gls{vsi} experts will review documents marked as Relevant by our system, we decided to calculate the positive ratio for the top classifiers on their test splits. Moreover, we aim for a reduced rate of false negatives, meaning the percentage of genuinely Relevant documents that our system mistakenly labels as Irrelevant (refer to Table \ref{tab:08_ratio_of_positives}). The rationale behind this is that overlooking an event that poses a risk to Plant Health (a positive) is more dangerous than mistakenly identifying a benign event (a negative) as Relevant.
+Given that the \gls{vsi} experts will review documents marked as Relevant by our system, we decided to calculate the positive ratio for the top classifiers on their respective test splits. Moreover, we aim for a reduced rate of false negatives, meaning the percentage of genuinely Relevant documents that our system mistakenly labels as Irrelevant (refer to Table \ref{tab:08_ratio_of_positives}). The rationale behind this is that overlooking an event that poses a risk to Plant Health (a positive) is more dangerous than mistakenly identifying a harmless event (a negative) as Relevant.
 
-\begin{table}[ht]
-\centering
-\begin{tabular}{ccccc}
-\hline
-  \contentType{}                                   & Model & Training Method & Positives/Total & FN/Total \\ \hline
-  \trafilaturaTitle{} & \bertmultilingual{} & \petThousand{}  & 43.33\% & 2.0\%\\ \hline %0.43333333333333335 \\
-
- \trafilaturaAbstract{} & \bertxlmroberta{} & \petThousand{} & 40.16\% & 2.23\% \\  \hline %0.4016489988221437 \\
-\trafilaturaFulltext{} & \bertmultilingual{} & \petThousand{} & 26.55\% & 1.66\%\\%0.29547471162378 \\ 
-\trafilaturaFulltext{} & \bertxlmroberta{} & \balanced{} & 24.16\% &  2.89\%\\%0.24156305506216696 \\
-\trafilaturaFulltext{} & \bertxlmroberta{} & \petThousand{} & 37.27\% & 1.20\% \\ %0.37267080745341613 \\
-\hline
-\translationTitle{} & \bertmultilingual{} & \petThousand{} & 34.62\% & 1.69\% \\ %0.34615384615384615 \\
-\hline
-\end{tabular}
-\caption{Positives and FN ratios for the best classifiers}
-\label{tab:08_ratio_of_positives}
-\end{table}
+\input{Tables/08/Positive_rate_FN_rate}
 
 The minimal False Negative rates indicate that our systems will overlook only around 2 out of every 100 Relevant (unique) documents, which we view as an impressive outcome. 
-As mentioned in \headerName{} \ref{vsi_results_of_preprocessing}, the actual proportions in the \gls{vsi} Dataset fluctuate between 12\% and 14\% positives. The closer our classifiers approaches to this balance, the fewer documents the \gls{vsi} experts will need to review manually.
+As mentioned in \headerName{} \ref{vsi_results_of_preprocessing}, the actual  proportions in the \gls{vsi} Dataset fluctuate between 12\% and 14\% positives. The closer our classifiers approach to this balance, the fewer documents the \gls{vsi} experts will need to review manually.
 
 In the most favorable scenario, with a Positive ratio of $24\%$, the \gls{vsi} experts will encounter roughly $76\% \approx 3/4$ fewer documents than they currently do. Conversely, in the least favorable scenario, with a Positive ratio of $43\%$, they will see about $57\% \approx 1/2$ fewer documents.
 
 
 \putInBox{
-This demonstrates that integrating our system into their monitoring mission will significantly decrease the number of documents requiring manual review. This will allow the \gls{vsi} experts to either assess the same volume of documents more quickly, allocate the same duration to evaluate a larger set of documents, or broaden their surveillance to additional pathogens. We consider this outcome to be satisfactory and a fitting conclusion to the project.
+This demonstrates that integrating our system into their monitoring mission will significantly decrease the number of documents requiring manual review. This will allow the \gls{vsi} experts to either assess the same volume of documents more quickly, allocate the same time to evaluate a larger set of documents, or broaden their surveillance to additional pathogens. We consider this outcome to be satisfactory and a fitting conclusion to our work.
 }
 
 
@@ -182,3 +165,47 @@ Critères:
 
 
 \fi
+
+
+
+\customHeader{1}{Future Work}
+\label{08_future_work}
+
+There are some ways for improving our work, here, we highlight three. 
+
+
+
+
+\begin{paragraph}{Translating the \trafilaturaFulltext{} }
+
+One significant improvement could involve translating the \trafilaturaFulltext{} of the documents. Our findings indicate that using the \trafilaturaFulltext{} provides the most substantial content for training our models. Considering that the most advanced language models are typically developed initially for English text, creating a new \contentType{} by translating the \trafilaturaFulltext{} into English seems like a logical step.
+
+However, this approach comes with its own set of challenges:
+
+\begin{itemize}
+    \item Using the Google Translate API for extensive content could become costly.
+    \item Determining whether a particular species is associated to an agricultural event is important to determine its relevant to Plant Health Surveillance. 
+    Given that agricultural reports tend to use the common names of species, using automatic translation carries the risk of inaccurately rendering the common names of various organisms. For instance, the Coccinellidae beetle is referred to as 'ladybug' in English, while in French, it is known as 'B\^ete \`a bon Dieu' (literally, 'god’s creature'). Such discrepancies present a substantial challenge for general-purpose translation systems.
+\end{itemize}
+
+\end{paragraph}
+
+
+\begin{paragraph}{Leveraging Metadata}
+
+As mentioned in \headerName{} \ref{vsi_dataset}, the \gls{vsi} Database also contains metadata for each article, which presents an opportunity to enhance our results.
+
+For instance, considering that the interests of the \gls{vsi} experts evolve over time, we could leverage the publication and annotation dates associated with each article to craft additional features for Machine Learning. This could potentially allow the model to adapt more effectively to the shifting focus of the \gls{vsi} experts.
+
+Additionally, we could parse the URL of each article and use it to help determine which sources are the most trustworthy.
+
+\end{paragraph}
+
+\begin{paragraph}{Clustering instead of Classification}
+
+A final suggestion is to complement \textclassification{} with \emph{Clustering} techniques. This approach would enable us to analyze the similarities between documents and understand their distribution more comprehensively. 
+
+For instance, we could investigate how documents are related across different subjects, or assess whether one subject is encompassed within another. This could provide valuable insights into the structure and relationships within the dataset, and to improve the efficiency of the \gls{vsi} experts.
+
+    
+\end{paragraph}

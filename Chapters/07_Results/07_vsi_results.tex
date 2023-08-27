@@ -3,7 +3,8 @@
 In this \headerName{}, we present the results of our training experiments, and provide insights on them.
 
 
-Due to space constraints, we're unable to display all the metrics from the training data. Comprehensive training plots and logs can be found in our GitLab repository. For a glimpse into the results from our initial training round, refer to Figures \ref{fig:07_vsi_sample_training_logs_unbalanced} and \ref{fig:07_vsi_sample_training_logs_pet_1000}. 
+%Due to space constraints, we're unable to display all the metrics from the training data. 
+Comprehensive training plots and logs can be found in our GitLab repository. For a glimpse into the results from our initial training round, refer to Figures \ref{fig:07_vsi_sample_training_logs_unbalanced} and \ref{fig:07_vsi_sample_training_logs_pet_1000}. 
 In the first figure, we can see that the optimal epoch to avoid overfitting in that particular scenario is the fourth epoch, which coincidentally also maximizes the \fTwo{}. 
 In contrast, in the second image, the first epoch is optimal, while it does not have the best \fTwo{}.
 
@@ -44,12 +45,28 @@ In contrast, in the second image, the first epoch is optimal, while it does not 
     \label{fig:07_vsi_sample_training_logs_pet_1000}
 \end{figure}
 
-The optimal epochs for each training scenario are detailed in \appendixname{} \ref{appendix05:vsi_optimal_epochs}. It's evident that \unbalanced{} takes the longest to reach the optimal epoch, especially when compared to the other methods, where the majority reach the optimum within the first or second epoch. The disparity between the two \finetuning{} techniques is significant, with \balanced{} often reaching its peak performance in just one epoch. When it comes to \gls{pet}, all five scenarios exhibit a consistent pattern, typically achieving their optimal epoch before the fourth one. This suggests that any variations in the rate of convergence might occur during the training of the \gls{pet} Ensembles. Given that all Ensembles undergo training for five epochs, it must be that this sufficient for achieving satisfactory results. Unfortunately, we did not record the evolution of the custom losses used to train the \gls{pet} Ensembles.
+
+
+The optimal epochs for each training scenario are detailed in \appendixname{} \ref{appendix05:vsi_optimal_epochs}. It's evident that \unbalanced{} takes the longest to reach the optimal epoch, especially when compared to the other methods, where the majority reach the optimum within the first or second epoch. The disparity between the two fine-tuning techniques is significant, with \balanced{} often reaching its peak performance in just one epoch. When it comes to \gls{pet}, all five scenarios exhibit a consistent pattern, typically achieving their optimal epoch before the fourth one. This suggests that any variations in the rate of convergence might occur during the training of the \gls{pet} ensembles. Given that all ensembles undergo training for five epochs, it must be that this sufficient for achieving satisfactory results. Unfortunately, we did not record the evolution of the custom losses used to train the \gls{pet} ensembles.
+
+
+\begin{figure}[ht]
+    \centering
+    \subfigure{
+            \includegraphics[width=0.45\textwidth]{Figures/07/mBERT Classifier at optimal epoch_trafilatura.png}
+    }
+    %\hfill
+    \subfigure{
+            \includegraphics[width=0.45\textwidth]{Figures/07/mBERT Classifier at optimal epoch_keyphrases.png}
+    }
+    \caption{Development \fTwo{} for \bertmultilingual{} at the optimal epochs, across all the training methods}
+    \label{fig:07_dev_f2_mbert}
+\end{figure}
 
 Based on these findings, we moved forward to the second round, trained models up to their optimal epochs, and evaluated their final performance.
 The metrics for the best classifiers across each training scenario and for every \gls{bert} model are detailed in \appendixname{} \ref{appendix05:vsi_metrics_optimal_epochs}. 
 A direct comparison of the Development \fTwo{} outcomes reveals that \unbalanced{} consistently underperforms compared to other training techniques
-\footnote{A \fTwo{} score of 0\% indicates the model defaulted to predict the predominant class (negative)}.
+\footnote{A \fTwo{} score of 0\% indicates the model defaulted to predict the predominant class (negative)} (See Figure \ref{fig:07_dev_f2_mbert} for sample results for \bertmultilingual{}).
 In fact, \balanced{} outperforms \unbalanced{} in nearly all instances, with only one exception\footnote{This specific instance pertains to \bertbase{} on the \trafilaturaTitle{}, showing a marginal difference of about 3\%}.
 
 When examining \gls{pet}, a noticeable trend emerges: performance improves as the document count per category grows. Specifically, the Development \fTwo{} for \petFifty{} generally lags behind other \gls{pet} variants and seldom matches their levels. Conversely, both \petFiveHundred{} and \petThousand{} consistently register superior results.
@@ -92,7 +109,7 @@ Piecing these insights together, it's plausible that these models achieve elevat
 
 
 Prioritizing models that genuinely grasp the concept of relevance rather than indiscriminately marking everything as positive, we set a threshold of 80\% for the Development \auc{}. By doing so, we narrow down to 49 classifiers, detailed in Table \ref{appendix05:tab:f2_auc_f1_top_pergorming_by_content_type}.
-Interestingly, the \contentType{} with the highest number of top-performing classifiers is the \trafilaturaFulltext{}, boasting 15 top classifiers across all \gls{bert} models.
+Interestingly, the \contentType{} with the highest number of top-performing classifiers is the \trafilaturaFulltext{}, exhibiting 15 top classifiers across all \gls{bert} models.
 This indicates that the \trafilaturaFulltext{}, typically longer than other \contentType{}s, offers ample content, enabling all models to effectively learn the task.
 
 Conversely, it's worth noting that the \keyphrasesAbstractOnly{} doesn't feature on the list. 
@@ -122,6 +139,13 @@ Moreover, the best classifiers are consistently obtained by training multilingua
 
 
 \input{Tables/07/best_classifiers}
+
+\putInBox{
+
+In summary, among all the training methods examined in our work, \unbalanced{} yields the least favorable performance, while \gls{pet} demonstrates increasingly improved performance as more documents per category are introduced. In terms of \contentType{}s, incorporating keywords from the documents does not enhance performance, whereas utilizing the \trafilaturaFulltext{} proves to be the most effective in providing substantial content for the models to learn from, with the \trafilaturaTitle{}, \translationTitle{} and \trafilaturaAbstract{} lagging behind. Additionally, the multilingual aspect of our dataset appears to hold greater significance than their biomedical content, as evidenced by the superior performance of classifiers trained with multilingual \gls{bert} models.
+
+
+}
 
 
 Finally, we put forward a reason for the enhanced performance of \gls{pet} compared to \finetuning{}. We theorize that the use of task descriptions in \gls{pet} enables the model to have a clearer comprehension of the task. To illustrate this idea, we reference an example from the foundational \gls{pet} paper by \mytextcite{pet_paper}.
@@ -159,7 +183,7 @@ Furthermore, it's worth noting that all other best classifiers predominantly use
 This suggests that exposing the model to more document examples combined with task-specific knowledge enhances its performance.
 However, the performance improvement stales over time, as the incremental gains from transitioning from \petFiveHundred{} to \petThousand{} are marginal, as seen in Tables \ref{tab:07_f2_bert_base}-\ref{tab:07_f2_bert_xlmroberta}.
 
-In summary, by employing \gls{pet} and its patterns, we inject task-specific knowledge, thereby guiding the model. 
+In conclusion, by employing \gls{pet} and its patterns, we inject task-specific knowledge, thereby guiding the model. 
 
 
 \clearpage

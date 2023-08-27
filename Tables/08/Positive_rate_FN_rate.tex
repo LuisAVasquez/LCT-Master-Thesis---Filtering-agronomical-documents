@@ -1,0 +1,21 @@
+
+\begin{table}[ht]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|ccccc|}
+\hline
+  \contentType{}                                   & Model & Training Method & Positives/Total & FN/Total \\ \hline
+  \trafilaturaTitle{} & \bertmultilingual{} & \petThousand{}  & 43.33\% & 2.0\%\\ \hline %0.43333333333333335 \\
+
+ \trafilaturaAbstract{} & \bertxlmroberta{} & \petThousand{} & 40.16\% & 2.23\% \\  \hline %0.4016489988221437 \\
+\trafilaturaFulltext{} & \bertmultilingual{} & \petThousand{} & 26.55\% & 1.66\%\\%0.29547471162378 \\ 
+\trafilaturaFulltext{} & \bertxlmroberta{} & \balanced{} & 24.16\% &  2.89\%\\%0.24156305506216696 \\
+\trafilaturaFulltext{} & \bertxlmroberta{} & \petThousand{} & 37.27\% & 1.20\% \\ %0.37267080745341613 \\
+\hline
+\translationTitle{} & \bertmultilingual{} & \petThousand{} & 34.62\% & 1.69\% \\ %0.34615384615384615 \\
+\hline
+\end{tabular}
+}
+\caption{Positives and FN ratios for the best classifiers}
+\label{tab:08_ratio_of_positives}
+\end{table}

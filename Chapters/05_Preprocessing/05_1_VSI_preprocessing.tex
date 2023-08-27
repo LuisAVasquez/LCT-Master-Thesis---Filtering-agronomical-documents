@@ -87,7 +87,7 @@ Although we attempted to identify common patterns and create regular expressions
 
 Nevertheless, along this examination, we noticed that scraping errors tend to be short in length (see Tables \ref{tab:04_headers} and \ref{tab:04_website_names}). As a result, we devised a new filtering strategy based on the length of the entries. However, simply counting naive tokens was insufficient, as languages like Chinese often lack whitespace in their text. Therefore, we needed a more robust algorithm to determine when a string is considered suspiciously ``too short."
 
-Our algorithm to filter by length consists in:
+Our heuristic to filter by length consists in:
 
 \begin{enumerate}
     \item First, the string is split on white spaces.

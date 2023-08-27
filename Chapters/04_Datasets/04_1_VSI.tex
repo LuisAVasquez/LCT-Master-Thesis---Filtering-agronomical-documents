@@ -20,13 +20,19 @@ The main tool for collecting documents is the web scrapping tool \emph{ScaleSERP
 
 
 As part of the \gls{vsi} pipeline, shown in Figure \ref{fig:04_vsi_data_collection_pipeline}, the websites corresponding to the URLs obtained from \emph{ScaleSERP} are downloaded using a Python script. 
-For each website, the tool \trafilatura{} \myparencite{barbaresi-2021-trafilatura} takes its XML and attempts to extract a title and  an abstract from the XML metadata\footnote{The title and the abstract are extracted from the \texttt{metadata.title} and \texttt{metadata.description} fields, respectively.} and the full text from the XML body.
+For each website, its source (in HTML) is downloaded, and the tool \trafilatura{} \myparencite{barbaresi-2021-trafilatura} parses it to XML/TEI, while attempting to discard ``non-contents", such as menus, headings, ads, etc.
+Then, \trafilatura{} takes the XML/TEI and attempts to extract a title and  an abstract from the metadata\footnote{The title and the abstract are extracted from the \texttt{metadata.title} and \texttt{metadata.description} fields, respectively.} and the full text from the XML body.
 
 %Then, they are scrapped using the tool \trafilatura{}.
 %the documents  are scrapped using the tool \trafilatura{} \myparencite{barbaresi-2021-trafilatura}, which attempts to extract a title, an abstract, the full text, and other data from the websites.
 %Specifically, for a website, \trafilatura{} scrapes the HTML content and parses it into XML. The tool then extracts the title and abstract from the XML metadata\footnote{The title and the abstract are extracted from the \texttt{metadata.title} and \texttt{metadata.description} fields, respectively.} and the full text from the XML body.
-Given that these articles come from public websites, all the content is in its original language.
-In order to help the annotators make a decision when encountering an article in a foreign language, and due to budget limitations, only the title is translated to English, using the Google Translate API, which also provides an automatically detected language for the document. 
+
+Given that these articles are extracted from public websites, they remain in their original language. The Google Translate API is used to assist the annotators with foreign-language articles. This API also automatically detects the document's language.
+Due to budget constraints, only the \trafilaturaTitle{} is translated into English.
+
+
+%Given that these articles come from public websites, all the content is in its original language.
+%In order to help the annotators make a decision when encountering an article in a foreign language, and due to budget limitations, only the title is translated to English, using the Google Translate API, which also provides an automatically detected language for the document. 
 
 Since documents are added each week, the \gls{vsi} database is in constant construction. 
 For our work, we utilized with the documents collected from the 11th of July 2022 to the 16th of April 2023, that is, the data collected over 39 weeks, comprising approximately 35,000 documents, which corresponds to more than 800 documents per week. We focus on a subset of the \VSI{} database, specifically its textual data, to obtain the \VSI{} dataset  (Table \ref{tab:04_pesv_sources of content}).
@@ -68,7 +74,9 @@ Special attention must be given to the \emph{Sujet} (subject), as this field wil
 
 \putInBox{
 %As part of their monitoring mission, the \gls{pesv} Platform surveys any health risk or plant health phenomenon that has or may have an impact on agriculture. 
-When the \gls{vsi} experts encounter an event that catches their attention (that is, that they consider \textbf{relevant}), they assign a \textbf{subject} to the respective document and utilize the interface presented in Figure \ref{fig:04_pesv_interface_2} to allocate a subject ID and description to the document. It is possible for multiple documents to share the same subject. In the case of documents considered \textbf{irrelevant} to the monitoring of plant health, the subject field for the document is left empty.
+When the \gls{vsi} experts encounter an event that catches their attention (that is, that they consider \textbf{relevant}), they assign a \textbf{subject} to the respective document and utilize the interface presented in Figure \ref{fig:04_pesv_interface_2} to allocate a subject ID and description to the document.
+Each subject corresponds to a specific health risk event that was reported during the weeks before the experts reviewed the documents.
+It is possible for multiple documents to share the same subject. In the case of documents considered \textbf{irrelevant} to the monitoring of plant health, the subject field for the document is left empty.
 }
 
 Subsequently, after a document is deemed relevant by the \gls{vsi} experts, it is officially published in the bulletin of the  \gls{pesv} Platform\footnote{\url{https://plateforme-esv.fr/bulletins_et_points_sur_VSI}} and can be accessed through the \gls{vsi} Document Search Engine\footnote{\url{https://plateforme-esv.fr/moteur-de-recherche-vsi}}. Some sample entries containing all sources of content can be found in Table \ref{tab:04_sample_entries_vsi}.
@@ -109,7 +117,7 @@ There are 34,587 entries in the dataset, out of which 3,715 have an assigned sub
     \label{fig:04_naive_positives_and_negatives}
 \end{figure}
 
-The automatic language detected by the Google Translate API on the \trafilaturaTitle{} can be used to approximately study the distribution of the entries in the dataset. In Figure \ref{fig:04_vsi_language_distribution} it can be seen that around one third of the entries are in English, followed by Italian, Spanish, and French. There is a considerable amount of failed translation attempts, for around one fifth of the entries. The complete data on documents per language is available in Appendix \ref{appendix01:vsi_language_distribution}.
+The language automatically detected by the Google Translate API on the \trafilaturaTitle{} can be used to approximately study the distribution of the entries in the dataset. In Figure \ref{fig:04_vsi_language_distribution} it can be seen that around one third of the entries are in English, followed by Italian, Spanish, and French. There is a considerable amount of failed translation attempts, for around one fifth of the entries. The complete data on documents per language is available in Appendix \ref{appendix01:vsi_language_distribution}.
  
 \begin{figure}
     \centering
